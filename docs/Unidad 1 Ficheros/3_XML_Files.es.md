@@ -9,49 +9,58 @@ Con los documentos XML, estructuramos la información insertando marcas o etique
 La forma de guardar información en XML, de forma jerárquica, es muy similar a la forma en que lo hacen los objetos en una aplicación, de manera que éstos se pueden traducir de manera relativamente conveniente en un documento XML.
 
 |Módulo |
+
 |---|-|---|
+
 |Acceso a Datos | 6 |8.45 |
+
 |Programación de servicios y procesos |3 |9.0|
+
 |Desarrollo de interfaces |6 |8.0|
+
 |Programación Multimedia y dispositivos móviles |5 |7.34|
+
 |Sistemas de Gestión Empresarial |5 |8.2|
+
 |Empresa e iniciativa emprendedora |3 |7.4|
+
 
 puede representarse en etiquetas `xml`:
 
 ```xml
-<curso> 
-<módulo> 
-<nombre>Acceso a Datos</nom> 
-<horas>6</horas> 
-<calificación>8.45</calificación> 
-</módulo> 
-<módulo> 
-<nom>Programación de servicios y procesos</nom> 
-<horas>3</horas> 
-<calificación>9.0</calificación> 
-</módulo> 
-<módulo> 
-<nom>Desarrollo de interfaces</nom> 
-<horas>6</horas> 
-<calificación>8.0</calificación> 
-</módulo> 
-<módulo> 
-<nom>Programación Multimedia y dispositivod móviles</nom> 
-<horas>5</horas> 
-<calificación>7.34</calificación> 
-</módulo> 
-<módulo> 
-<nom>Sistemas de Gestión Empresarial</nom> 
-<horas>5</horas> 
-<calificación>8.2</calificación> 
-</módulo> 
-<módulo> 
-<nom>Empresa e iniciativa emprendedora</nom> 
-<horas>3</horas> 
-<calificación>7.4</calificación> 
-</módulo>
-</curs>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<curso>
+    <modulo>
+        <nom>Acceso a Datos</nom>
+        <horas>6</horas>
+        <calificacion>8.45</calificacion>
+    </modulo>
+    <modulo>
+        <nom>Programación de servicios y procesos</nom>
+        <horas>3</horas>
+        <calificacion>9.0</calificacion>
+    </modulo>
+    <modulo>
+        <nom>Desarrollo de interfaces</nom>
+        <horas>6</horas>
+        <calificacion>8.0</calificacion>
+    </modulo>
+    <modulo>
+        <nom>Programación Multimedia y dispositivos móviles</nom>
+        <horas>5</horas>
+        <calificacion>7.34</calificacion>
+    </modulo>
+    <modulo>
+        <nom>Sistemas de Gestión Empresarial</nom>
+        <horas>5</horas>
+        <calificacion>8.2</calificacion>
+    </modulo>
+    <modulo>
+        <nom>Empresa e iniciativa emprendedora</nom>
+        <horas>3</horas>
+        <calificacion>7.4</calificacion>
+    </modulo>
+</curso>
 ```
 
 o puede ser representado con etiquetas y atributos:
@@ -102,24 +111,22 @@ Por otra parte, para leer e interpretar el documento XML, la clase `DocumentBuil
 Veremos todo esto con un ejemplo. Continuamos almacenando datos sobre los módulos del curso, pero ahora con XML. El siguiente método nos servirá para abrir un documento XML, analizarlo y devolver el DOM generado en un `Document`. Lo podemos utilizar en cualquier sitio de nuestros programas, ya que la tarea es siempre similar:
 
 ```java
-public Documento OpenXML(String name) throws IOException,SAXException, ParserConfigurationException, FileNotFoundException { 
+    public Document OpenXML(String name) throws IOException, SAXException, ParserConfigurationException, FileNotFoundException {
 
-// Crear an instance of DocumentBuilderFactory 
-DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance(); 
-// Using the DocumentBuilderFactory instance we create en DocumentBuilder 
-DocumentBuilder dBuilder = dbFactory.newDocumentBuilder(); 
-//And we use DocumentBuilder's "parse" method to get the document 
-Documento doc = dBuilder.parse(new File(name)); 
+        // Create an instance of DocumentBuilderFactory
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        // Using the DocumentBuilderFactory instance we create a DocumentBuilder
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 
-return documento;
-}
+        return dBuilder.parse(new File(name));
+    }
 ```
 
 Hay que decir que la función anterior podría simplificarse sin utilizar las declaraciones intermedias, pero está algo ofuscada.
 
 
 ```java
-public Documento OpenXML(String name) throws IOException,SAXException, ParserConfigurationException, FileNotFoundException { 
+public Document OpenXML(String name) throws IOException,SAXException, ParserConfigurationException, FileNotFoundException { 
 return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(name);
 }
 ```
