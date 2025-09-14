@@ -31,32 +31,32 @@ puede representarse en etiquetas `xml`:
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <curso>
     <modulo>
-        <nom>Acceso a Datos</nom>
+        <nombre>Acceso a Datos</nombre>
         <horas>6</horas>
         <calificacion>8.45</calificacion>
     </modulo>
     <modulo>
-        <nom>Programación de servicios y procesos</nom>
+        <nombre>Programación de servicios y procesos</nombre>
         <horas>3</horas>
         <calificacion>9.0</calificacion>
     </modulo>
     <modulo>
-        <nom>Desarrollo de interfaces</nom>
+        <nombre>Desarrollo de interfaces</nombre>
         <horas>6</horas>
         <calificacion>8.0</calificacion>
     </modulo>
     <modulo>
-        <nom>Programación Multimedia y dispositivos móviles</nom>
+        <nombre>Programación Multimedia y dispositivos móviles</nombre>
         <horas>5</horas>
         <calificacion>7.34</calificacion>
     </modulo>
     <modulo>
-        <nom>Sistemas de Gestión Empresarial</nom>
+        <nombre>Sistemas de Gestión Empresarial</nombre>
         <horas>5</horas>
         <calificacion>8.2</calificacion>
     </modulo>
     <modulo>
-        <nom>Empresa e iniciativa emprendedora</nom>
+        <nombre>Empresa e iniciativa emprendedora</nombre>
         <horas>3</horas>
         <calificacion>7.4</calificacion>
     </modulo>
@@ -67,15 +67,15 @@ o puede ser representado con etiquetas y atributos:
 
 ```xml
 <curso> 
-<módulo nombre="Acceso a Datos" horas="6" calificacion="8.45" > 
+<modulo nombre="Acceso a Datos" horas="6" calificacion="8.45" > 
 <modulo nombre="Programación de servicios y procesos" "horas"=3 calificacion="9.0" > 
-<módulo nombre ="Desarrollo de interfaces" horas="6" calificacion="8.0" > 
-</módulo> 
-<módulo nombre="Programación Multimedia y dispositivod móviles" horas="5" calificacion="7,34"> 
-<módulo nombre="Sistemas de Gestión Empresarial" horas="5" "calificación"=8.2 /> 
-<módulo nombre="Empresa e iniciativa emprendedora" horas="3" calificacion="7.4" /> 
-</módulo>
-</curs>
+<modulo nombre ="Desarrollo de interfaces" horas="6" calificacion="8.0" > 
+</modulo> 
+<modulo nombre="Programación Multimedia y dispositivod móviles" horas="5" calificacion="7,34"> 
+<modulo nombre="Sistemas de Gestión Empresarial" horas="5" "calificacion"=8.2 /> 
+<modulo nombre="Empresa e iniciativa emprendedora" horas="3" calificacion="7.4" /> 
+</modulo>
+</curso>
 ```
 Un **analizador XML** es una clase que permite analizar un archivo XML y extraer información de él, relacionándola según su posición en la jerarquía. Los analizadores, según su forma de funcionar, pueden ser:
 
@@ -231,7 +231,7 @@ Pero lo que nos interesa es recorrer todo el DOM y acceder a sus elementos. Para
 
 ```java 
 // We will get a list of nodes (Step 1) 
-NodeList modules = root.getElementsByTagName("módulo"); 
+NodeList modules = root.getElementsByTagName("modulo"); 
 
 // For each node (Step 2) 
 for (int i = 0; i < modules.getLength(); i++) { 
@@ -243,7 +243,7 @@ System.out.println(el.getNodeName() + " " + (y + 1));
 // And we show the value of the different tags 
 System.out.println("Nombre: " + el.getElementsByTagName("nombre").item(0).getFirstChild().getNodeValue()); 
 System.out.println("Horas: " + el.getElementsByTagName("horas").item(0).getFirstChild().getNodeValue()); 
-System.out.println("Calificación: " + el.getElementsByTagName("calificación").item(0).getFirstChild().getNodeValue()); 
+System.out.println("Calificación: " + el.getElementsByTagName("calificacion").item(0).getFirstChild().getNodeValue()); 
 System.out.println(); 
 }
 }
@@ -278,7 +278,7 @@ Recuerda que accederemos al archivo de objetos, así que deberemos saber exactam
 
 ```java
 Módulo m = (Módulo) f.readObject();
-Elemento modulo = doc.createElement("módulo");
+Elemento modulo = doc.createElement("modulo");
 ```
 
 And inside it, as we extract the different properties of the module object, we will create child nodes and add them to the module. Por ejemplo, para el módulo name:
@@ -299,7 +299,7 @@ Elemento hours = doc.createElement("horas");
 hours.appendChild(doc.createTextNode(Integer.toString(m.getHores()))));
 module.appendChild(hours);
 
-Elemento calificación = doc.createElement("calificación");
+Elemento calificación = doc.createElement("calificacion");
 calification.appendChild(doc.createTextNode(Double.toString(m.getNote()))));
 module.appendChild(grade);
 ```
@@ -307,7 +307,7 @@ module.appendChild(grade);
 Pondremos todo este procedimiento dentro de un bucle que recorrerá todo el archivo de objetos. Una vez hayamos leído cada uno de los módulos, deberemos añadirlos al elemento raíz con:
 
 ```java
-root.appendChild(módulo);
+root.appendChild(modulo);
 ```
 
 
@@ -346,7 +346,7 @@ Por ejemplo, en la clase `Modul` que habíamos definido, utilizaríamos la anota
 
 ```java
 @XmlRootElement
-class Módulo { 
+class Modulo { 
 
 String nombre; 
 int horas; 
@@ -370,6 +370,295 @@ public void setNota(double nota) { this.nota = nota;}
 ```
 
 Con esto tendríamos sólo la clase con las anotaciones preparadas para guardar un módulo como documento XML. Para guardar toda la jerarquía deberíamos crear la clase `Curso`, que contendría un `ArrayList` de módulos.
+
+## 3.7. Ejemplos con el XML inicial
+
+📖 Ejemplo 1: Lectura de XML con DOM
+
+```java
+package org.dam;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import java.io.File;
+
+public class LecturaCursoXML {
+    public static void main(String[] args) {
+        try {
+            File archivo = new File("curso.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.parse(archivo);
+
+            document.getDocumentElement().normalize();
+
+            System.out.println("Elemento raíz: " + document.getDocumentElement().getNodeName());
+
+            NodeList listaModulos = document.getElementsByTagName("modulo");
+
+            System.out.println("\n=== MÓDULOS DEL CURSO ===");
+            System.out.printf("%-45s %-8s %-12s%n", "Nombre", "Horas", "Calificación");
+            System.out.println("--------------------------------------------------------------");
+
+            for (int i = 0; i < listaModulos.getLength(); i++) {
+                Node nodo = listaModulos.item(i);
+
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elemento = (Element) nodo;
+
+                    String nombre = elemento.getElementsByTagName("nombre").item(0).getTextContent();
+                    String horas = elemento.getElementsByTagName("horas").item(0).getTextContent();
+                    String calificacion = elemento.getElementsByTagName("calificacion").item(0).getTextContent();
+
+                    System.out.printf("%-45s %-8s %-12s%n",
+                            nombre.length() > 40 ? nombre.substring(0, 40) + "..." : nombre,
+                            horas,
+                            calificacion);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}   
+
+```
+
+📝 Ejemplo 2: Escritura de XML con DOM
+
+```java
+package org.dam;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import java.io.File;
+
+public class EscrituraCursoXML {
+    public static void main(String[] args) {
+        try {
+            // Crear el DocumentBuilder
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.newDocument();
+
+            // Crear el elemento raíz <curso>
+            Element curso = document.createElement("curso");
+            document.appendChild(curso);
+
+            // Crear módulos según la estructura proporcionada
+            crearModulo(document, curso, "Acceso a Datos", 6, 8.45);
+            crearModulo(document, curso, "Programación de servicios y procesos", 3, 9.0);
+            crearModulo(document, curso, "Desarrollo de interfaces", 6, 8.0);
+            crearModulo(document, curso, "Programación Multimedia y dispositivos móviles", 5, 7.34);
+            crearModulo(document, curso, "Sistemas de Gestión Empresarial", 5, 8.2);
+            crearModulo(document, curso, "Empresa e iniciativa emprendedora", 3, 7.4);
+
+            // Escribir el contenido en un archivo XML
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+            DOMSource source = new DOMSource(document);
+            StreamResult result = new StreamResult(new File("curso.xml"));
+
+            transformer.transform(source, result);
+
+            System.out.println("Archivo XML creado correctamente!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void crearModulo(Document document, Element curso, String nombre,
+                                    int horas, double calificacion) {
+        Element modulo = document.createElement("modulo");
+        curso.appendChild(modulo);
+
+        Element nom = document.createElement("nombre");
+        nom.appendChild(document.createTextNode(nombre));
+        modulo.appendChild(nom);
+
+        Element horasElem = document.createElement("horas");
+        horasElem.appendChild(document.createTextNode(String.valueOf(horas)));
+        modulo.appendChild(horasElem);
+
+        Element calificacionElem = document.createElement("calificacion");
+        calificacionElem.appendChild(document.createTextNode(String.valueOf(calificacion)));
+        modulo.appendChild(calificacionElem);
+    }
+}
+
+```
+
+🏗️ Ejemplo 3: JAXB - Escritura y Lectura
+
+Clase Modulo para JAXB:
+
+```java
+package org.dam;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "módulo")
+@XmlType(propOrder = {"nombre", "horas", "calificacion"})
+public class Modulo {
+    private String nombre;
+    private int horas;
+    private double calificacion;
+
+    public Modulo() {
+        // Constructor por defecto necesario para JAXB
+    }
+
+    public Modulo(String nombre, int horas, double calificacion) {
+        this.nombre = nombre;
+        this.horas = horas;
+        this.calificacion = calificacion;
+    }
+
+    @XmlElement(name = "nom")
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    @XmlElement(name = "horas")
+    public int getHoras() { return horas; }
+    public void setHoras(int horas) { this.horas = horas; }
+
+    @XmlElement(name = "calificación")
+    public double getCalificacion() { return calificacion; }
+    public void setCalificacion(double calificacion) { this.calificacion = calificacion; }
+
+    @Override
+    public String toString() {
+        return String.format("%-40s %d horas - %.2f",
+                nombre.length() > 35 ? nombre.substring(0, 35) + "..." : nombre,
+                horas, calificacion);
+    }
+}
+
+```
+Clase Curso para JAXB:
+
+```java
+package org.dam;
+
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
+
+@XmlRootElement(name = "curso")
+public class Curso {
+    private List<Modulo> modulos = new ArrayList<>();
+
+    @XmlElement(name = "modulo")
+    public List<Modulo> getModulos() { return modulos; }
+    public void setModulos(List<Modulo> modulos) { this.modulos = modulos; }
+
+    public void addModulo(Modulo modulo) {
+        modulos.add(modulo);
+    }
+}
+
+```
+
+Escritura con JAXB:
+
+```java
+package org.dam;
+
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Marshaller;
+import java.io.File;
+
+public class EscrituraJAXBCurso {
+    public static void main(String[] args) {
+        try {
+            // Crear el curso con módulos
+            Curso curso = new Curso();
+            curso.addModulo(new Modulo("Acceso a Datos", 6, 8.45));
+            curso.addModulo(new Modulo("Programación de servicios y procesos", 3, 9.0));
+            curso.addModulo(new Modulo("Desarrollo de interfaces", 6, 8.0));
+            curso.addModulo(new Modulo("Programación Multimedia y dispositivos móviles", 5, 7.34));
+            curso.addModulo(new Modulo("Sistemas de Gestión Empresarial", 5, 8.2));
+            curso.addModulo(new Modulo("Empresa e iniciativa emprendedora", 3, 7.4));
+
+            // Configurar JAXB
+            JAXBContext context = JAXBContext.newInstance(Curso.class);
+            Marshaller marshaller = context.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+
+            // Escribir en archivo
+            marshaller.marshal(curso, new File("curso_jaxb.xml"));
+            System.out.println("XML creado con JAXB exitosamente!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
+
+Lectura con JAXB:
+
+```java
+package org.dam;
+
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.Unmarshaller;
+import java.io.File;
+
+public class LecturaJAXBCurso {
+    public static void main(String[] args) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(Curso.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+
+            Curso curso = (Curso) unmarshaller.unmarshal(new File("curso_jaxb.xml"));
+
+            System.out.println("=== MÓDULOS DEL CURSO (JAXB) ===");
+            System.out.printf("%-45s %-8s %-12s%n", "Nombre", "Horas", "Calificación");
+            System.out.println("--------------------------------------------------------------");
+
+            for (Modulo modulo : curso.getModulos()) {
+                System.out.println(modulo);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
+Recuerda añadir la dependencia de jakarta en el pom.xml
+
+```xml
+        <!-- https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api -->
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.2</version>
+        </dependency>
+
+```
+
 
 Por lo que se refiere a este curso, no profundizaremos más en esta técnica, ya que para nuestros propósitos, el análisis XML que hemos visto en las secciones anteriores es suficiente.
 
