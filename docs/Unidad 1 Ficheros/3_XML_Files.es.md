@@ -660,7 +660,7 @@ Recuerda añadir la dependencia de jakarta en el pom.xml
 ```
 
 
-Por lo que se refiere a este curso, no profundizaremos más en esta técnica, ya que para nuestros propósitos, el análisis XML que hemos visto en las secciones anteriores es suficiente.
+Por lo que se refiere a este curso, no profundizaremos más en esta técnica, ya que para nuestros propósitos, el análisis XML que hemos visto en las secciones anteriores es suficiente, o no :)
 
 !!! note "Cada vez más" 
 Utilizaremos muchas anotaciones en este curso, mantenga la calma...
