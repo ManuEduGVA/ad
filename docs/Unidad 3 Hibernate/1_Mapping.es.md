@@ -1,3 +1,5 @@
+# 1 Mapping
+
 ## 1. Introducción. Técnicas de mapeo.
 
 En unidades anteriores hemos estudiado el acceso de nuestros programas a los ficheros y bases de datos relacionales. Como hemos visto, el gran problema es que nuestros programas manipulan objetos, mientras que las bases de datos manipulan tablas, lo que provoca el uso de modelos diferentes y termina en el ya citado **vacío objeto-relacional**.

@@ -1,4 +1,4 @@
-## 5. Hibernate Query Language
+# 5. Hibernate Query Language
 
 La documentación completa se puede encontrar aquí:
 

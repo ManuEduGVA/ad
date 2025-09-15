@@ -1,4 +1,4 @@
-# Sistema de archivos
+# Ejercicios sistema de archivos
 
 ## `ls -la`
 
@@ -55,9 +55,9 @@ Escribe tu propia versión de tail y head en las utilidades GNU. Puedes encontra
 - [tail](https://man7.org/linux/man-pages/man1/tail.1.html)
 - [head](https://man7.org/linux/man-pages/man1/head.1.html)
 
-:::nota
+!!! nota
 
-Recuerda que estos programas muestran las últimas y las primeras diez líneas por defecto. Si quieres modificarlo, puedes usar `-nX`, donde X es el número de líneas que quieres mostrar. :::
+    Recuerda que estos programas muestran las últimas y las primeras diez líneas por defecto. Si quieres modificarlo, puedes usar `-nX`, donde X es el número de líneas que quieres mostrar.
 
 # Archivos binarios
 

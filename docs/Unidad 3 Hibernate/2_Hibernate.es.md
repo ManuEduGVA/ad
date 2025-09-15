@@ -1,4 +1,4 @@
-## 2. Hibernate
+# 2. Hibernate
 
 <figure markdown="span">
   ![Image title](./img/Hibernate.png){ width="700" }

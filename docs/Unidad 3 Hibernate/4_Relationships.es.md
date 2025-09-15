@@ -1,4 +1,5 @@
-## 4. Mapeando Relaciones
+
+# 4. Mapeando Relaciones
 
 Como mencionamos en la introducción, analizaremos cómo mapear los diferentes tipos de relaciones. Antes de empezar a discutir la cardinalidad de las relaciones, debemos considerar el significado de estas relaciones, y revisaremos el concepto de direccionalidad de las relaciones.
 

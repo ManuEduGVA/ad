@@ -9,13 +9,13 @@ Un archivo de **valores separados por comas** (CSV) es un archivo de texto está
 En caso de que el símbolo utilizado como separador aparezca dentro de los valores, es buena idea cerrar el contenido entre comillas. Se puede ver un ejemplo de archivo CSV aquí:
 
 ```csv
-Chevrolet Chevelle Concours (sw);0;8;350.0;165.0;4142.;11.5;70;US
+Chevrolet Chevelle Concours (sw);0;8;350.0;165.0;4142.0;11.5;70;US
 Ford Torino (sw);0;8;351.0;153.0;4034.;11.0;70;US
-Plymouth Satellite (sw);0;8;383.0;175.0;4166.;10.5;70;US
+Plymouth Satellite (sw);0;8;383.0;175.0;4166.0;10.5;70;US
 AMC Rebel SST (sw);0;8;360.0;175.0;3850.;11.0;70;US
-Dodge Challenger SE;15.0;8;383.0;170.0;3563.;10.0;70;US
-Plymouth Cuda 340;14.0;8;340.0;160.0;3609.;8.0;70;US
-Ford Mustang Boss 302;0;8;302.0;140.0;3353.;8.0;70;US
+Dodge Challenger SE;0;8;383.0;170.0;3563.0;10.0;70;US
+Plymouth Cuda 340;0;8;340.0;160.0;3609.0;8.0;70;US
+Ford Mustang Boss 302;0;8;302.0;140.0;3353.0;8.0;70;US
 ```
 
 La forma de procesar un archivo CSV en Java es:
@@ -34,10 +34,160 @@ Es una buena idea empezar a utilizar las clases abstractas `Files` y `Paths`. Es
 List<String> lines=Files.readAllLines(Paths.get(filename)); 
 ``` 
 
+Veamos como podríamos estrcuturar nuestro programa para poder leer de un fichero CSV con esta estructura.
+
+Para ello nos definimos la clase Coche:
+
+```java
+package org.dam;
+
+// Clase para representar un coche con los campos correctos
+public class Coche {
+    String nombre;
+    int kilometros;
+    int velocidades;
+    double potenciaCV;
+    double potenciaKW;
+    double cilindrada;
+    double aceleracion0a100;
+    int decada;
+    String paisFabricacion;
+
+    public Coche(String[] datos) {
+        this.nombre = datos[0];
+        this.kilometros = Integer.parseInt(datos[1]);
+        this.velocidades = Integer.parseInt(datos[2]);
+        this.potenciaCV = Double.parseDouble(datos[3]);
+        this.potenciaKW = Double.parseDouble(datos[4]);
+        this.cilindrada = Double.parseDouble(datos[5]);
+        this.aceleracion0a100 = Double.parseDouble(datos[6]);
+        this.decada = Integer.parseInt(datos[7]);
+        this.paisFabricacion = datos[8];
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s - %d km, %d vel, %.1f CV, %.1f KW, %.1f cc, %.1f s (0-100), %ds, %s",
+                nombre, kilometros, velocidades, potenciaCV, potenciaKW,
+                cilindrada, aceleracion0a100, decada, paisFabricacion);
+    }
+
+    // Método para mostrar información formateada
+    public String mostrarInfoDetallada() {
+        return String.format(
+                "\n=== %s ===\n" +
+                        "Kilómetros: %d km\n" +
+                        "Número de velocidades: %d\n" +
+                        "Potencia: %.1f CV (%.1f KW)\n" +
+                        "Cilindrada: %.1f cc\n" +
+                        "Aceleración 0-100 km/h: %.1f segundos\n" +
+                        "Década: %ds\n" +
+                        "País de fabricación: %s",
+                nombre, kilometros, velocidades, potenciaCV, potenciaKW,
+                cilindrada, aceleracion0a100, decada, paisFabricacion
+        );
+    }
+}
+
+```
+
+Ahora el programa principal
+
+```java
+package org.dam;
+
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+public class LectorCSVCoches {
+
+    public static void main(String[] args) {
+        String fichero = "coches.csv";
+
+        try {
+            // Leer todas las líneas del archivo CSV
+            List<String> lines = Files.readAllLines(Paths.get(fichero));
+            List<Coche> coches = new ArrayList<>();
+
+            System.out.println("=== LECTURA DE ARCHIVO CSV DE COCHES ===");
+            System.out.println("Número total de registros: " + lines.size());
+
+            // Procesar cada línea del archivo
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                String[] campos = line.split(";");
+
+                // Verificar que tenga todos los campos necesarios
+                if (campos.length >= 9) {
+                    try {
+                        Coche coche = new Coche(campos);
+                        coches.add(coche);
+                        System.out.println(coche.mostrarInfoDetallada());
+                    } catch (NumberFormatException e) {
+                        System.err.println("Error en formato numérico en línea " + (i+1) + ": " + line);
+                    }
+                } else {
+                    System.err.println("Línea incompleta " + (i+1) + ": " + line);
+                }
+            }
+
+            // Mostrar estadísticas generales
+            mostrarEstadisticas(coches);
+
+        } catch (IOException e) {
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Método para mostrar estadísticas de los coches
+    private static void mostrarEstadisticas(List<Coche> coches) {
+        if (coches.isEmpty()) return;
+
+        System.out.println("\n=== ESTADÍSTICAS GENERALES ===");
+
+        double totalPotenciaCV = 0;
+        double totalPotenciaKW = 0;
+        double totalCilindrada = 0;
+        double totalAceleracion = 0;
+        int totalKilometros = 0;
+
+        for (Coche coche : coches) {
+            totalPotenciaCV += coche.potenciaCV;
+            totalPotenciaKW += coche.potenciaKW;
+            totalCilindrada += coche.cilindrada;
+            totalAceleracion += coche.aceleracion0a100;
+            totalKilometros += coche.kilometros;
+        }
+
+        System.out.printf("Número de coches: %d%n", coches.size());
+        System.out.printf("Potencia media: %.1f CV (%.1f KW)%n",
+                totalPotenciaCV / coches.size(), totalPotenciaKW / coches.size());
+        System.out.printf("Cilindrada media: %.1f cc%n", totalCilindrada / coches.size());
+        System.out.printf("Aceleración media 0-100: %.1f segundos%n", totalAceleracion / coches.size());
+        System.out.printf("Kilómetros totales: %d km%n", totalKilometros);
+
+        // Agrupar por país
+        System.out.println("\n=== COCHES POR PAÍS ===");
+        coches.stream()
+                .collect(java.util.stream.Collectors.groupingBy(c -> c.paisFabricacion,
+                        java.util.stream.Collectors.counting()))
+                .forEach((pais, count) -> System.out.printf("%s: %d coches%n", pais, count));
+    }
+}
+
+```
+
 Más información en: 
 
 - [Files](https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/nio/file/Files.html) 
 - [Paths](https://docs.oracle.com/en/java/javase/12/docs/api/java.base/java/nio/file/Paths.html)
+
+
 
 ## 5.2. Archivos de propiedades
 
@@ -96,58 +246,103 @@ Java tiene un objeto muy útil para manejar este tipo de información. Con los o
 En el siguiente programa, puede ver un ejemplo de lectura y creación de archivos de propiedades en Java.
 
 ```java 
+package org.dam;
 
-/** 
-* Load the file specified and show its properties in different ways 
-* @param filename 
-*/ 
-private void loadAndShowProperties(String filename) { 
+import java.io.*;
+import java.util.Properties;
+import java.util.Set;
 
-Properties properties = new Properties(); 
+public class PropertiesManager {
 
-try { 
-properties.load(new FileInputStream(new File(filename))); 
+    /**
+     * Carga el archivo especificado y muestra sus propiedades de diferentes maneras
+     * @param fichero
+     */
+    private void loadAndShowProperties(String fichero) {
+        Properties properties = new Properties();
 
-System.out.println("Whole set: " + properties); 
+        try {
+            properties.load(new FileInputStream(new File(fichero)));
 
-properties.list(System.out); 
+            System.out.println("=== CONJUNTO COMPLETO ===");
+            System.out.println(properties);
+            System.out.println();
 
-Set<Object> keys = properties.keySet( ); 
+            System.out.println("=== SALIDA DE LISTA ===");
+            properties.list(System.out);
+            System.out.println();
 
-System.out.println("My listing: "); 
-for (Object key : keys) { 
-System.out.println(key + " - " + properties.getProperty((String) key)); 
-} 
+            Set<Object> keys = properties.keySet();
 
-} catch (FileNotFoundException e) { 
-// TODO Auto-generated catch block 
-e.printStackTrace(); 
-} catch (IOException e) { 
-// TODO Auto-generated catch block 
-e.printStackTrace(); 
-} 
+                System.out.println("=== MI LISTADO ===");
+            for (Object key : keys) {
+                System.out.println(key + " - " + properties.getProperty((String) key));
+            }
 
-} 
+        } catch (FileNotFoundException e) {
+            System.err.println("Fichero no encontrado " + fichero);
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Error leyendo fichero: " + fichero);
+            e.printStackTrace();
+        }
+    }
 
-/** 
-* Create en properties object, populated with samples and stores into a 
-* texto file and a XML file 
-* @throws IOException 
-*/ 
-private void writeProperties() throws IOException { 
-Properties props = new Properties(); 
+    /**
+     * Crear un objeto de propiedades, rellenado con muestras y almacenado
+     * en un archivo de texto y un archivo XML.
+     * @throws IOException
+     */
+    private void writeProperties() throws IOException {
+        Properties props = new Properties();
 
-props.put("Color", "Green"); 
-props.put("Range", "123"); 
-props.put("Visible", "false"); 
-props.put("Size", "Big"); 
-props.put("Status", "functional"); 
-props.put("Value", "345.24"); 
+        props.put("Color", "Green");
+        props.put("Range", "123");
+        props.put("Visible", "false");
+        props.put("Size", "Big");
+        props.put("Status", "functional");
+        props.put("Value", "345.24");
 
-props.store(new FileWriter(new File("propios.properties")), "Sample props file"); 
+        // Almacenado en fichero de texto
+        props.store(new FileWriter(new File("promise.properties")), "Ejemplo fichero de propiedades");
 
-props.storeToXML(new FileOutputStream(new File("propios.xml")), "Sample XML Props"); 
+        // Almacenado en fichero XML
+        props.storeToXML(new FileOutputStream(new File("promise.xml")), "Ejemplo de propiedades en XML");
+
+        System.out.println("Fichero de Properties creado satisfactoriamente!");
+        System.out.println("Fichero de texto: promise.properties");
+        System.out.println("Fichero XML: promise.xml");
+    }
+
+    /**
+     * Método principal para demostrar la funcionalidad
+     */
+    public static void main(String[] args) {
+        PropertiesManager manager = new PropertiesManager();
+
+        try {
+            // First, create the properties files
+            System.out.println("Creando ficheros...");
+            manager.writeProperties();
+            System.out.println();
+
+            // Then, read and display the properties from the text file
+            System.out.println("Leyendo el fichero de propiedades...");
+            manager.loadAndShowProperties("promise.properties");
+            System.out.println();
+
+            // Also read and display from the XML file
+            System.out.println("Leyendo el fichero en XML..");
+            manager.loadAndShowProperties("promise.xml");
+
+        } catch (IOException e) {
+            System.err.println("Error en la ejecución del programa principal: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 }
+
 ```
 
 ## 5.3. Entorno, archivos `.env` y `dot_env`

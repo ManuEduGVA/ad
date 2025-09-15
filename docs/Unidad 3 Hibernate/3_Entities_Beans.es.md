@@ -1,4 +1,4 @@
-## 3. Mapeo de Entidades. Beans
+# 3. Mapeo de Entidades. Beans
 
 Una vez estudiada la configuración inicial, es momento de mapear nuestras entidades y relaciones. Partiendo del modelo relacional, usaremos la entidad `Peli`:
 
