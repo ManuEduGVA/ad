@@ -355,12 +355,19 @@ En la sección anterior vimos cómo trabajar con archivos de caracteres y de byt
 Imaginemos que queremos guardar la siguiente tabla, que combina datos de distintos tipos. Este ejemplo aparecerá en las siguientes secciones.
 
 |Modulo |
+
 |---|-|---|
+
 |Acceso a Datos | 6 |8.45 |
+
 |Programación de servicios y procesos |3 |9.0|
+
 |Desarrollo de interfaces |6 |8.0|
+
 |Programación Multimedia y dispositivos móviles |5 |7.34|
+
 |Sistemas de Gestión Empresarial |5 |8.2|
+
 |Empresa e iniciativa emprendedora |3 |7.4|
 
 Como podemos ver, tenemos datos de texto, datos numéricos enteros y reales. Si queremos mantener los tipos, los flujos orientados a caracteres como `Reader` o `Writer` no serán útiles, así que deberíamos utilizar `InputStream` y `OutputStream`.
@@ -368,14 +375,23 @@ Como podemos ver, tenemos datos de texto, datos numéricos enteros y reales. Si 
 Para guardar estas estructuras eficientemente, podemos utilizar las clases `DataInputStream` y `DataOutputStream`, que son decoradores de flujos y que nos ofrecen los siguientes métodos para guardar o recuperar datos de diferentes tipos, sin tener que preocuparnos de cuánto ocupan internamente como puede ver, hay métodos recíprocos para leer.
 
 |`DataInputStream` |
+
 |---|---|---|
+
 |`byte readByte()`|`void writeByte(int)` |un byte |
+
 |`short readShort()` |`void writeShort(short)` |entero corto |
+
 |`int readInt()` |`void writeInt(int)` |
+
 |`long readLong()` |`void writeLong(long)` |
+
 |`float readFloat()` |`void writeFloat(float)` | real de precisión simple|
+
 |`double readDouble()` |`void writeDouble(double)` |real doble|
+
 |`char readChar()` |`void writeChar(int)` |n carácter Unicode|
+
 |`String readUTF()` |`void writeUTF(String)`|un String UTF-8 |
 
 !!! tip 
@@ -400,7 +416,7 @@ Escribe un programa que tenga los datos almacenados en tres arrays paralelos, qu
 public class Moduls{ 
 
 // several arrays with modules data 
-String[] moduls={"Acceso a Datos", "Programación de servicios y procesos", "Desarrollo de interfaces", "Programación Multimedia y dispositivod móviles", "Sistemas de Gestión Empresarial", "Empresa e iniciativa emprendedora"}; 
+String[] modulos={"Acceso a Datos", "Programación de servicios y procesos", "Desarrollo de interfaces", "Programación Multimedia y dispositivod móviles", "Sistemas de Gestión Empresarial", "Empresa e iniciativa emprendedora"}; 
 int[] horas={6, 3, 6, 5, 5, 3}; 
 double[] notas={8.45, 9.0, 8.0, 7.34, 8.2, 7.4}; 
 
@@ -447,7 +463,7 @@ System.exit(0);
 } 
 
 // Defining the class 
-Moduls moduls=new Moduls(); 
+Moduls moduls=new Modulos(); 
 
 // Depending the args, we will proceed 
 if (args[0].equals("read")) 
@@ -517,8 +533,8 @@ public class Modulo implements Serializable {
         this.nota=nota;
     }
 
-    public String getModul() {return this.nombre;}
-    public int getHores() {return this.horas;}
+    public String getModulo() {return this.nombre;}
+    public int getHoras() {return this.horas;}
     public double getNota() {return this.nota;}
 
 
