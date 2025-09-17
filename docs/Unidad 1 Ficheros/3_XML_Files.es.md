@@ -212,7 +212,7 @@ Vamos a repasar todos los conceptos de esta sección con una práctica. Crearemo
 Para empezar a leer el documento, lo primero que deberemos hacer es obtener el elemento raíz del documento con `getDocumentElement()`, que devuelve un objeto de tipo `Element`. Recuerda que la variable _doc_ contiene todo el DOM, leído con el método explicado anteriormente:
 
 ```java
-Elemento root = doc.getDocumentElement();
+Element root = doc.getDocumentElement();
 ```
 
 Con este elemento raíz, ya podemos mostrar todo su contenido con `getTextContent()`. Se mostrará en pantalla en formato de texto, sólo se imprimirá:
@@ -223,7 +223,7 @@ System.out.println(root.getTextContent());
 
 Pero lo que nos interesa es recorrer todo el DOM y acceder a sus elementos. Para ello, a partir de este elemento raíz, seguiremos los siguientes pasos:
 
-1. Buscamos todos los tags `<modul>` con `getElementsByTagName`. Este método nos devuelve una lista de nodos (objeto de tipo `NodeList`).
+1. Buscamos todos los tags `<modulo>` con `getElementsByTagName`. Este método nos devuelve una lista de nodos (objeto de tipo `NodeList`).
 2. Será necesario recorrer la lista de nodos (`NodeList`) para acceder a cada elemento. Para ello, es necesario utilizar el método `item(int index)`, que devolverá un elemento de tipo `Node`, y que debe convertirse explícitamente a `Element` con una operación de cast.
 3. Para cada elemento, accederemos al nombre del nodo para mostrar el nombre y el orden, utilizando `getNodeName()`.
 4. Buscamos las diferentes etiquetas encontradas dentro de cada módulo ('nombre', 'horas' y 'calificación') con `getElementsByTagName()`. Este método nos devolverá una NodeList para cada tipo de etiqueta. Como sólo tendremos un elemento, basta con acceder al elemento único, representado por `item(0)`.
