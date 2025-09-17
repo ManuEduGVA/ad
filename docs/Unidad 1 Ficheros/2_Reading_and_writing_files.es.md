@@ -641,7 +641,10 @@ public class Main {
 
 ```
 
-!!! tip "Less work, pero the same in the end" 
+!!! tip "Menos trabajo, pero al final lo mismo." 
 
-Probablemente se debe a que: _Allá en Java inheridos a Object, en ArrayList es en Object...Can I save o load en el camino ArrayList en un único call?
+    Probablemente lo pienses:
+
+    - Si todo en Java hereda de Object, un ArrayList es un Object... ¿Puedo guardar o cargar un ArrayList completo en una sola llamada?
+    - Pruébalo como una mejora del ejercicio anterior.
 

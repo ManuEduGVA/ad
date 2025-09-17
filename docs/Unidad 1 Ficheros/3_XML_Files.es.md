@@ -281,7 +281,7 @@ Módulo m = (Módulo) f.readObject();
 Elemento modulo = doc.createElement("modulo");
 ```
 
-And inside it, as we extract the different properties of the module object, we will create child nodes and add them to the module. Por ejemplo, para el módulo name:
+Dentro de él, a medida que extraemos las diferentes propiedades del objeto del módulo, crearemos nodos secundarios y los añadiremos al módulo. Por ejemplo, para el nombre del módulo:
 
 ```java
 Elemento name = doc.createElement("nombre");
@@ -311,7 +311,7 @@ root.appendChild(modulo);
 ```
 
 
-And we will already have el XML documento en el root. No se debe convertir este objeto en el type `Element` en texto string en orden a la obtención de la vuelta y de la etiqueta. Para este, se debe utilizar el ``Transformer` utility.
+Y ya tendremos el documento XML en la raíz. No se debe convertir este objeto en el tipo `Element` en cadena de texto en orden a la obtención de la vuelta y de la etiqueta. Para esto, se debe utilizar la utilidad ``Transformer`.
 
 
 ### 3.5.1. Transformer
@@ -663,4 +663,4 @@ Recuerda añadir la dependencia de jakarta en el pom.xml
 Por lo que se refiere a este curso, no profundizaremos más en esta técnica, ya que para nuestros propósitos, el análisis XML que hemos visto en las secciones anteriores es suficiente, o no :)
 
 !!! note "Cada vez más" 
-Utilizaremos muchas anotaciones en este curso, mantenga la calma...
+    Utilizaremos muchas anotaciones en este curso, mantenga la calma...
