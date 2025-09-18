@@ -38,54 +38,55 @@ Una base de datos para almacenar información sobre jugadores, juegos, etc. pued
 Implementada con el SGBD `MySQL`:
 
 ```sql
-CREATE SCHEMA IF NOT EXISTOS `BDJocs` DEFAULT CHARACTER SET utf8 ;
-USE `BDJocs` ;
+CREATE SCHEMA IF NOT EXISTS `BDJuegos` DEFAULT CHARACTER SET utf8 ;
+USE `BDJuegos` ;
 
-CREATE TABLE IF NOT EXISTOS `BDJocs`.`jugador` ( 
+CREATE TABLE IF NOT EXISTS `BDJuegos`.`jugador` ( 
 `id` INT NOT NULL, 
 `nick` VARCHAR(45) NULL, 
-`dataRegistre` DATETIME NULL, 
+`fechaRegistro` DATETIME NULL, 
 PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTOS `BDJocs`.`Genere` ( 
+CREATE TABLE IF NOT EXISTS `BDJuegos`.`Genero` ( 
 `id` INT NOT NULL, 
 `nombre` VARCHAR(45) NULL, 
-`descripción` VARCHAR(256) NULL, 
+`descripcion` VARCHAR(256) NULL, 
 PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTOS `BDJocs`.`Juego` ( 
+
+CREATE TABLE IF NOT EXISTS `BDJuegos`.`Juego` ( 
 `id` INT NOT NULL, 
 `nombre` VARCHAR(45) NULL, 
-`descripción` VARCHAR(256) NULL, 
-`Genere_id` INT NOT NULL, 
+`descripcion` VARCHAR(256) NULL, 
+`Genero_id` INT NOT NULL, 
 PRIMARY KEY (`id`), 
-INDICE `fk_Joc_Genere1_idx` (`Genere_id` ASC), 
-CONSTRAINT `fk_Joc_Genere1` 
-FOREIGN KEY (`Genere_id`) 
-REFERENCIAS `BDJocs`.`Genere` (`id`) 
-DONDE DELETE NO ACTION 
-DONDE UPDATE NO ACTION)
+INDEX `fk_Juego_Genero1_idx` (`Genero_id` ASC), 
+CONSTRAINT `fk_Juego_Genero1` 
+FOREIGN KEY (`Genero_id`) 
+REFERENCES `BDJuegos`.`Genero` (`id`) 
+ON DELETE NO ACTION 
+ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `BDJocs`.`Puntuaciones` ( 
+CREATE TABLE IF NOT EXISTS `BDJuegos`.`Puntuaciones` ( 
 `jugador_id` INT NOT NULL, 
 `Juego_id` INT NOT NULL, 
 `puntuacion` INT NULL, 
 PRIMARY KEY (`jugador_id`, `Juego_id`), 
-INDICE `fk_jugador_has_Joc_Joc1_idx` (`Joc_id` ASC), 
-INDICE `fk_jugador_has_Joc_jugador1_idx` (`jugador_id` ASC), 
-CONSTRAINT `fk_jugador_has_Joc_jugador1` 
+INDEX `fk_jugador_has_Juego_Juego1_idx` (`Juego_id` ASC), 
+INDEX `fk_jugador_has_Juego_jugador1_idx` (`jugador_id` ASC), 
+CONSTRAINT `fk_jugador_has_Juego_jugador1` 
 FOREIGN KEY (`jugador_id`) 
-REFERENCIAS `BDJocs`.`jugador` (`id`) 
-DONDE DELETE NO ACTION 
-DONDE UPDATE NO ACTION, 
-CONSTRAINT `fk_jugador_has_Joc_Joc1` 
+REFERENCES `BDJuegos`.`jugador` (`id`) 
+ON DELETE NO ACTION 
+ON UPDATE NO ACTION, 
+CONSTRAINT `fk_jugador_has_Juego_Juego1` 
 FOREIGN KEY (`Juego_id`) 
-REFERENCIAS `BDJocs`.`Juego` (`id`) 
-DONDE DELETE NO ACTION 
-DONDE UPDATE NO ACTION)
+REFERENCES `BDJuegos`.`Juego` (`id`) 
+ON DELETE NO ACTION 
+ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 ```
 
@@ -107,7 +108,7 @@ En la unidad introductoria ya revisamos la programación orientada a objetos, as
 
 El mismo ejemplo que hemos representado recientemente, con una representación orientada a objetos, podría ser:
 
-<center>![Orientación a Objetos](./img/O_O.png){width=90%}</center>
+![Orientación a Objetos](./img/O_O.png)
 
 
 Como podemos ver, tiene una estructura similar, a la que también hemos añadido algunos métodos como getters y setters. Además, las distintas clases no tienen un atributo identificador, puesto que cada objeto se identifica a sí mismo. Aquí tenemos una pequeña aproximación de cómo implementaríamos esta jerarquía en Java.
@@ -115,21 +116,21 @@ Como podemos ver, tiene una estructura similar, a la que también hemos añadido
 La clase `Genere` es una clase POJO, que sólo almacena información (nombre y descripción del tipo de juego) e implementa getters y setters.
 
 ```java
-public class Genere { 
+public class Genero { 
 protected String nombre; 
-protected String descripción; 
+protected String descripcion; 
 
-public Genere(String nombre, String descripcio) { 
+public Genero(String nombre, String descripcion) { 
 this.nombre = nombre; 
-this.descripcio = descripcion; 
+this.descripcion = descripcion; 
 } 
 
-public String getNom() {return nombre;} 
-public void setNom(String nombre) {this.nom = nombre;} 
+public String getNombre() {return nombre;} 
+public void setNombre(String nombre) {this.nom = nombre;} 
 
-public String getDescripcio() {return descripcio;} 
-public void setDescripcio(String descripcio) { 
-this.descripcio = descripcion; 
+public String getDescripcion() {return descripcion;} 
+public void setDescripcion(String descripcion) { 
+this.descripcion = descripcion; 
 }
 }
 ```
@@ -140,27 +141,27 @@ La clase `Juego` almacena el nombre, la descripción y el género del juego. A d
 public class Juego { 
 
 protected String nombre; 
-protected String descripción; 
-protected Genere genere; 
+protected String descripcion; 
+protected Genere genero; 
 
-public Juego(String nombre, String descripcio, Genere genere) { 
+public Juego(String nombre, String descripcion, Genere genero) { 
 this.nombre = nombre; 
 this.descripcio = descripcion; 
-this.genere = genere; 
+this.genero = genero; 
 
 } 
 
-public String getNom() {return this.nom;} 
-public void setNom(String nombre) {this.nom = nombre;} 
+public String getNombre() {return this.nombre;} 
+public void setNombre(String nombre) {this.nombre = nombre;} 
 
-public String getDescripcio() {return this.descripcio;} 
-public void setDescripcio(String descripcio) { 
-this.descripcio= descripcion; 
+public String getDescripcion() {return this.descripcion;} 
+public void setDescripcion(String descripcion) { 
+this.descripcion= descripcion; 
 } 
 
-public Genere getGenere() {return this.genere;} 
+public Genere getGenero() {return this.genero;} 
 
-public void setGenere(Genere genere) {this.genere = genere;}
+public void setGenero(Geneoe genero) {this.genero = genero;}
 }
 ```
 
@@ -171,19 +172,19 @@ public class Registro {
 private int puntuacion; 
 private Juego juego; 
 
-public Registro(int puntuacio, Juego juego) { 
+public Registro(int puntuacion, Juego juego) { 
 this.puntuacion = puntuacion; 
 this.juego = juego; 
 } 
 
-public int getPuntuacio() {return puntuacio;} 
-public void setPuntuacion(int puntuacio) { 
+public int getPuntuacion() {return puntuacion;} 
+public void setPuntuacion(int puntuacion) { 
 this.puntuacion = puntuacion; 
 } 
 
-public Juego getJoc() {return juego;} 
+public Juego getJuego() {return juego;} 
 
-public void setJoc(Juego juego) {this.joc = juego;}
+public void setJuego(Juego juego) {this.juego = juego;}
 }
 ```
 
@@ -194,25 +195,25 @@ Y finalmente, la clase `Jugador` almacena el apodo y la fecha de registro para c
 public class Jugador { 
 
 private String nick; 
-private Date dataRegistre; 
+private Date fechaRegistro; 
 private Set<Registro> puntuaciones; 
 
-public Jugador(String nick, Date dataRegistre) { 
+public Jugador(String nick, Date fechaRegistro) { 
 this.nick = nick; 
-this.dataRegistre = dataRegistre; 
+this.fechaRegistro = fechaRegistro; 
 } 
 
 public String getNick() {return nick;} 
 public void setNick(String nick) {this.nick = nick;} 
 
-public Date getDataRegistre() {return dataRegistre;} 
-public void setDataRegistre(Date dataRegistre) { 
-this.dataRegistre = dataRegistre; 
+public Date getFechaRegistro() {return fechaRegistro;} 
+public void setFechaRegistro(Date fechaRegistro) { 
+this.fechaRegistro = fechaRegistro; 
 } 
 
 public Set getPuntuaciones() {return this.puntuaciones;} 
-public void setPuntuacion(Juego juego, int puntuacio) { 
-Registro registro = new Registro(puntuación, juego); 
+public void setPuntuacion(Juego juego, int puntuacion) { 
+Registro registro = new Registro(puntuacion, juego); 
 this.puntuaciones.add(registro); 
 }
 }
