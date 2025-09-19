@@ -28,10 +28,10 @@ Para crear programas Java utilizando el controlador de MySQL, necesitamos cargar
 
 Una vez haya importado el controlador, debe decirle a su programa Java cómo conectarse a su base de datos y finalmente conectarse a su programa. Para esta tarea, debemos crear una `Connection` utilizando una URL especial llamada _URL de conexión_. Como otras URL, una URL de conexión puede contener:
 
-- **Protocolo** $\rightarrow$ utilizaremos `jdbc`.
-- **SGBD** $\rightarrow$ podríamos utilizar `mysql`, `postgres`, `sqlite`, `sqlserver` o cualquier SGBD con un conector JDBC.
-- **Dirección del servidor** $\rightarrow$ podemos utilizar tanto un nombre completo como la dirección IP del servidor.
-- [opcional]**Port** $\rightarrow$ el puerto donde el servidor está escuchando. Si no se utiliza ninguna, el controlador intentará conectarse al puerto predeterminado. Recuerde separar el puerto de la dirección con `:`.
+- **Protocolo** →  utilizaremos `jdbc`.
+- **SGBD** →  podríamos utilizar `mysql`, `postgres`, `sqlite`, `sqlserver` o cualquier SGBD con un conector JDBC.
+- **Dirección del servidor** →  podemos utilizar tanto un nombre completo como la dirección IP del servidor.
+- [opcional]**Port** →  el puerto donde el servidor está escuchando. Si no se utiliza ninguna, el controlador intentará conectarse al puerto predeterminado. Recuerde separar el puerto de la dirección con `:`.
 - **Otros parámetros**, separándolos con `?` al principio y con `&` entre los parámetros. Por ejemplo: 
 - **user**=`usuario` 
 - **pass**=`contraseña` 
