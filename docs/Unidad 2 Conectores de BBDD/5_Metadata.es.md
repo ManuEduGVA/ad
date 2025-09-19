@@ -27,7 +27,7 @@ En cualquier caso, la mayoría de los SGBD coinciden el catálogo con el nombre 
 
 ## 5.1. Ejercicio resuelto
 
-Vamos a crear un programa Java que muestre información interna de una base de datos `BDJocs`, mediante `DataBaseMetaData`. Veremos el programa paso a paso.
+Vamos a crear un programa Java que muestre información interna de una base de datos `BDJuegos`, mediante `DataBaseMetaData`. Veremos el programa paso a paso.
 
 !!! info 
 Puede ver toda la información del método y cómo los datos se almacenan en cada ResultSet del método en este [enlace](https://docs.oracle.com/javase/7/docs/api/java/sql/DatabaseMetaData.html).
