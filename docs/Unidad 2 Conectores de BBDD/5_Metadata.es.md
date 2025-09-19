@@ -4,15 +4,15 @@ Antes de recuperar datos, estudiaremos cómo obtener información sobre la base 
 
 La interfaz `DatabaseMetaData` nos proporciona información sobre las tablas y vistas de la base de datos, así como su estructura. A continuación tenemos algunos de los métodos más relevantes de esta interfaz.
 
-- `String getDatabaseProductName()` $\rightarrow$ Obtiene el nombre de SGBD.
-- `String getDriverName()` $\rightarrow$ Obtiene el nombre del controlador JDBC que se está utilizando.
-- `String getURL()` $\rightarrow$ Obtiene la URL de la conexión.
-- `String getUserName()` $\rightarrow$ Obtiene el nombre del usuario conectado a la base de datos.
-- `ResultSet getTables(String catalog, String schema, String patternTableName, String[] type)` $\rightarrow$ Obtiene información de las tablas disponibles en el catálogo indicado.
-- `ResultSet getColumns(String catalog, String schema, String patternNameTable, String patternColumnName)` $\rightarrow$ Obtiene información de los campos de la tabla especificada en el catálogo y esquema indicados.
-- `ResultSet getPrimaryKeys(String catalog, String schema, String patternNameTable)` $\rightarrow$ Obtiene la lista de campos que forman la clave primaria.
-- `ResultSet getImportedKeys(String catalog, String schema, String patternNameTable)` $\rightarrow$ Obtiene una lista con las claves externas definidas en la tabla.
-- `ResultSet getExportedKeys(String catalog, String schema, String patternNameTable)` $\rightarrow$ Obtiene una lista con las claves externas que apuntan a esta tabla.
+- `String getDatabaseProductName()` →  Obtiene el nombre de SGBD.
+- `String getDriverName()` →  Obtiene el nombre del controlador JDBC que se está utilizando.
+- `String getURL()` →  Obtiene la URL de la conexión.
+- `String getUserName()` →  Obtiene el nombre del usuario conectado a la base de datos.
+- `ResultSet getTables(String catalog, String schema, String patternTableName, String[] type)` →  Obtiene información de las tablas disponibles en el catálogo indicado.
+- `ResultSet getColumns(String catalog, String schema, String patternNameTable, String patternColumnName)` →  Obtiene información de los campos de la tabla especificada en el catálogo y esquema indicados.
+- `ResultSet getPrimaryKeys(String catalog, String schema, String patternNameTable)` →  Obtiene la lista de campos que forman la clave primaria.
+- `ResultSet getImportedKeys(String catalog, String schema, String patternNameTable)` →  Obtiene una lista con las claves externas definidas en la tabla.
+- `ResultSet getExportedKeys(String catalog, String schema, String patternNameTable)` →  Obtiene una lista con las claves externas que apuntan a esta tabla.
 
 
 !!! info "Información" 
@@ -48,7 +48,7 @@ Muy sencillo, carga el controlador y conéctate a la base de datos de la forma q
 
 ### 5.1.2. Recupera los metadatos del SGBD y muéstralos en un formato amigable
 
-Utilizaremos la clase `Color` para mostrar los datos en formato de texto en la consola. Tiene esta clase en la APAC1, dentro del proyecto.
+Utilizaremos la clase [Color](./Colores.java) para mostrar los datos en formato de texto en la consola.
 
 ```java
 // get the metadata

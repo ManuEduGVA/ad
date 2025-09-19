@@ -4,7 +4,7 @@ Ahora que estamos conectados a la base de datos, es hora de empezar a pedir info
 
 En Java, la clase que permite trabajar con datos en formato tabular provenientes de bases de datos se llama `Resultset`. Un `Resultset` está compuesto por una tabla (filas y columnas) y un puntero en una fila, llamado **cursor**.
 
-<center>![Resultset](./img/ResultSet.png){width=90%}</center>
+![Resultset](./img/ResultSet.png){width=90%}
 
 
 1. Cuando recuperamos datos de las bases de datos, la información se guarda en la tabla y el cursor apunta a una fila imaginaria vacía llamada `beforeFirst`.
@@ -15,8 +15,8 @@ En Java, la clase que permite trabajar con datos en formato tabular provenientes
 
 Cuando el cursor apunta a una fila real, es cuando podemos recuperar los datos de las columnas de la fila actual. Podemos utilizar un método especial y sobrecargado, de la siguiente forma:
 
-- `getXXX(int posiciónColumna)` $\rightarrow$ devuelve los datos, donde `XXX` es un tipo de datos (Int, Float, Double, String, etc.) de la posición de la columna, empezando por 1.
-- `getXXX(String nombreColumna)` $\rightarrow$ devuelve los datos, donde `XXX` es un tipo de datos (Int, Float, Double, String, etc.) de la columna con el nombre proporcionado.
+- `getXXX(int posiciónColumna)` →  devuelve los datos, donde `XXX` es un tipo de datos (Int, Float, Double, String, etc.) de la posición de la columna, empezando por 1.
+- `getXXX(String nombreColumna)` →  devuelve los datos, donde `XXX` es un tipo de datos (Int, Float, Double, String, etc.) de la columna con el nombre proporcionado.
 
 !!! danger "Peligro" 
 
@@ -30,9 +30,9 @@ Tenga en cuenta:
 
 Los ResultSets de una consulta también tienen un conjunto de metadatos. Estos metadatos se pueden obtener utilizando `ResultSetMetaData`. Los métodos más relevantes de esta clase son:
 
-- `int getColumnCount()` $\rightarrow$ Obtiene el número de columnas en el ResultSet.
-- `String getColumnName(index)` $\rightarrow$ Obtiene el nombre de la columna indicada en el índice (recuerda que el primero es 1).
-- `String getColumnTypeName(index)` $\rightarrow$ Obtiene el tipo de la columna.
+- `int getColumnCount()` → Obtiene el número de columnas en el ResultSet.
+- `String getColumnName(index)` →  Obtiene el nombre de la columna indicada en el índice (recuerda que el primero es 1).
+- `String getColumnTypeName(index)` →  Obtiene el tipo de la columna.
 
 ResulSetMetaData se obtiene de cada ResultSet generado previamente, con el método `getMetaData()`.
 
