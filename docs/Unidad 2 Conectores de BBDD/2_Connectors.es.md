@@ -86,4 +86,4 @@ Revisa las notas de tu módulo de bases de datos sobre cómo trabajar con Workbe
 - Edita y crea SQL 
 - Edita y guarda datos
 
-Dispones del scrip [Esquema BD Juegos](./esquemaBDJocs.sql) para cargar los ejemplos de los apuntes
+Dispones del scrip [Esquema BD Juegos](./bdjuegos.sql) para cargar los ejemplos de los apuntes
