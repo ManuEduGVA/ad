@@ -280,10 +280,8 @@ En la plataforma encontrarás:
 - Clase Competicion: Esta no tendrá constructor, constructor por defecto. Para esta se deberá implementar lo siguiente:
 
 
-    - `Constructor(Element result)`, que recibe un elemento XML.
-    - `public String toCSV()`, que devuelve todos los campos separados por `;`.
-    - `public ArrayList<ResultadoCarrera> carregaResultadosXML(String nomXML)`, que recibe el nombre del archivo XML y carga todos los resultados. 
-    - `public void saveAsCSV(String nomFitxer, ArrayList<ResultadoCarrera> elsResultats)`, que guardará en un archivo de texto csv los resultados cargados previamente.
+    - `public ArrayList<Carrera> cargaResultadosXML(String nomXML)`, que recibe el nombre del archivo XML y carga todos los resultados. 
+    - `public void saveAsCSV(String nombreFichero, ArrayList<Carrera> losResultados)`, que guardará en un archivo de texto csv los resultados cargados previamente.
 
 - La clase del programa principal ya se proporciona implementada.
 
@@ -303,7 +301,6 @@ En la plataforma encontrarás un archivo llamado `SW.json`. Este recupera inform
 </character>
 ```
 
-Comencemos el curso experimentando con bases de datos y programas para repasar todos los conceptos necesarios para comenzar con los temas principales con una base sólida.
 <!--
 
 # Enlaces
