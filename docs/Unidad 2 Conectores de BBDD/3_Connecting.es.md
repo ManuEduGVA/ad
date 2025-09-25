@@ -51,7 +51,7 @@ String server="localhost";
 int puerto=3308;
 String user="root";
 String pass="root";
-String DBName="Cycling";
+String DBName="BDJuegos";
 String connectionUrl = "jdbc:mysql://"+server+":"+puerto;
 connectionUrl+="/" + DBName;
 connectionUrl+="?useUnicode=true&characterEncoding=UTF-8";
@@ -79,22 +79,33 @@ La clase que centralizará todas las operaciones con la base de datos es `java.s
 Una muestra inicial será:
 
 ```java
-public static void main (String [] args ) 
-throws ClassNotFoundException, SQLException{ 
+package org.dam;
 
-Class.forName("com.mysql.cj.jdbc.Driver"); 
-String server="localhost"; 
-int puerto=3308; 
-String user="root"; 
-String pass="root"; 
-String DBName="Cycling"; 
-String connectionUrl = "jdbc:mysql://"+server+":"+puerto; 
-connectionUrl+="/" + DBName; 
-connectionUrl+="?useUnicode=true&characterEncoding=UTF-8"; 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-Connection conn = DriverManager.getConnection(connectionUrl,user,pass); 
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args)
+            throws ClassNotFoundException, SQLException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        String server = "localhost";
+        int puerto = 3308;
+        String user = "root";
+        String pass = "root";
+        String DBName = "BDJuegos";
+        String connectionUrl = "jdbc:mysql://" + server + ":" + puerto;
+        connectionUrl += "/" + DBName;
+        connectionUrl += "?useUnicode=true&characterEncoding=UTF-8";
+
+        Connection conn = DriverManager.getConnection(connectionUrl, user, pass);
 
 // if no excepto se catched, you connected to your DBMS
+    }
+}
 ```
 
 Con el objeto `Connection` que tenemos ahora conectado, enviaremos nuestras consultas y pediremos información, como veremos más adelante.
@@ -105,32 +116,37 @@ Nuestra aplicación debe conectarse a una (o más) bases de datos. Podemos reali
 
 
 ```java
-public class ConnexionBD { 
+package org.dam;
 
-private Connection laConnexion = null; 
+import java.sql.Connection;
+import java.sql.SQLException;
 
-// write here access variables, like user, server or whatever 
+public class ConnexionBD {
 
-private void connect() { 
-// do the connetion (look the sample). 
-// Take care. private method. It will be called inside the class 
-} 
+    private Connection laConexion = null;
 
-// close connection, if it's opened 
-public void disConnect() { 
-if (laConnexion != null) { 
-laConexion.close(); 
-} 
-} 
+// write here access variables, like user, server or whatever
 
-// returns the connection. 
-// It will be create first time of after closed 
-public Connection getConexion(){ 
-if (laConexion == null) { 
-this.connect(); 
-} 
-return this.laConnexion; 
-}
+    private void connect() {
+// do the connetion (look the sample).
+// Take care. private method. It will be called inside the class
+    }
+
+    // close connection, if it's opened
+    public void disConnect() throws SQLException {
+        if (laConexion != null) {
+            laConexion.close();
+        }
+    }
+
+    // returns the connection.
+// It will be create first time of after closed
+    public Connection getConexion(){
+        if (laConexion == null) {
+            this.connect();
+        }
+        return this.laConexion;
+    }
 }
 ```
 ### 3.4.1. Ejercicio resuelto
