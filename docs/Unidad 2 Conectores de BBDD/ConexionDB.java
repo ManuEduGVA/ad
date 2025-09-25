@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package org.dam;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,25 +18,25 @@ import java.util.logging.Logger;
  *
  * @author Manu
  */
-public class ConnexionDB {
+public class ConexionDB {
 
-    private Connection laConnexion = null;
+    private Connection laConexion = null;
 
     private String dbName;
     
 
-    public ConnexionDB() {
+    public ConexionDB() {
         this.dbName="";
     }
 
-    public ConnexionDB(String dbName) {
+    public ConexionDB(String dbName) {
         this.dbName = dbName;
     }
     
     
     private void abrirConnexion() {
 
-        if (laConnexion == null) {
+        if (laConexion == null) {
 
             Properties config = new Properties();
             try {
@@ -60,7 +61,7 @@ public class ConnexionDB {
                 p.put("user", config.getProperty("user"));
                 p.put("password", config.getProperty("password"));
                 p.put("allowMultiQueries", config.getProperty("allowMultiQueries"));
-                laConnexion = DriverManager.getConnection(connectionUrl, p);
+                laConexion = DriverManager.getConnection(connectionUrl, p);
                  
                // laConnexio = DriverManager.getConnection(connectionUrl, config);
 
@@ -79,24 +80,22 @@ public class ConnexionDB {
 
     }
 
-    public Connection getConnexion() {
-        if (laConnexion == null) {
+    public Connection getConexion() {
+        if (laConexion == null) {
             abrirConnexion();
         }
-
-        return laConnexion;
-
+        return laConexion;
     }
 
-    public void tancarConnexio() {
-        if (laConnexion != null) {
+    public void closeConexion() {
+        if (laConexion != null) {
             try {
-                laConnexion.close();
+                laConexion.close();
             } catch (SQLException ex) {
-                Logger.getLogger(ConnexionDB.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        laConnexion = null;
+        laConexion = null;
     }
 
 }

@@ -154,4 +154,4 @@ public class ConnexionBD {
 Crea un proyecto único con dos clases. Una para conectarte a tu base de datos, como el último ejemplo, y una clase principal que se conecte y muestre si ha habido algún error.
 
 
-> La solución del ejercicio está enlazada aquí [connexio.properties](./connexion.properties) y [ConnexioDB.java](./ConnexionDB.java)
+> La solución del ejercicio está enlazada aquí [conexion.properties](./conexion.properties) y [ConexionDB.java](./ConexionDB.java)
