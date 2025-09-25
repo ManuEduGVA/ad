@@ -94,10 +94,10 @@ En este enlace [configuración de Lombok](https://projectlombok.org/setup/) enco
 
 Una vez instalada, basta con decir mediante anotaciones lo que quieres:
 
-- `@Getter` $\rightarrow$ generará todos los getters.
-- `@Setter` $\rightarrow$ generará todos los setters.
-- `@Data` $\rightarrow$ todos los métodos que necesitan un POJO, incluyendo `ToString`.
-- `@AllArgsConstructor` o `@NoArgsConstructor` $\rightarrow$ generará el constructor que quieras.
+- `@Getter` → generará todos los getters.
+- `@Setter` → generará todos los setters.
+- `@Data` → todos los métodos que necesitan un POJO, incluyendo `ToString`.
+- `@AllArgsConstructor` o `@NoArgsConstructor` → generará el constructor que quieras.
 
 En el siguiente [vídeo](https://youtu.be/Ot_4SbEpZMA) se explica cómo añadir la dependencia de Gradle y utilizar Lombok.
 

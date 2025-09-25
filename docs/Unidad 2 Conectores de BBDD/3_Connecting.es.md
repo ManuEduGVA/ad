@@ -31,7 +31,7 @@ Una vez haya importado el controlador, debe decirle a su programa Java cómo con
 - **Protocolo** →  utilizaremos `jdbc`.
 - **SGBD** →  podríamos utilizar `mysql`, `postgres`, `sqlite`, `sqlserver` o cualquier SGBD con un conector JDBC.
 - **Dirección del servidor** →  podemos utilizar tanto un nombre completo como la dirección IP del servidor.
-- [opcional]**Port** →  el puerto donde el servidor está escuchando. Si no se utiliza ninguna, el controlador intentará conectarse al puerto predeterminado. Recuerde separar el puerto de la dirección con `:`.
+- [opcional]**Port** → el puerto donde el servidor está escuchando. Si no se utiliza ninguna, el controlador intentará conectarse al puerto predeterminado. Recuerde separar el puerto de la dirección con `:`.
 - **Otros parámetros**, separándolos con `?` al principio y con `&` entre los parámetros. Por ejemplo: 
 - **user**=`usuario` 
 - **pass**=`contraseña` 

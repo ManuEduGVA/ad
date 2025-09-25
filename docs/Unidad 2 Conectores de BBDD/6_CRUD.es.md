@@ -11,15 +11,15 @@ El punto 1 se ha estudiado en las secciones anteriores.
 
 Para crear las consultas, deberemos utilizar las siguientes clases/interfaces:
 
-- `Statement` $\rightarrow$ Se utiliza de forma general y es útil cuando queremos realizar **sentencias SQL estáticas**, ya que no acepta parámetros. Creamos un `Statement` con el método `createStatement()` de la clase `Connection`.
-- `PreparedStatement` $\rightarrow$ Se utiliza cuando queremos lanzar varias consultas y, además, se permite realizar **sentencias dinámicas**. Creamos un `PreparedStatement` con el método `prepareStatement()` de la clase `Connection`.
-- `CallableStatement` $\rightarrow$ Se utiliza para acceder a procedimientos almacenados en la base de datos y también acepta parámetros de entrada. Creamos un `CallableStatement` con el método `prepareCall()` de la clase `Connection`.
+- `Statement` → Se utiliza de forma general y es útil cuando queremos realizar **sentencias SQL estáticas**, ya que no acepta parámetros. Creamos un `Statement` con el método `createStatement()` de la clase `Connection`.
+- `PreparedStatement` → Se utiliza cuando queremos lanzar varias consultas y, además, se permite realizar **sentencias dinámicas**. Creamos un `PreparedStatement` con el método `prepareStatement()` de la clase `Connection`.
+- `CallableStatement` → Se utiliza para acceder a procedimientos almacenados en la base de datos y también acepta parámetros de entrada. Creamos un `CallableStatement` con el método `prepareCall()` de la clase `Connection`.
 
 
 Cuando la sentencia está preparada, podemos ejecutarla con:
 
-- `executeQuery` $\rightarrow$ Ejecuta sentencias que **esperamos que devuelvan datos** (consultas SELECT). El valor de retorno de esta ejecución es, como ya supondrá, un ResultSet.
-- `executeUpdate` $\rightarrow$ Ejecuta sentencias que **no se espera que devuelvan datos**, pero que se utilizarán para modificar la base de datos conectada (consultas INSERT, DELETE, UPDATE y CREATE TABLE).
+- `executeQuery` → Ejecuta sentencias que **esperamos que devuelvan datos** (consultas SELECT). El valor de retorno de esta ejecución es, como ya supondrá, un ResultSet.
+- `executeUpdate` → Ejecuta sentencias que **no se espera que devuelvan datos**, pero que se utilizarán para modificar la base de datos conectada (consultas INSERT, DELETE, UPDATE y CREATE TABLE).
 
 ## 6.1. Create (Insert)
 
@@ -334,16 +334,16 @@ throws SQLException
 
 Como puede ver, hay 3 argumentos para indicar qué tipo de ResultSet damos al final. Estos tres argumentos pueden ser:
 
-- `resultSetType` $\rightarrow$ éstas son opciones sobre cómo moverse y pasar por las filas del ResultSet: 
-- `TYPE_FORWARD_ONLY` $\rightarrow$ **opción por defecto**. El ResultSet sólo puede ocurrir una vez. 
-- `TYPE_SCROLL_INSENSITIVE` $\rightarrow$ Permite rebobinar y saltar a una posición absoluta o relativa. 
-- `TYPE_SCROLL_SENSITIVE` $\rightarrow$ Al igual que antes, pero permite ver los cambios realizados en la base de datos.
-- `ResultSetConcurrency` $\rightarrow$ éstas son opciones sobre si se puede actualizar el ResultSet o no: 
-- `CONCUR_READ_ONLY` $\rightarrow$ **opción por defecto**. Sólo lectura. Si queremos actualizar algo, sólo podemos utilizar las cláusulas `DELETE` o `UPDATE`. 
-- `CONCUR_UPDATABLE` $\rightarrow$ Las filas de ResultSet se pueden actualizar o borrar.
-- `ResultSetHoldability` estas opciones son sobre el comportamiento al cerrar el ResultSet: 
-- `HOLD_CURSORS_OVER_COMMIT` $\rightarrow$ El ResultSet se mantiene abierto después de confirmar la transacción. 
-- `CLOSE_CURSORS_AT_COMMIT` $\rightarrow$ El ResultSet se cierra después de confirmar la transacción. Mejora el rendimiento.
+- `resultSetType` → éstas son opciones sobre cómo moverse y pasar por las filas del ResultSet: 
+- `TYPE_FORWARD_ONLY` → **opción por defecto**. El ResultSet sólo puede ocurrir una vez. 
+- `TYPE_SCROLL_INSENSITIVE` → Permite rebobinar y saltar a una posición absoluta o relativa. 
+- `TYPE_SCROLL_SENSITIVE` → Al igual que antes, pero permite ver los cambios realizados en la base de datos.
+- `ResultSetConcurrency` → éstas son opciones sobre si se puede actualizar el ResultSet o no: 
+- `CONCUR_READ_ONLY` → **opción por defecto**. Sólo lectura. Si queremos actualizar algo, sólo podemos utilizar las cláusulas `DELETE` o `UPDATE`. 
+- `CONCUR_UPDATABLE` → Las filas de ResultSet se pueden actualizar o borrar.
+- `ResultSetHoldability` → estas opciones son sobre el comportamiento al cerrar el ResultSet: 
+- `HOLD_CURSORS_OVER_COMMIT` → El ResultSet se mantiene abierto después de confirmar la transacción. 
+- `CLOSE_CURSORS_AT_COMMIT` → El ResultSet se cierra después de confirmar la transacción. Mejora el rendimiento.
 
 En el siguiente ejemplo, podemos preguntar a nuestro DBMS si estos tipos de ResultSet están soportados:
 
@@ -363,10 +363,10 @@ System.out.println("CONCUR_UPDATABLE: " + dbmd.supportsResultSetConcurrency(Resu
 
 Como podemos ver, no sólo podemos mover el cursor hacia delante:
 
-- `next`, `previous`, `first` y `last` $\rightarrow$ como su nombre indica, se mueven hacia delante, hacia atrás, al principio ya la última fila. Devuelve true si el cursor apunta a una fila y false de lo contrario.
-- `beforeFirst` y `afterLast` $\rightarrow$ el cursor apuntará fuera de las filas, antes de la primera o después de la última fila.
-- `relative(int n)` $\rightarrow$ el cursor se mueve _n_ files (hacia adelante o hacia atrás, dependiendo del signo).
-- `absolute(int n)` $\rightarrow$ el cursor apunta a la fila _n_.
+- `next`, `previous`, `first` y `last` → como su nombre indica, se mueven hacia delante, hacia atrás, al principio ya la última fila. Devuelve true si el cursor apunta a una fila y false de lo contrario.
+- `beforeFirst` y `afterLast` → el cursor apuntará fuera de las filas, antes de la primera o después de la última fila.
+- `relative(int n)` → el cursor se mueve _n_ files (hacia adelante o hacia atrás, dependiendo del signo).
+- `absolute(int n)` → el cursor apunta a la fila _n_.
 
 
 ### 6.6.2. Eliminación de filas en un ResultSet
