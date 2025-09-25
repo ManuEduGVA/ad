@@ -63,27 +63,44 @@ Sé consciente de que:
 En este blog de código, vamos a ver un ejemplo breve para ejecutar una consulta (`Select * from table`). Veremos otras consultas en las siguientes secciones.
 
 ```java
-//with a previous connection
-String tabla="Juegos";
-ResultSet rst = con.createStatement().executeQuery("SELECT * FROM " +mesa);
-System.out.println(Colores.Cyan);
-System.out.println("");
-System.out.println("Contenido de " + tabla);
-System.out.println("******************************");
+ try {
+            ConnexionDB laConexionDB = new ConnexionDB("BDJuegos");
 
-ResultSetMetaData rsmdQuery = rst.getMetaData();
+            Connection con = laConexionDB.getConnexion();
 
-// print the columns name
-for (int i = 1; y <= rsmdQuery.getColumnCount(); i++) 
-System.out.print(String.format("%-25.25s",rsmdQuery.getColumnName(i)));
+            DatabaseMetaData dbmd = con.getMetaData();
 
-System.out.println();
-System.out.println(Colores.Reset);
+            System.out.println("\nDBMS information--------" );
+            System.out.println("DBMS:\t" + dbmd.getDatabaseProductName());
+            System.out.println("DBMS:\t"+ dbmd.getDriverName());
+            System.out.println("DBMS:\t" + dbmd.getURL());
+            System.out.println("DBMS:\t" + dbmd.getUserName());
 
-// print the values
-while (rs.next()) { 
-for (int i = 1; y <= rsmdQuery.getColumnCount(); i++) 
-System.out.print(String.format("%-25.25s ",rst.getString(i))); 
-System.out.println();
-}
+            System.out.println(String.format("%-15s %-15s %-15s ", "Database", "Table", "Type"));
+            System.out.println("-------------------------------------------------------");
+            ResultSet rsmd = dbmd.getTables("BDJuegos", null, null, null);
+            while (rsmd.next()) {
+                System.out.println(String.format("%-15s %-15s %-15s", rsmd.getString(1), rsmd.getString(3), rsmd.getString(4)));
+            }
+
+            rsmd.close();
+
+            String table = "Genero"; // we set the name of an existing table
+            ResultSet columnas = dbmd.getColumns("BDJuegos", null, table, null);
+
+            System.out.println(String.format("%-25s %-15s %-15s ", "Atributo/Claves", "Tipo", "¿Puede ser nulo?"));
+            while (columnas.next()) {
+                String columnName = columnas.getString(4);
+                String tipo = columnas.getString(6);
+                String nullable = columnas.getString(18);
+
+                System.out.println(String.format("%-25s %-15s %-15s", columnName,tipo,nullable));
+            }
+            con.close();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }   
 ```
+
+> La solución del ejercicio está enlazada aquí [conexion.properties](./conexion.properties), [ConexionDB.java](./ConexionDB.java) y el [Main.java](./Main.java)

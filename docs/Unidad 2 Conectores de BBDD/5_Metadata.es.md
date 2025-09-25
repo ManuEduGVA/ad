@@ -40,8 +40,8 @@ Recuerda cómo conectarte a un SGBD de forma sencilla:
 ```java
 // load JDBC driver
 2 Class.forName("com.mysql.cj.jdbc.Driver");
-3 // Conecto a DBMS and DB BDJosc, with user and pass
-4 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/BDJocs", "root", "root");
+3 // Conecto a DBMS and DB BDJuegos, with user and pass
+4 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3308/BDJuegos", "root", "root");
 ```
 
 Muy sencillo, carga el controlador y conéctate a la base de datos de la forma que hemos estudiado.
@@ -66,12 +66,12 @@ Como puede ver, obtenemos el nombre del SGBD, el controlador, el URL y el usuari
 
 ### 5.1.3. Recuperar tablas en un esquema/base de datos
 
-Utilizando el método `getTables()` podemos recuperar las tablas y más información. Supongamos que `BDJocs` existe en nuestro SGBD:
+Utilizando el método `getTables()` podemos recuperar las tablas y más información. Supongamos que `BDJuegos` existe en nuestro SGBD:
 
 ```java
 System.out.println(Colores.Bright_White+String.format("%-15s %-15s %-15s","Database","Table","Type"));
 System.out.println("-------------------------------------------------------"+Colores.Reset);
-ResultSet rsmd = dbmd.getTables("BDJocs", null, null, null);
+ResultSet rsmd = dbmd.getTables("BDJuegos", null, null, null);
 while (rsmd.next()) { 
 System.out.println(String.format("%-15s %-15s %-15s",rsmd.getString(1),rsmd.getString(3),rsmd.getString(4)));
 }
@@ -105,7 +105,7 @@ Es el momento de obtener las columnas de una tabla, utilizando el método `getCo
 
 ```java
 String table=...; // we set the name of an existing table
-ResultSet columnas = dbmd.getColumns("BDJocs",null , tabla, null);
+ResultSet columnas = dbmd.getColumns("BDJuegos",null , tabla, null);
 System.out.println(Colores.Bright_White+String.format("%-25s %-15 s%-15s","Atributo/Claves","Tipos","¿Puede ser nulo?"+Colores.reset));
 
 while (columnas.next()){ 

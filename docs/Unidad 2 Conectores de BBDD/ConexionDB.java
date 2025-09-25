@@ -22,11 +22,11 @@ public class ConexionDB {
 
     private Connection laConexion = null;
 
-    private String dbName;
+    private String dbName = null;
     
 
     public ConexionDB() {
-        this.dbName="";
+        this.dbName=null;
     }
 
     public ConexionDB(String dbName) {
@@ -67,14 +67,14 @@ public class ConexionDB {
 
                 System.out.println("Connection to MySQL has been established with DB: " + dbName);
 
-            } catch (FileNotFoundException fnfe) {
-                fnfe.printStackTrace();
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            } catch (SQLException ex) {
-                System.out.println("Error:" + ex.getMessage());
-            } catch (ClassNotFoundException ex) {
-                System.out.println(ex.getMessage());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                System.out.println("Error:" + e.getMessage());
+            } catch (ClassNotFoundException e) {
+                System.out.println(e.getMessage());
             }
         }
 
@@ -91,8 +91,8 @@ public class ConexionDB {
         if (laConexion != null) {
             try {
                 laConexion.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException e) {
+                Logger.getLogger(ConexionDB.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         laConexion = null;

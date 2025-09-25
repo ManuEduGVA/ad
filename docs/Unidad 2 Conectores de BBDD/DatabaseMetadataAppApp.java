@@ -18,38 +18,39 @@ import java.util.logging.Logger;
 public class App {
 
     public static void main(String[] args) {
-        try {
-            ConnexionDB laConnexioDB = new ConnexionDB("BDJocs");
+         
+  try {
+            ConexionDB laConexionDB = new ConexionDB("BDJuegos");
 
-            Connection con = laConnexioDB.getConnexion();
+            Connection con = laConexionDB.getConexion();
 
             DatabaseMetaData dbmd = con.getMetaData();
 
-            System.out.println("\nDBMS information--------" );
+            System.out.println("\nDBMS information--------");
             System.out.println("DBMS:\t" + dbmd.getDatabaseProductName());
-            System.out.println("DBMS:\t"+ dbmd.getDriverName());
+            System.out.println("DBMS:\t" + dbmd.getDriverName());
             System.out.println("DBMS:\t" + dbmd.getURL());
             System.out.println("DBMS:\t" + dbmd.getUserName());
 
             System.out.println(String.format("%-15s %-15s %-15s ", "Database", "Table", "Type"));
             System.out.println("-------------------------------------------------------");
-            ResultSet rsmd = dbmd.getTables("BDJocs", null, null, null);
+            ResultSet rsmd = dbmd.getTables("BDJuegos", null, null, null);
             while (rsmd.next()) {
                 System.out.println(String.format("%-15s %-15s %-15s", rsmd.getString(1), rsmd.getString(3), rsmd.getString(4)));
             }
 
             rsmd.close();
 
-            String table = "Genere"; // we set the name of an existing table
-            ResultSet columnes = dbmd.getColumns("BDJocs", null, table, null);
+            String table = "Genero"; // we set the name of an existing table
+            ResultSet columnas = dbmd.getColumns("BDJuegos", null, table, null);
 
-            System.out.println(String.format("%-25s %-15s %-15s ", "Atribut/Claus", "Tipus", "Pot ser nul?"));
-            while (columnes.next()) {
-                String columnName = columnes.getString(4);
-                String tipus = columnes.getString(6);
-                String nullable = columnes.getString(18);
+            System.out.println(String.format("%-25s %-15s %-15s ", "Atributo/Claves", "Tipo", "¿Puede ser nulo?"));
+            while (columnas.next()) {
+                String columnName = columnas.getString(4);
+                String tipo = columnas.getString(6);
+                String nullable = columnas.getString(18);
 
-                System.out.println(String.format("%-25s %-15s %-15s", columnName,tipus,nullable));
+                System.out.println(String.format("%-25s %-15s %-15s", columnName, tipo, nullable));
             }
             con.close();
 

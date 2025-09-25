@@ -1,3 +1,5 @@
+package org.dam;
+
 public class Colores {
     // Reset
     public static final String Reset = "\u001B[0m";
