@@ -26,7 +26,7 @@ Cuando la sentencia está preparada, podemos ejecutarla con:
 Vamos a ver un ejemplo sencillo de declaración `INSERT`.
 
 ```java
-ConnexioDB conDB=new ConnexioDB("BDJocs");
+ConnexionDB conDB=new ConnexioDB("BDJuegos");
 Connection con=conDB.getConnexio();
 
 String SQL="INSERT INTO Juego VALUES (1, 'Double Dragon', 'Dos hermanos gemelos expertos en artes marciales deben hacerse camino en un escenario urbano donde miembros de bandas rivales quieren dejarlos fuera de combate.', 1);";
@@ -51,42 +51,57 @@ La lectura es el proceso más importante que realizaremos, ya que sólo con el p
 2. Sentencias variables
 3. Sentencias preparadas
 
-Veremos con detalle ambos modos. Utilizaremos para ello el script `Instituto.sql` y la base de datos.
+Veremos con detalle ambos modos. Utilizaremos para ello el script `instituto`  en el siguiente [enlace](./instituto.sql).
 
 ### 6.2.1. Sentencias fijas
 
 Estas sentencias, como su nombre indica, son sentencias fijas o constantes. SQL es fija y no tiene ninguna variable.
 
 ```java
-// The query
-String SQL="Select * from Persona";
-// The statement
-Statement st=con.createStatement();
-// The execution
-ResultSet rst=st.executeQuery(SQL);
+package org.dam;
 
-// processing
-while(rst.next()){ 
-System.out.print(ConsoleColors.BLUE_BRIGHT+ "Person: "+ ConsoleColors.RESET); 
-/* 
-System.out.println( 
-rst.getString(3)+ ", "+ 
-rst.getString(2)+ " "+ 
-rst.getInt(4)); 
-*/ 
-System.out.println( 
-rst.getString("apellidos")+ ", "+ 
-rst.getString("número")+ " "+ 
-rst.getInt("edad"));
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+public class Main {
+    public static void main(String[] args) throws SQLException {
+
+        ConexionDB conDB = new ConexionDB("instituto");
+        Connection con = conDB.getConexion();
+        String SQL = "Select * from persona";
+        // The statement
+        Statement st = con.createStatement();
+        // The execution
+        ResultSet rst = st.executeQuery(SQL);
+
+        // processing
+        while (rst.next()) {
+            System.out.print(Colores.Bright_Blue + "Person: " + Colores.Reset);
+            /*
+            System.out.println(
+            rst.getString(3)+ ", "+
+            rst.getString(2)+ " - "+
+            rst.getInt(5));
+            */
+            System.out.println(
+                    rst.getString("apellidos") + ", " +
+                            rst.getString("nombre") + " - " +
+                            rst.getInt("edad"));
+        }
+
+        rst.close();
+    }
 }
-
-rst.close();
 ```
 
 En el procesamiento de la información, ResultSet tiene:
 
-- `type getType(int columnIndex)` $\rightarrow$ método sobrecargado que devuelve el tipo de datos dado, utilizando el índice de columna del ResultSet. Recuerda que la primera columna es 1 en lugar de 0. El tipo puede ser Int, String, Double, etc. si conoces el tipo. Para columnas desconocidas, puedes utilizar `Object` como tipo genérico.
-- `type getType(String columnName)` $\rightarrow` mismo que el método anterior, pero accediendo a la columna con el nombre que hemos seleccionado en la consulta o el nombre en la tabla.
+- `type getType(int columnIndex)` → método sobrecargado que devuelve el tipo de datos dado, utilizando el índice de columna del ResultSet. Recuerda que la primera columna es 1 en lugar de 0. El tipo puede ser Int, String, Double, etc. si conoces el tipo. Para columnas desconocidas, puedes utilizar `Object` como tipo genérico.
+- `type getType(String columnName)` → mismo que el método anterior, pero accediendo a la columna con el nombre que hemos seleccionado en la consulta o el nombre en la tabla.
 
 ### 6.2.2. Sentencias variables
 
@@ -94,48 +109,67 @@ En el procesamiento de la información, ResultSet tiene:
 Imagina que quieres recuperar nombres que contengan la cadena `Ma` en su interior.
 
 ```sql
-String SQL="Select * from Persona where número like '%Ma%'";
+String SQL="Select * from persona where nombre like '%Ma%'";
 ```
 
 En ese caso, esta consulta está codificada directamente, y si quieres cambiar la parte del texto, debes modificar tu código. Para evitar la codificación directa, podemos escribir:
 
 ```java
-ConnexioDB conDB=new ConnexioDB("Instituto");
+ConexionDB conDB = new ConexionDB("instituto");
+        Connection con = conDB.getConexion();
+        // hardcoded String
+        // String SQL="Select * from persona where nombre like '%Ma%'";
 
-Connection con=conDB.getConnexio();
+        String nombre=Utilidades.leerTextoC("Introduce una parte del nombre: ");
+        // The query
+        String SQL="Select * from persona where nombre like '%" + nombre + "%'";
+        // The statement
+        Statement st=con.createStatement();
+        // The execution
+        ResultSet rst=st.executeQuery(SQL);
 
-// hardcoded String
-// String SQL="Select * from Persona where número like '%Ma%'";
+        // processing
+        while(rst.next()){
+            System.out.print(Colores.Bright_Blue+ "Personas con " +nombre+": "+ Colores.Reset);
+            System.out.println(
+                    rst.getString("apellidos")+ ", "+
+                            rst.getString("nombre")+ " "+
+                            rst.getInt("edad"));
+        }
 
-String número=Utilidades.leerTextoC("Give me parte of the name: ");
-// The query
-String SQL="Select * fromPersona where número like '%" + número + "%'";
-// The statement
-Statement st=con.createStatement();
-// The execution
-ResultSet rst=st.executeQuery(SQL);
-
-// processing
-while(rst.next()){ 
-System.out.print(ConsoleColors.BLUE_BRIGHT+ "People with " +número+": "+ ConsoleColors.RESET); 
-System.out.println( 
-rst.getString("apellidos")+ ", "+ 
-rst.getString("número")+ " "+ 
-rst.getInt("edad"));
-}
-
-rst.close();
+        rst.close();
+    }
 ```
 
 Como podemos ver, los datos están ahora en variables, pero la construcción de SQL es más compleja. Hay que tener en cuenta que los textos deben estar entre comillas y los números no, lo que facilita cometer errores. Pero puede ser peor, este tipo de código puede incurrir en problemas de inyección SQL, como vemos en el siguiente ejemplo:
 
 ```java
-String idPersona=Read.readText("Tel me the id to consult: ");
-String SQL = "Select * from Person where idPersona="+idPersona;
+        ConexionDB conDB = new ConexionDB("instituto");
+        Connection con = conDB.getConexion();
+        // hardcoded String
+        String id_persona=Utilidades.leerTextoC("Dame el id: ");
+        // The query
+        String SQL="Select * from persona where id_persona ="+id_persona;
+        // The statement
+        Statement st=con.createStatement();
+        // The execution
+        ResultSet rst=st.executeQuery(SQL);
+
+        // processing
+        while(rst.next()){
+            System.out.print(Colores.Bright_Blue+ "Personas con " +id_persona+": "+ Colores.Reset);
+            System.out.println(
+                    rst.getString("apellidos")+ ", "+
+                            rst.getString("nombre")+ " "+
+                            rst.getInt("edad"));
+        }
+
+        rst.close();
+    }
 ```
 
-- Si el usuario introduce `4` $\rightarrow$ Se mostrará la persona con ID igual a 4
-- Si el usuario introduce `4 o 1=1` $\rightarrow$ Se mostrarán todas las personas
+- Si el usuario introduce `4` → Se mostrará las persona con ID igual a 4
+- Si el usuario introduce `4 or 1` → Se mostrarán todas las personas
 
 Debe evitarse este tipo de consultas en las declaraciones de validación de usuario, para las que utilizaremos las sentencias preparadas y, obviamente, ser muy cautelosos en la verificación de las entradas.
 
@@ -149,37 +183,37 @@ A continuación, deberemos asignar valores a estos placeholders, utilizando los 
 
 
 ```java
-ConnexioDB conDB=new ConnexioDB("Instituto");
 
-Connection con=conDB.getConnexio();
+        ConexionDB conDB = new ConexionDB("instituto");
+        Connection con = conDB.getConexion();
+        // hardcoded String
+        String id_persona=Utilidades.leerTextoC("Dame el id: ");
+        // The query
+        String SQL="Select * from persona where id_persona = ?";
 
-String ID=Utilidades.leerTextoC("Give me an id: ");
-// The query
-String SQL="Select * from Persona where idPersona = ?" ;
-// The statement
-PreparedStatement pst=con.prepareStatement(SQL);
-// hijo placeholders
+        // The statement
+        PreparedStatement pst = con.prepareStatement(SQL);
 
-pst.setString(1, ID);
+        pst.setString(1, id_persona);
 
-// The execution
-ResultSet rst=pst.executeQuery();
+        // The execution
+        ResultSet rst=pst.executeQuery();
 
-// processing
-while(rst.next()){ 
-System.out.print(ConsoleColors.BLUE_BRIGHT+ "People con " +ID+": "+ ConsoleColors.RESET); 
-System.out.println( 
-rst.getString("apellidos")+ ", "+ 
-rst.getString("número")+ " "+ 
-rst.getInt("edad"));
-}
+        // processing
+        while(rst.next()){
+            System.out.print(Colores.Bright_Blue+ "Personas con " +id_persona+": "+ Colores.Reset);
+            System.out.println(
+                    rst.getString("apellidos")+ ", "+
+                            rst.getString("nombre")+ " "+
+                            rst.getInt("edad"));
+        }
 
-rst.close();
+        rst.close();
 ```
 
 !!! tip "Consejo" 
 
-Puedes combinar ResultSet con ResultSetMetaData para obtener los nombres de las columnas y tipos de datos almacenados en la base de datos. Encontrarás un ejemplo en la plataforma.
+Puedes combinar ResultSet con ResultSetMetaData para obtener los nombres de las columnas y tipos de datos almacenados en la base de datos.
 
 
 ## 6.3. Actualización (Update) y Borrado (Delete)
@@ -192,31 +226,28 @@ Vamos a borrar filas de una mesa de personas entre las edades dadas:
 
 
 ```java
-ConnexioDB conDB = new ConnexioDB("Instituto");
-Connection con = conDB.getConnexio();
+        ConexionDB conDB = new ConexionDB("instituto");
+        Connection con = conDB.getConexion();
+        // hardcoded String
+        // give the age's bounds
+        int minEdad = Utilidades.leerEnteroC("Dame la edad mínima: ");
+        int maxEdad = Utilidades.leerEnteroC("Dame la edad máxima: ");
+        // The query
+        String SQL="Delete from persona where edad between ? and ?";
 
-// give the age's bounds
-int minAge = Utilidades.leerEnteroC("Give me minimal age: ");
-int maxAge = Utilidades.leerEnteroC("Give me maximun age: ");
+        // The statement
+        PreparedStatement pst = con.prepareStatement(SQL);
 
-// The query
-String SQL = "Delete from Persona where edad between ? and ?";
+        pst.setInt(1, minEdad);
+        pst.setInt(2, maxEdad);
 
-// The statement
-PreparedStatement pst = con.prepareStatement(SQL);
+        System.out.println(pst);
+        // The execution
+        int deletedRows = pst.executeUpdate();
 
-// hijo placeholders
-pst.setInt(1, minAge);
-pst.setInt(2, maxAge);
+        System.out.println(deletedRows + " han sido eliminadas");
 
-// show the query after resolve placeholders
-System.out.println(pst);
-
-// The execution
-int deletedtedRows = pst.executeUpdate();
-
-// how many roas affecte
-System.out.println(deletedtedRows + " has been deleted.");
+        pst.close();
 ```
 
 !!! warning "Peligro" 
@@ -232,29 +263,28 @@ Eliminar datos es una operación muy delicada. Cuida de:
 Vamos a añadir años a las personas con el ID dado:
 
 ```java
-ConnexioDB conDB = new ConnexioDB("Instituto");
+        ConexionDB conDB = new ConexionDB("instituto");
+        Connection con = conDB.getConexion();
+        // hardcoded String
+        // give the age's bounds
+        int difEdad = Utilidades.leerEnteroC("Dame el número de años: ");
+        int idMin = Utilidades.leerEnteroC("Dame el id mínimo: ");
+        // The query
+        String SQL="Update persona set edad=edad+ ? where id_persona> ?";
 
-Connection con = conDB.getConnexio();
+        // The statement
+        PreparedStatement pst = con.prepareStatement(SQL);
 
-// give the age's bounds
-int difAge = Utilidades.leerEnteroC("Give me number oy years: ");
-int idMin = Utilidades.leerEnteroC("Give me minimum id: ");
+        pst.setInt(1, difEdad);
+        pst.setInt(2, idMin);
 
-// The query
-String SQL = "Update Persona set edad=edad+ ? where idPersona > ?";
+        System.out.println(pst);
+        // The execution
+        int updatedRows = pst.executeUpdate();
 
-// The statement
-PreparedStatement pst = con.prepareStatement(SQL);
+        System.out.println(updatedRows + " han sido actualizadas");
 
-// hijo placeholders
-pst.setInt(1, difAge);
-pst.setInt(2, idMin);
-
-System.out.println(pst);
-// The execution
-int updatedRows = pst.executeUpdate();
-
-System.out.println(updatedRows + " has been updated.");
+        pst.close();
 ```
 
 !!! warning 
@@ -270,34 +300,35 @@ Recuerda que:
 
 Un script, que normalmente se ha creado en un archivo externo, es un conjunto de instrucciones SQL ejecutadas en orden de arriba abajo. Podemos tomar como estrategia leer el archivo línea por línea y ejecutarlo una por una, pero JDBC permite ejecutar un conjunto de instrucciones en bloque. Para ello, lo primero que debemos hacer es habilitar múltiples ejecuciones añadiendo un parámetro a la conexión, que es `allowMultiQueries=true`.
 
-A continuación, debemos cargar el archivo y componer una cadena con todo el script. Para normalizarlo y hacerlo totalmente portátil, debemos tener cuidado con los saltos de línea, ya que dependiendo del sistema es una combinación `\n` o `\r\n`. Podemos leer línea por línea y guardarlo en un `StringBuilder`, añadiendo `System.getProperty("line.separator")` como separadores.
+A continuación, debemos cargar el archivo y componer una cadena con todo el script. Para normalizarlo y hacerlo totalmente portátil, debemos tener cuidado con los saltos de línea, ya que dependiendo del sistema es una combinación `\n` o `\r\n`. Podemos leer línea por línea y guardarlo en un `StringBuilder`, añadiendo `System.getProperty("line.separator")` o `System.lineSeparator()`como separadores.
 
 Después sólo necesitaremos crear una declaración con esta cadena y ejecutarla con `executeUpdate()`. Lo veremos a continuación:
 
 ```java
-ConnexioDB conDB = new ConnexioDB("Instituto");
+ConexionDB conDB = new ConexionDB("instituto");
 
-Connection con = conDB.getConnexio();
+        Connection con = conDB.getConexion();
 
-File script = new File("sql/EsquemaCine.sql");
+        File script = new File("EsquemaCine.sql");
 
-BufferedReader bfr = bfr = new BufferedReader(new FileReader(script));
+        BufferedReader bfr = bfr = new BufferedReader(new FileReader(script));
 
-String line = null;
-StringBuilder sb = new StringBuilder();
+        String line = null;
+        StringBuilder sb = new StringBuilder();
 
-// Obtenemos el salto de línea del sistema subyacente
-String breakLine = System.getProperty("line.separator");
+        // Obtenemos el salto de línea del sistema subyacente
+        String breakLine = System.lineSeparator();
 
-while ((line = bfr.readLine()) != null) { 
-sb.append(line); 
-sb.append(breakLine);
-}
+        while ((line = bfr.readLine()) != null) {
+            sb.append(line);
+            sb.append(breakLine);
+        }
 
-String query = sb.toString(); // generamos el Script en un String
-Statement stm = con.createStatement();
-int result = stm.executeUpdate(query);
-System.out.println("Script ejecutado con salida" + result);
+        String query = sb.toString(); // generamos el Script en un String
+        Statement stm = con.createStatement();
+        int result = stm.executeUpdate(query);
+        System.out.println("Script ejecutado con salida " + result);
+        stm.close();
 ```
 
 !!! tip "Consejo" 
@@ -348,8 +379,8 @@ Como puede ver, hay 3 argumentos para indicar qué tipo de ResultSet damos al fi
 En el siguiente ejemplo, podemos preguntar a nuestro DBMS si estos tipos de ResultSet están soportados:
 
 ```java
-ConnexioDB conDB = new ConnexionDB("Instituto");
-Connection con = conDB.getConnexion();
+ConexionDB conDB = new ConexionDB("instituto");
+Connection con = conDB.getConexion();
 DatabaseMetaData dbmd = con.getMetaData();
 
 System.out.println("TYPE_FORWARD_ONLY: " + dbmd.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY));
@@ -399,3 +430,5 @@ Si queremos insertar una nueva fila en un ResultSet, debemos:
 
 - Estas operaciones de actualización, eliminación e inserción sólo pueden realizarse en consultas que provienen de una tabla sin agrupaciones. 
 - Para evitar complejidad en nuestros programas, vale la pena evaluar la conveniencia de traducir las actualizaciones del ResultSet a SQL puro y ejecutarlas directamente en las bases de datos mediante nuevas sentencias.
+
+Disponemos de todos los ejemplos en el proyecto `SentFija` en el siguiente [enlace](./SentFija.zip).
