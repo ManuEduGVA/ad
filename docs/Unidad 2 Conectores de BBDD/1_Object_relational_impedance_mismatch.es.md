@@ -116,75 +116,80 @@ Como podemos ver, tiene una estructura similar, a la que también hemos añadido
 La clase `Genere` es una clase POJO, que sólo almacena información (nombre y descripción del tipo de juego) e implementa getters y setters.
 
 ```java
-public class Genero { 
-protected String nombre; 
-protected String descripcion; 
+package org.dam;
 
-public Genero(String nombre, String descripcion) { 
-this.nombre = nombre; 
-this.descripcion = descripcion; 
-} 
+public class Genero {
+    protected String nombre;
+    protected String descripcion;
 
-public String getNombre() {return nombre;} 
-public void setNombre(String nombre) {this.nom = nombre;} 
+    public Genero(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 
-public String getDescripcion() {return descripcion;} 
-public void setDescripcion(String descripcion) { 
-this.descripcion = descripcion; 
-}
+    public String getNombre() {return nombre;}
+    public void setNombre(String nombre) {this.nombre = nombre;}
+
+    public String getDescripcion() {return descripcion;}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 }
 ```
 
 La clase `Juego` almacena el nombre, la descripción y el género del juego. A diferencia del modelo relacional, donde lo que se almacena sería una clave externa al género, ya que aquí no tenemos claves externas, almacenamos el propio objeto (la referencia).
 
 ```java
-public class Juego { 
+package org.dam;
 
-protected String nombre; 
-protected String descripcion; 
-protected Genere genero; 
+public class Juego {
+    protected String nombre;
+    protected String descripcion;
+    protected Genero genero;
 
-public Juego(String nombre, String descripcion, Genere genero) { 
-this.nombre = nombre; 
-this.descripcio = descripcion; 
-this.genero = genero; 
+    public Juego(String nombre, String descripcion, Genero genero) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.genero = genero;
 
-} 
+    }
 
-public String getNombre() {return this.nombre;} 
-public void setNombre(String nombre) {this.nombre = nombre;} 
+    public String getNombre() {return this.nombre;}
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
-public String getDescripcion() {return this.descripcion;} 
-public void setDescripcion(String descripcion) { 
-this.descripcion= descripcion; 
-} 
+    public String getDescripcion() {return this.descripcion;}
+    public void setDescripcion(String descripcion) {
+        this.descripcion= descripcion;
+    }
 
-public Genere getGenero() {return this.genero;} 
+    public Genero getGenero() {return this.genero;}
 
-public void setGenero(Geneoe genero) {this.genero = genero;}
+    public void setGenero(Genero genero) {this.genero = genero;}
 }
 ```
 
-La clase `Registro` presenta la relación entre `Jugador` y `Juego` (cuando un jugador juega a un juego) y almacena los puntos y una referencia al juego.
+La clase `Puntuaciones` presenta la relación entre `Jugador` y `Juego` (cuando un jugador juega a un juego) y almacena los puntos y una referencia al juego.
 
 ```java
-public class Registro { 
-private int puntuacion; 
-private Juego juego; 
+package org.dam;
 
-public Registro(int puntuacion, Juego juego) { 
-this.puntuacion = puntuacion; 
-this.juego = juego; 
-} 
+public class Puntuaciones {
+    private int puntuacion;
+    private Juego juego;
 
-public int getPuntuacion() {return puntuacion;} 
-public void setPuntuacion(int puntuacion) { 
-this.puntuacion = puntuacion; 
-} 
+    public Puntuaciones(int puntuacion, Juego juego) {
+        this.puntuacion = puntuacion;
+        this.juego = juego;
+    }
 
-public Juego getJuego() {return juego;} 
+    public int getPuntuacion() {return puntuacion;}
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
 
-public void setJuego(Juego juego) {this.juego = juego;}
+    public Juego getJuego() {return juego;}
+
+    public void setJuego(Juego juego) {this.juego = juego;}
 }
 ```
 
@@ -192,30 +197,35 @@ public void setJuego(Juego juego) {this.juego = juego;}
 Y finalmente, la clase `Jugador` almacena el apodo y la fecha de registro para cada jugador, y después, un array con todos los juegos que el jugador ha jugado:
 
 ```java
-public class Jugador { 
+package org.dam;
 
-private String nick; 
-private Date fechaRegistro; 
-private Set<Registro> puntuaciones; 
+import java.util.Date;
+import java.util.Set;
 
-public Jugador(String nick, Date fechaRegistro) { 
-this.nick = nick; 
-this.fechaRegistro = fechaRegistro; 
-} 
+public class Jugador {
 
-public String getNick() {return nick;} 
-public void setNick(String nick) {this.nick = nick;} 
+    private String nick;
+    private Date fechaRegistro;
+    private Set<Puntuaciones> puntuaciones;
 
-public Date getFechaRegistro() {return fechaRegistro;} 
-public void setFechaRegistro(Date fechaRegistro) { 
-this.fechaRegistro = fechaRegistro; 
-} 
+    public Jugador(String nick, Date fechaRegistro) {
+        this.nick = nick;
+        this.fechaRegistro = fechaRegistro;
+    }
 
-public Set getPuntuaciones() {return this.puntuaciones;} 
-public void setPuntuacion(Juego juego, int puntuacion) { 
-Registro registro = new Registro(puntuacion, juego); 
-this.puntuaciones.add(registro); 
-}
+    public String getNick() {return nick;}
+    public void setNick(String nick) {this.nick = nick;}
+
+    public Date getFechaRegistro() {return fechaRegistro;}
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    public Set getPuntuaciones() {return this.puntuaciones;}
+    public void setPuntuacion(Juego juego, int puntuacion) {
+        Puntuaciones registro = new Puntuaciones(puntuacion, juego);
+        this.puntuaciones.add(registro);
+    }
 }
 ```
 
