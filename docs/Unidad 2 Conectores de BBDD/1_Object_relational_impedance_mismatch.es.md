@@ -33,7 +33,7 @@ Las claves primarias tienen ambas propiedades: valor no nulo y unicidad.
 
 Una base de datos para almacenar información sobre jugadores, juegos, etc. puede ser así:
 
-![Entity-Relationship](./img/E_R.png)
+![Entity-Relationship](./img/bdJuegos.png)
 
 Implementada con el SGBD `MySQL`:
 
@@ -108,7 +108,7 @@ En la unidad introductoria ya revisamos la programación orientada a objetos, as
 
 El mismo ejemplo que hemos representado recientemente, con una representación orientada a objetos, podría ser:
 
-![Orientación a Objetos](./img/O_O.png)
+![Orientación a Objetos](./img/uml_bd_juegos.png)
 
 
 Como podemos ver, tiene una estructura similar, a la que también hemos añadido algunos métodos como getters y setters. Además, las distintas clases no tienen un atributo identificador, puesto que cada objeto se identifica a sí mismo. Aquí tenemos una pequeña aproximación de cómo implementaríamos esta jerarquía en Java.
