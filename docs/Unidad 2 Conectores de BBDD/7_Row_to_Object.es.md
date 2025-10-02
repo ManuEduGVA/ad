@@ -22,25 +22,25 @@ Un ejemplo de POJO sería, por ejemplo:
 
 ```java
 // AS POJO
-public class Modul { 
+public class Modulo { 
 // atributos 
 String nombre; 
 int horas; 
 double nota; 
 // constructor 
-public Modul(String nombre, int horas, double nota) { 
+public ModulO(String nombre, int horas, double nota) { 
 this.nombre = nombre; 
 this.horas = horas; 
 this.nota = nota; 
 } 
 // getters 
-public String getModul(){return this.nombre;} 
-public int getHores() {return this.hores;} 
+public String getModulO(){return this.nombre;} 
+public int getHorAs() {return this.horas;} 
 public double getNota() {return this.nota;} 
 
 @Override 
 public String toString() { 
-return "Modul{" + "nombre=" + nombre + ", horas=" + horas + ", nota=" + nota + '}'; 
+return "Modulo{" + "nombre=" + nombre + ", horas=" + horas + ", nota=" + nota + "}"; 
 }
 }
 ```
@@ -61,25 +61,25 @@ Los Beans son un tipo especial de POJO. Hay algunas restricciones para que un PO
 
 ```java
 // AS POJO
-public class Modul { 
+public class Modulo { 
 // atributos 
 private String nombre; 
 private int horas; 
 private double nota; 
 // constructor 
-public Modul() { } 
+public Modulo() { } 
 // getters 
-public String getModul(){return this.nombre;} 
-public int getHores() {return this.hores;} 
+public String getModulo(){return this.nombre;} 
+public int getHoras() {return this.horas;} 
 public double getNota() {return this.nota;}
 // setters 
-public void getModul(){return this.nombre;} 
-public void getHores() {return this.hores;} 
+public void getModulo(){return this.nombre;} 
+public void getHoras() {return this.horas;} 
 public void getNota() {return this.nota;} 
 
 @Override 
 public String toString() { 
-return "Modul{" + "nombre=" + nombre + ", horas=" + horas + ", nota=" + nota + '}'; 
+return "Modulo{" + "nombre=" + nombre + ", horas=" + horas + ", nota=" + nota + "}"; 
 }
 }
 ```
@@ -99,7 +99,7 @@ Una vez instalada, basta con decir mediante anotaciones lo que quieres:
 - `@Data` → todos los métodos que necesitan un POJO, incluyendo `ToString`.
 - `@AllArgsConstructor` o `@NoArgsConstructor` → generará el constructor que quieras.
 
-En el siguiente [vídeo](https://youtu.be/Ot_4SbEpZMA) se explica cómo añadir la dependencia de Gradle y utilizar Lombok.
+En el siguiente vídeo [vídeo](https://youtu.be/XjnPMrUBUDs) se explica como añadir la dependencia a Maven y como hacer usp de lombok.
 
 ## 7.2. Cargando objetos
 
@@ -111,13 +111,13 @@ Esta clase es el POJO de una persona. Creará getters, setters, toString y los m
 
 
 ```java
-@Fecha
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Persona { 
-private int idPersona; 
-private String número; 
-private String cogidos; 
+private int id_persona; 
+private String nombre; 
+private String apellidos; 
 private int edad;
 }
 ```
@@ -135,39 +135,50 @@ La tarea principal es transformar el `ResultSet` en una lista, pero es una tarea
 - Añade este objeto a la lista
 
 ```java
-ArrayList<Persona> lasPersonas= new ArrayList();
+package org.dam;
 
-ConnexioDB conDB=new ConnexioDB("Instituto");
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
-Connection con=conDB.getConnexio();
 
-String SQL="Select * from Persona" ;
-// The statement
-Statement st=con.createStatement( 
-ResultSet.TYPE_SCROLL_INSENSITIVE, 
-ResultSet.CONCUR_READ_ONLY);
+public class Main {
+    public static void main(String[] args) throws SQLException {
+        ArrayList<Persona> lasPersonas = new ArrayList();
 
-// The execution
-ResultSet rst=st.executeQuery(SQL);
+        ConexionDB conDB = new ConexionDB("instituto");
 
-if (!rst.next()){ 
-System.out.println("No people in DB");
+        Connection con = conDB.getConexion();
+
+        String SQL = "Select * from persona";
+        // The statement
+        Statement st = con.createStatement(
+                ResultSet.TYPE_SCROLL_INSENSITIVE,
+                ResultSet.CONCUR_READ_ONLY);
+
+        // The execution
+        ResultSet rst = st.executeQuery(SQL);
+
+        if (!rst.next()) {
+            System.out.println("No hay personas en la BD2");
+            rst.beforeFirst();
+            while (rst.next()) {
+                Persona p = new Persona(
+                        rst.getInt(1),
+                        rst.getString(2),
+                        rst.getString(3),
+                        rst.getInt(4));
+                System.out.println("Añadiendo" + p);
+                lasPersonas.add(p);
+            }
+        }
+
+        System.out.println("Añadido " + lasPersonas.size() + " personas");
+        rst.close();
+    }
 }
-else{ 
-rst.beforeFirst(); 
-while(rst.next()){ 
-Persona p= new Persona( 
-rst.getInt(1), 
-rst.getString(2), 
-rst.getString(3), 
-rst.getInt(4)); 
-System.out.println("Adding" +p); 
-lasPersonas.add(p); 
-}
-}
-
-System.out.println("Added " + lasPersonas.size() + " people");
-rst.close();
 ```
 
 Ahora podrás cambiar la información en los objetos y, finalmente, si se ha realizado alguna modificación, deberás guardarla en la base de datos. Las preguntas son:

@@ -85,7 +85,7 @@ public class Main {
             System.out.println(
             rst.getString(3)+ ", "+
             rst.getString(2)+ " - "+
-            rst.getInt(5));
+            rst.getInt(4));
             */
             System.out.println(
                     rst.getString("apellidos") + ", " +
