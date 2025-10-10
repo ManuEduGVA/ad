@@ -21,7 +21,7 @@ import java.io.Serializable;
 
 /**
 *
-* @author joange
+* @author Manu
 */
 public class Peli implements Serializable{
 
@@ -43,7 +43,7 @@ this.elDirector = elDirector;
 ```
 
 !!! consejo "Recordatorio"
-Recuerda que puedes usar la biblioteca `Lombok` para crear beans más rápido.
+    Recuerda que puedes usar la biblioteca `Lombok` para crear beans más rápido.
 
 ## 3.1. Mapeo de archivos
 
@@ -54,38 +54,37 @@ Por lo tanto, crearemos un paquete `orm` y, dentro de él, el archivo `Peli.hbm.
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-<class name="Model.Peli" table="Peli" >
-<id column="idPeli" name="idPeli" type="int">
-<generator class="native"/>
-</id>
-<property name="titulo" type="string"/>
-<property name="anyo" />
-<property column="director" name="elDirector" />
-</class>
+    <class name="Peli" table="Peli" >
+        <id column="idPeli" name="idPeli" type="int">
+            <generator class="native"/>
+        </id>
+        <property name="titulo" type="string"/>
+        <property name="anyo" type="int"/>
+        <property column="director" name="elDirector" />
+    </class>
 </hibernate-mapping>
 ```
 
 Vea los conceptos básicos:
 
 - Las líneas 1-3 son el encabezado XML, que apunta a Archivo DTD con la gramática para comprobar que el archivo esté bien formado.
-- `<hibernate-mapping>` $\rightarrow$ indica que este archivo es una asignación.
-- `<class>` $\rightarrow$ es la etiqueta para especificar la clase que estamos asignando y tiene dos atributos:
-- `name="Model.Peli"` $\rightarrow$ apunta a la clase (archivo Java), sin extensión.
-- `table="Peli"` $\rightarrow$ aquí escribimos el nombre de la tabla en la base de datos que contendrá los datos.
+- `<hibernate-mapping>` → indica que este archivo es una asignación.
+- `<class>` → es la etiqueta para especificar la clase que estamos asignando y tiene dos atributos:
+- `name="Model.Peli"` → apunta a la clase (archivo Java), sin extensión.
+- `table="Peli"` → aquí escribimos el nombre de la tabla en la base de datos que contendrá los datos.
 - Es necesario especificar los campos de la clase y sus respectivas columnas. Distinguimos entre:
-- `<property>` $\rightarrow$ para campos normales. Puede tener varios atributos:
-- `name` $\rightarrow$ (**obligatorio**) es el nombre del campo dentro de la clase.
-- `column` $\rightarrow$ es el nombre de la columna correspondiente en la tabla. Si no se especifica `column`, Hibernate asumirá que es el mismo que el atributo `name`.
-- `type` $\rightarrow$ es el tipo de dato Java de la columna. Por defecto, Hibernate usará el mismo que el especificado por la clase, pero es necesario indicarlo para resolver campos ambiguos (véase la figura a continuación, especialmente en formatos de fecha y hora).
-- `<id>` $\rightarrow$ (**obligatorio**) es el campo que se usará como clave principal y también puede tener los atributos `name`, `column` y `type`. Es posible que la clave principal la genere el sistema de gestión de bases de datos (SGBD), y lo indicaremos con:
-- `<generator>` $\rightarrow$ configura el motor para generar la clave principal, que puede especificarse de varias maneras. Con `native` usamos el mismo método que la base de datos subyacente. En este tutorial puede encontrar ejemplos completos [link](https://www.javatpoint.com/generator-classes)
+- `<property>` → para campos normales. Puede tener varios atributos:
+- `name` → (**obligatorio**) es el nombre del campo dentro de la clase.
+- `column` → es el nombre de la columna correspondiente en la tabla. Si no se especifica `column`, Hibernate asumirá que es el mismo que el atributo `name`.
+- `type` → es el tipo de dato Java de la columna. Por defecto, Hibernate usará el mismo que el especificado por la clase, pero es necesario indicarlo para resolver campos ambiguos (véase la figura a continuación, especialmente en formatos de fecha y hora).
+- `<id>` → (**obligatorio**) es el campo que se usará como clave principal y también puede tener los atributos `name`, `column` y `type`. Es posible que la clave principal la genere el sistema de gestión de bases de datos (SGBD), y lo indicaremos con:
+- `<generator>` → configura el motor para generar la clave principal, que puede especificarse de varias maneras. Con `native` usamos el mismo método que la base de datos subyacente. En este tutorial puede encontrar ejemplos completos [link](https://www.javatpoint.com/generator-classes)
 
-!!! Importante: "Atención"
-
-- Debe guardar este archivo para que sea accesible en nuestro proyecto. Una buena opción es crear una carpeta `resources` dentro de `src/main` y guardar estos archivos allí.
-- Hibernate necesita métodos `get/set` para acceder a los campos de nuestros objetos. Sin embargo, puede que no desee crear ningún método, pero Hibernate sí los necesita. La solución es agregar un nuevo atributo `access=field` que permita a Hibernate acceder a los campos sin métodos `getters` ni `setters`.
+!!! nota "Atención"
+    - Debe guardar este archivo para que sea accesible en nuestro proyecto. Una buena opción es crear una carpeta `resources` dentro de `src/main` y guardar estos archivos allí.
+    - Hibernate necesita métodos `get/set` para acceder a los campos de nuestros objetos. Sin embargo, puede que no desee crear ningún método, pero Hibernate sí los necesita. La solución es agregar un nuevo atributo `access=field` que permita a Hibernate acceder a los campos sin métodos `getters` ni `setters`.
 
 <figure markdown="span">
   ![Image title](./img/Hybernate_Types.png){ width="700" }
@@ -94,8 +93,8 @@ Vea los conceptos básicos:
 
 
 
-!!! Nota: "Atención"
-Estudiaremos más opciones como claves foráneas en las siguientes secciones.
+!!! nota "Atención"
+    Estudiaremos más opciones como claves foráneas en las siguientes secciones.
 
 Ahora estudiaremos un pequeño programa:
 
@@ -130,7 +129,7 @@ Comentarios:
 
 !!! importante "Recuerda" 
 
-Si elegimos `create` en la propiedad `hbm2ddl.auto`, como ya supondrás, la base de datos estará vacía. Es una buena idea crear un archivo llamado `imports.sql` con algunos datos necesarios para probar nuestros programas.
+    Si elegimos `create` en la propiedad `hbm2ddl.auto`, como ya supondrás, la base de datos estará vacía. Es una buena idea crear un archivo llamado `imports.sql` con algunos datos necesarios para probar nuestros programas.
 
 
 ## 3.2. Mapeando clases. Anotaciones.

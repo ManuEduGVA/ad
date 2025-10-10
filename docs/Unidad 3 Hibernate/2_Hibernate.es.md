@@ -7,22 +7,20 @@
 
 [Hibernate](https://hibernate.org) es un framework ORM para Java, que facilita la correspondencia de atributos entre una base de datos relacional y el modelo de objetos de nuestra aplicación mediante archivos XML o anotaciones en los beans de entidad. Es un software libre distribuido bajo la licencia GPL 2.0, por lo que puede utilizarse en aplicaciones comerciales.
 
-La función principal de Hibernate será ofrecer al programador las herramientas para detallar su modelo de datos y las relaciones entre ellos, de modo que sea el propio ORM el que interactúe con la base de datos, mientras que el desarrollador se dedica a manipular objetos.
+Hibernate es la implementación más popular de la especificación JPA (Java Persistence API), un estándar de Java para la persistencia de objetos. JPA proporciona una API uniforme mientras que Hibernate ofrece la implementación robusta que maneja la correspondencia ORM.
 
-Además, ofrece un lenguaje de consulta, llamado HQL (Hibernate Query Language), de modo que sea el propio ORM el que traduzca este lenguaje al de cada motor de base de datos, manteniendo así la portabilidad a costa de un ligero aumento en el tiempo de ejecución.
+La función principal de Hibernate con JPA será ofrecer al programador las herramientas para detallar su modelo de datos mediante anotaciones estándar, de modo que sea el propio ORM el que interactúe con la base de datos, mientras que el desarrollador se dedica a manipular objetos.
 
 <figure markdown="span">
   ![Image title](./img/Hibernate-arquitecture.png){ width="700" }
   <figcaption>Hibernate Arquitecture</figcaption>
 </figure>
 
-Cuando se crean objetos, éstos son volátiles o temporales (se destruirán cuando la aplicación finalice). Cuando queremos almacenarlos con Hibernate, son rastreados con un mecanismo llamado `Session`. También se rastrean los objetos cargados desde las bases de datos. Si lo deseamos, podemos finalizar el rastreo, eliminando el objeto cuando ya no lo necesitemos.
-
-Además, se proporciona un lenguaje de consulta, HQL o Hibernate Query Language, basado en OQL. La parte subyacente de la sesión, como puede verse, permite el uso de varias tecnologías, incluyendo JDBC para conectarse al SGBD necesario.
+JPA introduce el EntityManager como interfaz principal para las operaciones de persistencia, reemplazando en muchos casos el uso directo de Session de Hibernate. Los objetos creados son rastreados en el contexto de persistencia, y las operaciones se sincronizan con la base de datos al confirmar las transacciones.
 
 ## 2.1 Configuración
 
-Hibernate, como un buen framework, no necesita una instalación, puesto que está integrado en nuestro proyecto como librerías. Podríamos optar por instalar muchas librerías _jar_, pero es mucho mejor utilizar un gestor de paquetes para automatizar esta tarea. El proceso de construcción del proyecto será más fácil al final.
+Hibernate, como implementación de JPA, no necesita una instalación específica, puesto que está integrado en nuestro proyecto como librerías. Utilizaremos Maven como gestor de paquetes para automatizar las dependencias.
 
 Utilizaremos **Maven** como gestor de paquetes.
 
@@ -30,33 +28,42 @@ Utilizaremos **Maven** como gestor de paquetes.
 
 En nuestros proyectos se utilizarán dos herramientas básicas: Hibernate y un controlador para conectarse a la base de datos seleccionada. Obviamente, es necesario añadir las dependencias al gestor de paquetes. En Maven, las dependencias se incluyen en el archivo `Pom.xml`, en la carpeta raíz de nuestro proyecto. Dentro de la etiqueta `<dependencias>` hay que añadir:
 
-```xml
-<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-<dependency> 
-<groupId>mysql</groupId> 
-<artifactId>mysql-connector-java</artifactId> 
-<version>8.0.27</version>
-</dependency>
+=== "Maven"
 
-<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
-<dependency> 
-<groupId>org.hibernate</groupId> 
-<artifactId>hibernate-core</artifactId> 
-<version>5.6.3.Final</version>
-</dependency>
-```
+    ```xml
+    <!-- Hibernate como implementación JPA -->
+    <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>7.1.2.Final</version>
+    </dependency>
 
-Si has elegido a Gradle como gestor de paquetes, tu `build.gradle` debería ser el siguiente:
+    <!-- MySQL Connector -->
+    <dependency>
+        <groupId>com.mysql</groupId>
+        <artifactId>mysql-connector-j</artifactId>
+        <version>8.0.33</version>
+    </dependency>
 
-```sh
-dependencias { 
-// https://mvnrepository.com/artifact/mysql/mysql-connector-java 
-implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.27' 
+    <!-- API JPA (Jakarta Persistence) -->
+    <dependency>
+        <groupId>jakarta.persistence</groupId>
+        <artifactId>jakarta.persistence-api</artifactId>
+        <version>3.1.0</version>
+    </dependency>
+    ```
+=== "Gradle"
 
-// https://mvnrepository.com/artifact/org.hibernate/hibernate-core 
-implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.3.Final'
-}
-```
+    ```bash
+    // Hibernate como implementación JPA
+    implementation("org.hibernate.orm:hibernate-core:7.1.2.Final")
+
+    // MySQL Connector
+    implementation("com.mysql:mysql-connector-j:8.0.33")
+
+    // API JPA (Jakarta Persistence)
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    ```
 
 !!! note "Recuerda..." 
 Recuerda que puedes encontrar los paquetes en <https://mvnrepository.com/repos/central>
@@ -66,9 +73,9 @@ Recuerda que puedes encontrar los paquetes en <https://mvnrepository.com/repos/c
 
 Una vez que hemos añadido las dependencias, debemos crear una estructura de proyecto para organizar nuestras clases, con el objetivo de separar la lógica del programa. A continuación, mostraremos una breve descripción, profundizando en cada punto más adelante.
 
-### 2.3.1. Beans
+### 2.3.1. Entidades JPA
 
-Los Beans son la evolución de los POJOS que hemos estudiado en unidades anteriores. Recuerda que estas clases son objetos comunes, sin pertenecer a ningún árbol de herencia y sin implementar interfaz alguna. Se utilizan para almacenar información sobre un concepto concreto (si necesito un coche...crea un coche).
+Las entidades JPA son la evolución de los Beans tradicionales:
 
 Como extensión de los POJOs, aparecen los **Beans**, sin restricciones en los atributos, constructores y herencia. Tienen algunas restricciones:
 
@@ -89,24 +96,53 @@ static final long serialVersionUID = 137L;
 
 Así, los Beans son componentes de acceso a datos y representan a entidades en nuestra aplicación. Es una buena idea crear nuestros Beans en la misma carpeta, normalmente llamada `Modelo`.
 
-!!! tip "Recuerda" 
-¿Recuerdas la librería `Lombok`? Es muy útil para crear nuestros beans con sólo unas pocas líneas de código.
+Nosotros vamos a trabajar con JPA que es lo que la industria hace uso actualmente.
+
+```java
+
+import jakarta.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "Peli")
+public class Peli implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idPeli;
+    
+    @Column(name = "titulo", nullable = false)
+    private String titulo;
+    
+    @Column(name = "anyo")
+    private int anyo;
+    
+    @Column(name = "director")
+    private String elDirector;
+
+    // Constructor por defecto (OBLIGATORIO en JPA)
+    public Peli() {}
+
+    // Constructor con parámetros
+    public Peli(String titulo, int anyo, String elDirector) {
+        this.titulo = titulo;
+        this.anyo = anyo;
+        this.elDirector = elDirector;
+    }
+
+    // Getters y setters
+    public Long getIdPeli() { return idPeli; }
+    public void setIdPeli(Long idPeli) { this.idPeli = idPeli; }
+    // ... resto de getters y setters
+}
+
+```
 
 
 ### 2.3.2. Archivos de mapeo
 
-Una vez creadas las entidades, es necesario mapear cada entidad. Cada mapeo establece las referencias entre los beans y tablas, atributos y columnas, para establecer una coincidencia perfecta entre ellos.
+**¡IMPORTANTE!** Con JPA, los archivos `*.hbm.xml` **NO SON NECESARIOS**. Todo el mapeo se define mediante anotaciones en las clases entidad.
 
-La primera opción será crear archivos de mapeo, con la sintaxis (en XML) entre las clases y las tablas. Si el bean se llama `Car`, el archivo de mapeo debe ser `Car.hbm.xml`:
-
-- `hbm` es para mapeo de hibernate
-- `xml` porque la sintaxis está en la especificación XML.
-
-Estudiaremos los archivos de mapeo en las siguientes secciones.
-
-### 2.3.3. Otros archivos
-
-Por último, tendremos el resto de clases del programa, así como la aplicación o clase principal. Si está diseñando una aplicación con un entorno gráfico, habría clases de representación de datos o vistas. De forma similar, en caso de una aplicación web, faltarían los controladores y los servicios.
 
 ## 2.4. Configuración del proyecto
 
@@ -114,117 +150,360 @@ Vamos a examinar más detenidamente el archivo de configuración de Hibernate. E
 
 ### 2.4.1. Hibernate.cfg.xml
 
+=== "XML"
+
 ```xml
-<?xml version="1.0" encoding="UTF-8"?> 
-<!DOCTYPE hibernate-configuration PUBLIC 
-"-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
-"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"> 
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
-<hibernate-configuration> 
-<session-factory> 
-<!-- Connection properties --> 
-<!-- Driver JDBC --> 
-<property name="connection.driver_class"> 
-com.mysql.cj.jdbc.Driver 
-</property> 
+<hibernate-configuration>
+    <session-factory>
+        <!-- Configuración de conexión -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3308/DBName</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
 
-<!-- Add ?createDatabaseIfNotExist=true to create database --> 
-<property name="connection.url"> 
-jdbc:mysql://localhost:3308/DBName 
-</property> 
+        <!-- Pool de conexiones -->
+        <property name="hibernate.connection.pool_size">5</property>
 
-<!--user and pass --> 
-<property name="connection.username">root</property> 
-<property name="connection.password">root</property> 
+        <!-- Dialecto -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
-<!-- extra conf --> 
+        <!-- Contexto de sesión -->
+        <property name="hibernate.current_session_context_class">thread</property>
 
-<!-- JDBC connection pool for concurrent connections --> 
-<property name="connection.pool_size">5</property> 
+        <!-- Mostrar SQL (solo desarrollo) -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
 
-<!-- dialect conector. Useful for Foreing Keys--> 
-<property name="dialect"> 
-org.hibernate.dialect.MySQL5InnoDBDialect 
-</property> 
+        <!-- Estrategia DDL -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
-<!-- one thread one session --> 
-<property name="current_session_context_class">thread</property> 
-
-<!-- show "reales" SQL ops. only for development--> 
-<property name="show_sql">true</property> 
-
-<!-- DB maintenance --> 
-<property name="hbm2ddl.auto">update</property> 
-
-<!-- options hbm2dll: 
-create : 
-create always DB when session factory is loaded. Fecha will be lost. 
-update : 
-Data will be safe, but database structure will be update. 
-Useful in production. 
-create-drop : 
-como create and dropping the database. 
-validate: 
-check the mapping between database and beans. 
---> 
-
-<!-- Mapping files. Can be combined--> 
-
-<!-- mapping classes --> 
-<mapping class="package.class1" /> 
-<mapping class="package.class2" /> 
-
-<!-- Maping files--> 
-<mapping resource="class3.hbm.xml" /> 
-<mapping resource="class4.hbm.xml" /> 
-</session-factory>
+        <!-- Mapeo de clases entidad JPA -->
+        <mapping class="paquete.entidad.Peli" />
+    </session-factory>
 </hibernate-configuration>
 ```
 
-Hay que tener en cuenta que:
+### 2.4.2 Alternativa: persistence.xml
 
-- Es muy recomendable tener la opción de mostrar las consultas SQL establecidas en `true`, al menos en los primeros proyectos, para ver cómo se realiza la correspondencia de los objetos con las consultas SQL.
-- La opción `hbm2ddl` es muy potente, puesto que si sólo partimos del modelo orientado a objetos, Hibernate creará la base de datos para nosotros (obviamente vacía de datos). Más adelante veremos en una práctica posterior otra opción muy interesante, hbm2java, que mediante la ingeniería inversa nos permitirá crear nuestros Beans a partir del diseño relacional.
-- Los archivos de mapeo XML (<mapping resource="class2.hbm.xml">) deben estar juntos con las clases Java, en el mismo paquete.
-- Los mapeos dentro de las clases (<mapping class="class2.java">) hacen referencia a los propios Beans, como veremos en la siguiente sección.
+=== "XML"
 
-### 2.4.2. Carga de scripts
+    ```xml
+    <?xml version="1.0" encoding="UTF-8"?>
+    <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence 
+                                    https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+        <persistence-unit name="miUnidadPersistencia" transaction-type="RESOURCE_LOCAL">
+            <description>Unidad de persistencia para MySQL</description>
+            
+            <!-- Proveedor JPA -->
+            <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+            
+            <!-- Propiedades -->
+            <properties>
+                <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/DBName"/>
+                <property name="jakarta.persistence.jdbc.user" value="root"/>
+                <property name="jakarta.persistence.jdbc.password" value="root"/>
+                
+                <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+                <property name="hibernate.show_sql" value="true"/>
+                <property name="hibernate.format_sql" value="true"/>
+                <property name="hibernate.hbm2ddl.auto" value="update"/>
+            </properties>
+        </persistence-unit>
+    </persistence>
+    ```
+### 2.4.3 Opciones hbm2ddl.auto
 
-Si desea insertar datos en su base de datos en aplicaciones de prueba, es una buena idea tener un script SQL y cargarlo automáticamente cuando se cargue la configuraciónde Hibernate. Puede añadir un archivo bajo `src/main/resources` llamado `import.sql`, y, después de la creación de tablas, si existe, este script se ejecutará. Ésta es la manera de empezar un proyecto con datos de prueba existentes en nuestras bases de datos.
+| Opción        | Descripción                                                  |
+| :------------ | :----------------------------------------------------------- |
+| `create`      | Crea siempre la BD cuando se carga la session factory. Se pierden los datos. |
+| `update`      | Los datos se mantienen, pero la estructura se actualiza. Útil en producción. |
+| `create-drop` | Como create pero elimina la base de datos al final.          |
+| `validate`    | Comprueba el mapeo entre la base de datos y los beans.       |
+| `none`        | No realiza acciones DDL.                                     |
 
-Además, si desea ejecutar más scripts, puede añadir archivos específicos a `hibernate.cfg.xml`, de la siguiente manera:
+### 2.4.4 Carga de scripts
 
-```xml
-<property name="hibernate.hbm2ddl.import_files"> 
-/import1.sql, /import2.sql
-</property>
-```
+Para insertar datos de prueba, crea un archivo `import.sql` en `src/main/resources`. Se ejecutará automáticamente después de la creación de tablas.
 
-## 2.5. Cargando la configuración y las sesiones
+Para múltiples scripts:
 
-Para cargar el archivo de configuración anterior, debemos crear un objeto `SessionFactory` a través del cual podemos crear instancias de `Session` para conectarnos a nuestra base de datos. La estructura de esta clase será siempre la misma: cargar el archivo de configuración XML y después crear la `SessionFactory`.
+=== "XML"
 
-```java
-public class HibernateUtil { 
+    ```xml
+    <property name="hibernate.hbm2ddl.import_files"> 
+    /import1.sql, /import2.sql
+    </property>
+    ```
 
-private static final SessionFactory sessionFactory; 
 
-// Código estático. Sólo se ejecuta una vez, como un Singleton 
-static { 
-try { 
-// Creamos se SessionFactory desde el archivo hibernate.cfg.xml 
-sessionFactory = new Configuration() 
-.configure(new File("hibernate.cfg.xml")).buildSessionFactory(); 
-} catch (Throwable ex) { 
-System.err.println("Error en la inicialización. " + ej); 
-throw new ExceptionInInitializerError(ej); 
-} 
-} 
+## 2.5 Configuración de sesiones
 
-public static SessionFactory getSessionFactory() { 
-return sessionFactory; 
-}
-}
-```
-!!! note "Atención" 
-Esta implementación se ha realizado con el patrón de diseño _Singleton_, a fin de tener una única instancia de SessionFactory.
+### 2.5.1 HibernateUtil con JPA
+
+=== "Java"
+
+    ```java
+    import org.hibernate.SessionFactory;
+    import org.hibernate.boot.Metadata;
+    import org.hibernate.boot.MetadataSources;
+    import org.hibernate.boot.registry.StandardServiceRegistry;
+    import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+    public class HibernateUtil { 
+
+        private static final SessionFactory sessionFactory; 
+
+        static { 
+            try { 
+                StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                        .configure("hibernate.cfg.xml")
+                        .build();
+                        
+                MetadataSources sources = new MetadataSources(registry);
+                sources.addAnnotatedClass(Peli.class);
+                
+                Metadata metadata = sources.getMetadataBuilder().build();
+                sessionFactory = metadata.getSessionFactoryBuilder().build();
+                
+            } catch (Throwable ex) { 
+                System.err.println("Error en la inicialización. " + ex); 
+                throw new ExceptionInInitializerError(ex); 
+            } 
+        } 
+
+        public static SessionFactory getSessionFactory() { 
+            return sessionFactory; 
+        }
+        
+        public static void shutdown() {
+            if (sessionFactory != null) {
+                sessionFactory.close();
+            }
+        }
+    }
+    ```
+
+### 2.5.2 JPAUtil (Alternativa estándar)
+
+=== "Java"
+
+    ```java
+    import jakarta.persistence.EntityManager;
+    import jakarta.persistence.EntityManagerFactory;
+    import jakarta.persistence.Persistence;
+
+    public class JPAUtil {
+        private static final EntityManagerFactory emf = 
+            Persistence.createEntityManagerFactory("miUnidadPersistencia");
+
+        public static EntityManager getEntityManager() {
+            return emf.createEntityManager();
+        }
+        
+        public static void close() {
+            if (emf != null && emf.isOpen()) {
+                emf.close();
+            }
+        }
+    }
+    ```
+
+
+
+## 2.6 Operaciones básicas
+
+### 2.6.1 Persistir entidades
+
+=== "Con Session"
+
+
+    ```java
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    Transaction tx = session.beginTransaction();
+
+    Peli nuevaPeli = new Peli("Inception", 2010, "Christopher Nolan");
+    session.persist(nuevaPeli);
+
+    tx.commit();
+    session.close();
+    ```
+
+
+
+
+=== "Con EntityManager"
+
+    ```java
+    EntityManager em = JPAUtil.getEntityManager();
+    EntityTransaction tx = em.getTransaction();
+    tx.begin();
+
+    em.persist(nuevaPeli);
+
+    tx.commit();
+    em.close();
+    ```
+
+
+
+
+### 2.6.2 Buscar por ID
+
+=== "Con Session"
+
+    ```java
+    Peli peli = session.find(Peli.class, 1L);
+    ```
+
+
+
+
+=== "Con EntityManager"
+
+    ```java
+    Peli peli = em.find(Peli.class, 1L);
+    ```
+
+
+
+
+### 2.6.3 Actualizar entidades
+
+=== "Java"
+
+    ```java
+    Peli peli = em.find(Peli.class, 1L);
+    peli.setTitulo("Nuevo título");
+    // La actualización es automática al hacer commit
+    ```
+
+
+
+### 2.6.4 Eliminar entidades
+
+
+=== "Java"
+
+    ```java
+    Peli peli = em.find(Peli.class, 1L);
+    em.remove(peli);
+    ```
+
+
+
+## 2.7 Consultas con JPQL
+
+### 2.7.1 Consulta básica
+
+
+=== "Java"
+    ```java
+    TypedQuery<Peli> query = em.createQuery(
+        "SELECT p FROM Peli p WHERE p.anyo > :anio", Peli.class);
+    query.setParameter("anio", 2000);
+    List<Peli> pelis = query.getResultList();
+    ```
+
+
+
+### 2.7.2 Consulta con múltiples resultados
+
+=== "Java"
+
+    ```java
+    TypedQuery<Object[]> query = em.createQuery(
+        "SELECT p.titulo, p.director FROM Peli p", Object[].class);
+    ```
+
+
+
+### 2.7.3 Consultas nativas SQL
+
+=== "Java"
+
+    ```java
+    Query query = em.createNativeQuery("SELECT * FROM Peli WHERE anyo > ?", Peli.class);
+    query.setParameter(1, 2000);
+    List<Peli> pelis = query.getResultList();
+    ```
+
+
+
+## 2.8 Ejemplo completo
+
+=== "Java"
+
+    ```java
+    public class Main {
+        public static void main(String[] args) {
+            EntityManager em = JPAUtil.getEntityManager();
+            EntityTransaction tx = null;
+            
+            try {
+                tx = em.getTransaction();
+                tx.begin();
+                
+                // Crear y guardar nueva entidad
+                Peli peli = new Peli("The Matrix", 1999, "Lana Wachowski");
+                em.persist(peli);
+                
+                // Buscar entidad
+                Peli encontrada = em.find(Peli.class, peli.getIdPeli());
+                System.out.println("Encontrada: " + encontrada);
+                
+                // Consulta JPQL
+                TypedQuery<Peli> query = em.createQuery(
+                    "SELECT p FROM Peli p WHERE p.anyo >= :anio", Peli.class);
+                query.setParameter("anio", 2000);
+                List<Peli> pelisRecientes = query.getResultList();
+                
+                tx.commit();
+                
+            } catch (Exception e) {
+                if (tx != null && tx.isActive()) {
+                    tx.rollback();
+                }
+                e.printStackTrace();
+            } finally {
+                em.close();
+                JPAUtil.close();
+            }
+        }
+    }
+    ```
+
+
+
+## 2.9 Ventajas de JPA
+
+| Ventaja           | Descripción                                          |
+| :---------------- | :--------------------------------------------------- |
+| **Portabilidad**  | Puedes cambiar entre diferentes implementaciones JPA |
+| **Estándar**      | Las anotaciones JPA son reconocidas universalmente   |
+| **Integración**   | Mejor compatibilidad con Spring y otros frameworks   |
+| **Mantenimiento** | Código más limpio y fácil de mantener                |
+| **Futuro**        | JPA es el estándar actual de la industria            |
+
+!!! success "Mejores prácticas"
+
+    \- Siempre usa anotaciones JPA en lugar de archivos XML
+
+    \- Maneja las transacciones correctamente
+
+    \- Usa `@Entity` y `@Table` para el mapeo de entidades
+
+    \- Define `@Id` y estrategia de generación apropiada
+
+    \- Cierra recursos en bloques finally o usa try-with-resources
+
+
+!!! note "Atención"
+    Esta implementación mantiene la compatibilidad con el patrón Singleton para SessionFactory/EntityManagerFactory, asegurando una única instancia en la aplicación.
