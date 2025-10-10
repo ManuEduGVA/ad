@@ -66,7 +66,7 @@ En nuestros proyectos se utilizarán dos herramientas básicas: Hibernate y un c
     ```
 
 !!! note "Recuerda..." 
-Recuerda que puedes encontrar los paquetes en <https://mvnrepository.com/repos/central>
+    Recuerda que puedes encontrar los paquetes en <https://mvnrepository.com/repos/central>
 
 
 ## 2.3. Estructura del proyecto
@@ -86,13 +86,10 @@ Como extensión de los POJOs, aparecen los **Beans**, sin restricciones en los a
 
 !!! note "Recuerda" 
 
-La serialización en tiempo de ejecución asocia a cada clase serializable un número de versión, llamado `serialVersionUID`, que se utiliza durante la deserialización para verificar que el emisor y el receptor de un objeto serializado han cargado clases para ese objeto que son compatibles en relación a la serialización. 
+    La serialización en tiempo de ejecución asocia a cada clase serializable un número de versión, llamado `serialVersionUID`, que se utiliza durante la deserialización para verificar que el emisor y el receptor de un objeto serializado han cargado clases para ese objeto que son compatibles en relación a la serialización. 
 
-Si el receptor ha cargado una clase para el objeto que tiene un `serialVersionUID` distinto al de la clase del emisor correspondiente, entonces la deserialización dará lugar a una `InvalidClassException`. Una clase serializable puede declarar su propio `serialVersionUID` explícitament mediante la declaración de un campo llamado `serialVersionUID` que debe ser estático, final y de tipo long: 
+    Si el receptor ha cargado una clase para el objeto que tiene un `serialVersionUID` distinto al de la clase del emisor correspondiente, entonces la deserialización dará lugar a una `InvalidClassException`. Una clase serializable puede declarar su propio `serialVersionUID` explícitament mediante la declaración de un campo llamado `serialVersionUID` que debe ser estático, final y de tipo long: 
 
-```java 
-static final long serialVersionUID = 137L; 
-```
 
 Así, los Beans son componentes de acceso a datos y representan a entidades en nuestra aplicación. Es una buena idea crear nuestros Beans en la misma carpeta, normalmente llamada `Modelo`.
 
