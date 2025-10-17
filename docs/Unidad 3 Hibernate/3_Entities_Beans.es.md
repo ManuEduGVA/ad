@@ -1,298 +1,477 @@
-# 3. Mapeo de Entidades. Beans
+# 3. Mapeo de Entidades con JPA y Hibernate
 
-Una vez estudiada la configuración inicial, es momento de mapear nuestras entidades y relaciones. Partiendo del modelo relacional, usaremos la entidad `Peli`:
+Una vez estudiada la configuración inicial, es momento de mapear nuestras entidades y relaciones usando JPA. Partiendo del modelo relacional, usaremos la entidad `Peli`:
+
+
 
 ```sql
-CREATE dTABLE `Peli` (
-`idPeli` int(11) NOT NULL AUTO_INCREMENT,
-`titulo` varchar(45) NOT NULL,
-`anyo` varchar(45) NOT NULL,
-`director` varchar(45) NOT NULL,.
-PRIMARY KEY (`idPeli`)
+CREATE TABLE `Peli` (
+  `idPeli` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(45) NOT NULL,
+  `anyo` varchar(45) NOT NULL,
+  `director` varchar(45) NOT NULL,
+  PRIMARY KEY (`idPeli`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 ```
 
-Aquí hay un script [DBCine.sql](./DBCine1.sql) con el que trabajar. La clase que encapsula la película será algo como:
 
-```java
-package Model;
 
-import java.io.Serializable;
+Aquí hay un script [DBCine.sql](./DBCine1.sql) con el que trabajar. 
 
-/**
-*
-* @author Manu
-*/
-public class Peli implements Serializable{
 
-private Long idPeli;
-private String titulo;
-private int anyo;
-private String elDirector;
+📁 Estructura del Proyecto
+```text
+JPAhibernate/
+├── src/main/java/
+│   ├── model/
+│   │   └── Peli.java                 # Entidad principal
+│   ├── util/
+│   │   └── JpaUtil.java              # Utilidad para JPA
+│   └── Main.java                     # Aplicación principal
+├── src/main/resources/
+│   ├── META-INF/
+│   │   └── persistence.xml           # Configuración JPA
+│   └── logback.xml                   # Configuración de logs
+└── pom.xml                          # Dependencias Maven
 
-public Peli() {
-}
-
-public Peli(String titulo, int anyo, String elDirector) {
-this.titulo = titulo;
-this.anyo = anyo;
-this.elDirector = elDirector;
-}
-// Próximamente
-}
 ```
 
-!!! consejo "Recordatorio"
-    Recuerda que puedes usar la biblioteca `Lombok` para crear beans más rápido.
+## 3.1. ⚙️ Configuración de dependencias
 
-## 3.1. Mapeo de archivos
+### 📦 pom.xml
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-El bean creado en la sección anterior aún no se puede persistir. Para ello, necesitamos crear un archivo externo a la clase, con la extensión `hbm.xml` y el mismo nombre que la clase (**Mapeo de Hibernate**). La ubicación del archivo no importa, pero conviene mantener las clases del modelo en un lugar y los archivos de mapeo en otro.
+    <groupId>org.cipfpcheste.dam2</groupId>
+    <artifactId>JPAhibernate</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>JPAhibernate</name>
 
-Por lo tanto, crearemos un paquete `orm` y, dentro de él, el archivo `Peli.hbm.xml`. Lo explicaremos con un ejemplo, ya que la sintaxis es bastante extensa.
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>24</maven.compiler.target>
+        <maven.compiler.source>24</maven.compiler.source>
+        <junit.version>5.11.0</junit.version>
+    </properties>
+
+    <dependencies>
+        <!-- Conector MySQL -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.4.0</version>
+        </dependency>
+        
+        <!-- Hibernate ORM -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>7.1.2.Final</version>
+        </dependency>
+        
+        <!-- Jakarta Persistence API -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        
+        <!-- Logging con Logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.19</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>
+
+```
+### 🔍 Explicación de Dependencias
+
+| Dependencia               | Versión     | Propósito                       |
+| :------------------------ | :---------- | :------------------------------ |
+| `mysql-connector-j`       | 9.4.0       | Conector oficial para MySQL     |
+| `hibernate-core`          | 7.1.2.Final | Implementación ORM de Hibernate |
+| `jakarta.persistence-api` | 3.2.0       | API estándar de JPA (Jakarta)   |
+| `logback-classic`         | 1.5.19      | Sistema de logging avanzado     |
+
+## 3.2. 🛠️ Archivos de Configuración
+
+### 📄 persistence.xml
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.2"
+             xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd">
+
+    <persistence-unit name="cinePU" transaction-type="RESOURCE_LOCAL">
+        <description>Unidad de persistencia para aplicación Cine - Hibernate 7.1.2</description>
+
+        <!-- Proveedor Hibernate 7 -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Entidades -->
+        <class>model.Peli</class>
+
+        <properties>
+            <!-- Conexión a Base de Datos - FORMATO NUEVO -->
+            <property name="jakarta.persistence.jdbc.driver"
+                      value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3308/Cine1_V1?createDatabaseIfNotExist=true"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value="root"/>
+
+            <!-- Configuración específica de Hibernate 7 -->
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+
+            <!-- NUEVAS PROPIEDADES HIBERNATE 7 -->
+            <property name="hibernate.connection.provider_disables_autocommit" value="true"/>
+            <property name="hibernate.session.events.log" value="false"/>
+
+            <!-- Pool de conexiones -->
+            <property name="hibernate.connection.pool_size" value="5"/>
+        </properties>
+    </persistence-unit>
+</persistence>
+```
+### 🔧 Propiedades de Configuración Clave
+
+| Propiedad                        | Valor          | Descripción                         |
+| :------------------------------- | :------------- | :---------------------------------- |
+| `hibernate.dialect`              | `MySQLDialect` | Dialecto SQL para MySQL             |
+| `hibernate.hbm2ddl.auto`         | `update`       | Actualiza esquema automáticamente   |
+| `hibernate.show_sql`             | `true`         | Muestra SQL en consola              |
+| `hibernate.format_sql`           | `true`         | Formatea SQL para mejor legibilidad |
+| `hibernate.connection.pool_size` | `5`            | Tamaño del pool de conexiones       |
+
+### 📊 logback.xml
+
+
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
-    <class name="Peli" table="Peli" >
-        <id column="idPeli" name="idPeli" type="int">
-            <generator class="native"/>
-        </id>
-        <property name="titulo" type="string"/>
-        <property name="anyo" type="int"/>
-        <property column="director" name="elDirector" />
-    </class>
-</hibernate-mapping>
+<configuration>
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logs específicos para Hibernate 7 -->
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.orm.jdbc.bind" level="TRACE"/>
+    <logger name="org.hibernate.stat" level="DEBUG"/>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>
 ```
 
-Vea los conceptos básicos:
+## 3.3. 🎭 Modelo de Datos
 
-- Las líneas 1-3 son el encabezado XML, que apunta a Archivo DTD con la gramática para comprobar que el archivo esté bien formado.
-- `<hibernate-mapping>` → indica que este archivo es una asignación.
-- `<class>` → es la etiqueta para especificar la clase que estamos asignando y tiene dos atributos:
-- `name="Model.Peli"` → apunta a la clase (archivo Java), sin extensión.
-- `table="Peli"` → aquí escribimos el nombre de la tabla en la base de datos que contendrá los datos.
-- Es necesario especificar los campos de la clase y sus respectivas columnas. Distinguimos entre:
-- `<property>` → para campos normales. Puede tener varios atributos:
-- `name` → (**obligatorio**) es el nombre del campo dentro de la clase.
-- `column` → es el nombre de la columna correspondiente en la tabla. Si no se especifica `column`, Hibernate asumirá que es el mismo que el atributo `name`.
-- `type` → es el tipo de dato Java de la columna. Por defecto, Hibernate usará el mismo que el especificado por la clase, pero es necesario indicarlo para resolver campos ambiguos (véase la figura a continuación, especialmente en formatos de fecha y hora).
-- `<id>` → (**obligatorio**) es el campo que se usará como clave principal y también puede tener los atributos `name`, `column` y `type`. Es posible que la clave principal la genere el sistema de gestión de bases de datos (SGBD), y lo indicaremos con:
-- `<generator>` → configura el motor para generar la clave principal, que puede especificarse de varias maneras. Con `native` usamos el mismo método que la base de datos subyacente. En este tutorial puede encontrar ejemplos completos [link](https://www.javatpoint.com/generator-classes)
-
-!!! nota "Atención"
-    - Debe guardar este archivo para que sea accesible en nuestro proyecto. Una buena opción es crear una carpeta `resources` dentro de `src/main` y guardar estos archivos allí.
-    - Hibernate necesita métodos `get/set` para acceder a los campos de nuestros objetos. Sin embargo, puede que no desee crear ningún método, pero Hibernate sí los necesita. La solución es agregar un nuevo atributo `access=field` que permita a Hibernate acceder a los campos sin métodos `getters` ni `setters`.
-
-<figure markdown="span">
-  ![Image title](./img/Hybernate_Types.png){ width="700" }
-  <figcaption>Hibernate types</figcaption>
-</figure>
+### 🎬 Peli.java
 
 
 
-!!! nota "Atención"
-    Estudiaremos más opciones como claves foráneas en las siguientes secciones.
+``` java
+package model;
 
-Ahora estudiaremos un pequeño programa:
+import jakarta.persistence.*;
+import java.io.Serializable;
 
-```java
-// obtener una sesión e iniciar una transacción
-Session laSesion=HibernateUtil.getSessionFactory().getCurrentSession();
-
-laSesion.getTransaction().begin();
-
-// Crear nuevo objeto
-Peli p=new Peli("Piratas del Caribe", 2003, "Gore Verbinsky");
-System.out.println("Sin guardar: "+ p);
-
-// Guardarin the database
-Long idNueva=(Long)laSesion.save(p);
-
-// Get the saved object (with another varaible)
-Pele q=laSesion.get(Peli.class, idNueva);
-
-System.out.println("Saved: " + q);
-
-//close all
-laSesion.getTransaction().commit();
-laSesion.close();
-```
-
-Comentarios:
-
-- Hay que tener en cuenta que para guardar un objeto (por ejemplo, insertar una fila en la base de datos), basta con ejecutar `Session.save(Object)`.
-- Para obtener un objeto de la base de datos, existe una manera sencilla, conociendo la clase y la clave primaria del objeto. El método es `Session.get(class,ID)`, y obtenemos un objeto de esta clase con esa ID.
-- Hay que tener en cuenta que cuando creamos un objeto nuevo, no tiene un ID (recuerda que es generada automáticamente), pero cuando lo guardamos, se le asigna una nueva ID.
-
-!!! importante "Recuerda" 
-
-    Si elegimos `create` en la propiedad `hbm2ddl.auto`, como ya supondrás, la base de datos estará vacía. Es una buena idea crear un archivo llamado `imports.sql` con algunos datos necesarios para probar nuestros programas.
-
-
-## 3.2. Mapeando clases. Anotaciones.
-
-Antes de empezar a anotar clases, dejamos que le muestre esto:
-
-- **JDO (Java Data Objects)** es un estándar de persistencia desarrollado por Apache, que incluye un marco de trabajo de persistencia basado en post-compilación. A pesar de intentar conseguir una técnica más eficiente, existen pocas iniciativas comerciales que siguen este estándar.
-
-- La alternativa es **JPA (Java Persistance API)**, un estándar de persistencia incorporado a JDK 5, con varias librerías que lo soportan, y basado en el principio de la reflexión, que utiliza metadatos así como información sobre las clases y la estructura para que la máquina virtual pueda acceder a la información recopilada de los objetos para invocar sus métodos. Las dos ORM más implementadas en Java: **Hibernate** y **EJB** utilizan este estándar.
-
-Mapear clases es fácil, y sólo es necesario emparejar cada campo con cada columna. El inconveniente es que necesitamos mantener dos archivos: clases y archivos de mapeo. Por este motivo, podemos unir ambos elementos, añadiendo dentro de las clases las anotaciones específicas para realizar el emparejamiento. La interfaz JPA nos permite realizar esta tarea.
-
-Vamos a mostrar una clase con anotaciones y compararla con los archivos de mapeo. Además, utilizaremos Lombok para crear la clase, que también utiliza anotaciones ;).
-
-```java
-@Fecha
-@NoArgsConstructor
 @Entity
-@Table(name = "Car")
-public class Car implements Serializable {
+@Table(name = "Peli")
+public class Peli implements Serializable {
 
-public Car(String plate, String brand, int year) { 
-this.plate = plate; 
-this.brand = brand; 
-this.year = year;
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idPeli;
+
+    @Column(name = "titulo", nullable = false, length = 100)
+    private String titulo;
+
+    @Column(name = "anyo", nullable = false)
+    private int anyo;
+
+    @Column(name = "director", nullable = false, length = 100)
+    private String elDirector;
+
+    // Constructores
+    public Peli() {}
+
+    public Peli(String titulo, int anyo, String elDirector) {
+        this.titulo = titulo;
+        this.anyo = anyo;
+        this.elDirector = elDirector;
+    }
+
+    // Getters y setters
+    public Long getIdPeli() {
+        return idPeli;
+    }
+
+    public void setIdPeli(Long idPeli) {
+        this.idPeli = idPeli;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public int getAnyo() {
+        return anyo;
+    }
+
+    public void setAnyo(int anyo) {
+        this.anyo = anyo;
+    }
+
+    public String getElDirector() {
+        return elDirector;
+    }
+
+    public void setElDirector(String elDirector) {
+        this.elDirector = elDirector;
+    }
+
+    @Override
+    public String toString() {
+        return "Peli{" +
+                "idPeli=" + idPeli +
+                ", titulo='" + titulo + '\'' +
+                ", anyo=" + anyo +
+                ", director='" + elDirector + '\'' +
+                '}';
+    }
 }
+}
+```
 
-static final long serialVersionUID = 137L;
+### 📋 Anotaciones JPA Explicadas
 
+| Anotación         | Uso   | Descripción                             |
+| :---------------- | :---- | :-------------------------------------- |
+| `@Entity`         | Clase | Marca la clase como entidad persistente |
+| `@Table`          | Clase | Especifica el nombre de la tabla en BD  |
+| `@Id`             | Campo | Indica la clave primaria                |
+| `@GeneratedValue` | Campo | Estrategia de generación de IDs         |
+| `@Column`         | Campo | Mapea el campo a columna de BD          |
+
+
+
+!!! info "Información"
+    Más información, [aquí](https://docs.jboss.org/hibernate/orm/7.1/introduction/html_single/Hibernate_Introduction.html)
+
+
+### 💾 Estrategia de Generación de IDs
+
+```java
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-private long idCar;
-
-@Column
-private String plate;
-
-@Column(name = "marca")
-private String brand;
-
-@Column
-private int year;
-}
+private Long idPeli;
 ```
 
-!!! info "Información" 
-Hibernate primero creó las anotaciones del paquete `org.hibenate.annotations`, pero desde la versión 4 está depreciado, y debe importarse desde `javax.persistence`
+La estrategia `IDENTITY` usa la auto-incrementación de MySQL para generar los IDs automáticamente.
 
-Vamos a ver las principales anotaciones, aunque tendrás muchas más en la [documentación de JPA](https://docs.oracle.com/javaee/7/api/javax/persistence/package-summary.html):
+## 3.4. 🔧 Utilidades JPA
 
-- `@Entity` para indicar que esta clase representa una **entidad** en nuestra base de datos. Además, debemos asociar esta entidad a una `@Table` con el nombre correcto.
-- Para definir los campos de la base de datos, debemos utilizar `@Column`. Puedes especificar más opciones, especialmente si el nombre de la columna es distinto del nombre del campo. Consulta la siguiente imagen para más opciones. Una opción interesante es establecer un valor generado automáticamente con `@GeneratedValue`. Si no especificas la opción `name`, se supone que es lo mismo.
-- Para marcar un campo como clave primaria, necesitas `@Id`. En este caso, no es necesario especificarlo con `@Column`.
-
-## 3.3. Componentes
-
-Vamos a revisar un patrón de diseño especial, que es la agregación. Este patrón se utiliza cuando necesitamos una entidad que sólo tiene sentido dentro de otra, por ejemplo, una rueda no tiene sentido fuera de un coche. Si la entidad puede existir por sí sola, es cuando utilizamos una **relación**, y lo estudiaremos en la siguiente sección.
-
-La clase agregada también se conoce como **component**.
-
-!!! info "Cuenta" 
-Estos componentes también pueden sustituirse por una relación 1:1 con una restricción de existencia, cuando en el proceso de normalización se juntan en la misma tabla.
-
-Para crear un componente, la clase agregada debe definirse con `@Embeddable` (y, obviamente, sin `@Entity`). Esta anotación indica a Hibernate que la existencia de estos objetos debe estar dentro de otros objetos. Dentro de estos objetos, como campos, los objetos deben marcarse con `@Embedded`. Vamos a ver un ejemplo:
-
-**Un componente** `Roda` (Wheel
+### 🛠️ JpaUtil.java
 
 ```java
-@Embeddable
-@Fecha
-@AllArgsConstructor
-@NoArgsConstructor
-public class Wheel { 
+package util;
 
-@Column 
-int diameter; 
-@Column 
-char speedCode;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import java.util.Map;
+import java.util.HashMap;
+
+public class JpaUtil {
+    private static final String PERSISTENCE_UNIT_NAME = "cinePU";
+    private static EntityManagerFactory entityManagerFactory;
+
+    static {
+        initialize();
+    }
+
+    private static void initialize() {
+        try {
+            System.out.println("Inicializando Hibernate 7.1.2...");
+
+            // Configuración programática adicional si es necesaria
+            Map<String, Object> configOverrides = new HashMap<>();
+            configOverrides.put("hibernate.connection.autocommit", "false");
+
+            entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME, configOverrides);
+
+            System.out.println("EntityManagerFactory creado exitosamente con Hibernate 7");
+            System.out.println("Metadata: " + entityManagerFactory.getMetamodel().getEntities().size() + " entidades cargadas");
+
+        } catch (Exception e) {
+            System.err.println("Error inicializando Hibernate 7: " + e.getMessage());
+            e.printStackTrace();
+            throw new ExceptionInInitializerError("Fallo en inicialización de Hibernate 7: " + e.getMessage());
+        }
+    }
+
+    public static EntityManager getEntityManager() {
+        if (entityManagerFactory == null) {
+            initialize();
+        }
+        return entityManagerFactory.createEntityManager();
+    }
+
+    public static EntityManagerFactory getEntityManagerFactory() {
+        return entityManagerFactory;
+    }
+
+    public static void close() {
+        if (entityManagerFactory != null && entityManagerFactory.isOpen()) {
+            entityManagerFactory.close();
+            System.out.println("EntityManagerFactory cerrado");
+            entityManagerFactory = null;
+        }
+    }
+
+    public static boolean isInitialized() {
+        return entityManagerFactory != null && entityManagerFactory.isOpen();
+    }
 }
 ```
 
-**An aggregation** `CarWheel`
+### 🎯 Patrón Singleton para EntityManagerFactory
 
-```java
-@Fecha
-@NoArgsConstructor
-@Entity
-@Table(name = "Car")
-public class CarWheel implements Serializable { 
+El `EntityManagerFactory` es un objeto pesado que debe crearse **una sola vez** en toda la aplicación. Por eso usamos:
 
-public CarWheel(String plate, String brand, int year, Wheel wheel) { 
-this.plate = plate; 
-this.brand = brand; 
-this.year = year; 
-this.wheel = wheel; 
-} 
+- **Bloque estático**: Se ejecuta al cargar la clase
+- **Singleton**: Una única instancia compartida
+- **Lazy initialization**: Se crea solo cuando se necesita
 
-static final long serialVersionUID = 137L; 
+### 🔄 Ciclo de Vida de EntityManager
 
-@Id 
-@GeneratedValue(strategy = GenerationType.IDENTITY) 
-private long idCar; 
 
-@Column 
-private String plate; 
 
-@Column(name = "marca") 
-private String brand; 
+``` java
+// 1. Obtener EntityManager
+EntityManager em = JpaUtil.getEntityManager();
 
-@Column 
-private int year; 
-
-@Embedded 
-private Wheel wheel;
-
-}
+try {
+    // 2. Iniciar transacción
+    EntityTransaction tx = em.getTransaction();
+    tx.begin();
+    
+    // 3. Operaciones JPA
+    em.persist(entidad);
+    
+    // 4. Confirmar transacción
+    tx.commit();
+    
+} finally {
+    // 5. CERRAR SIEMPRE el EntityManager
+    em.close();
 }
 ```
 
-Cuando Hibernate crea la tabla, debe tenerse en cuenta que no se creará ninguna tabla `Wheel`. En cambio, todos los campos están dentro de CarWheel. Los dos últimos campos son propiedades de la clase Wheel.
 
-```sql
-Hibernate:
-create table Car ( 
-idCar bigint not null auto_increment, 
-marca varchar(255), 
-plate varchar(255), 
-year integer, 
-diameter integer, 
-speedCode char(1), 
-primary key (idCar)) engine=InnoDB
+## 3.5. 🚀 Aplicación Principal
+
+### 📱 Main.java
+
+
+
+``` java
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
+import model.Peli;
+import util.JpaUtil;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("=== HIBERNATE 7.1.2 - JPA PURO ===");
+
+        EntityManager em = null;
+        EntityTransaction tx = null;
+
+        try {
+            // 1. Obtener EntityManager
+            em = JpaUtil.getEntityManager();
+            System.out.println(" EntityManager obtenido - Hibernate 7.1.2");
+
+            // 2. Verificar conexión
+            boolean connected = em.isOpen();
+            System.out.println(" EntityManager abierto: " + connected);
+
+            // 3. Iniciar transacción
+            tx = em.getTransaction();
+            tx.begin();
+            System.out.println("Transacción iniciada");
+
+            // 4. Crear y persistir entidad
+            Peli pelicula = new Peli("Avatar: El sentido del agua", 2022, "James Cameron");
+            System.out.println(" Creando: " + pelicula);
+
+            em.persist(pelicula);
+            em.flush(); // Forzar INSERT inmediato
+            System.out.println("Persistido con ID: " + pelicula.getIdPeli());
+
+            // 5. Buscar para verificar
+            Peli recuperada = em.find(Peli.class, pelicula.getIdPeli());
+            System.out.println(" Recuperado: " + recuperada);
+
+            // 6. Consulta JPQL
+            Long count = em.createQuery("SELECT COUNT(p) FROM Peli p", Long.class).getSingleResult();
+            System.out.println(" Total de películas en BD: " + count);
+
+            // 7. Confirmar transacción
+            tx.commit();
+            System.out.println(" Transacción confirmada");
+
+            System.out.println(" HIBERNATE 7.1.2 FUNCIONANDO CORRECTAMENTE!");
+
+        } catch (Exception e) {
+            System.err.println(" ERROR: " + e.getMessage());
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+                System.out.println(" Transacción revertida");
+            }
+            e.printStackTrace();
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close();
+                System.out.println(" EntityManager cerrado");
+            }
+            JpaUtil.close();
+        }
+    }
+}
 ```
 
-**Atención** Puede aparecer un problema cuando intentas guardar dos componentes incrustados, por ejemplo dos _direcciones_ de un _empleado_, ya que Hibernate crea campos a partir de la clase del componente y los nombres de los campos se duplicarán. Para evitar este inconveniente, la solución es cambiar el nombre de los campos de la clase del componente, como se muestra a continuación (dentro de la clase agregada):
+### 🔍 Operaciones JPA Demostradas
 
-```java
-@Embedded
-private Wheel wheel1;
+| Operación  | Método          | Descripción                      |
+| :--------- | :-------------- | :------------------------------- |
+| **Create** | `em.persist()`  | Inserta nueva entidad            |
+| **Read**   | `em.find()`     | Busca por ID                     |
+| **JPQL**   | `createQuery()` | Consulta con lenguaje JPA        |
+| **Flush**  | `em.flush()`    | Sincroniza con BD inmediatamente |
 
-@Embedded
-@AttributeOverrides({ 
-@AttributeOverride(name="diameter", column = @Column(name="diameter2") ), 
-@AttributeOverride(name="speedCode", columna = @Column(name="speedCode2") )
-})
-private Wheel wheel2;
-```
-
-Observa que:
-
-- El primer campo incrustado no necesita nada especial.
-- En el segundo, debemos sobreescribir los nombres de los atributos, comenzando con `@AttributeOverrides` con varios `@AttributeOverride`, indicando el nombre antiguo y el nuevo nombre de la columna.
-
-!!! tip "Pero..." 
-Esta situación no es habitual, pero es importante resolverla cuando sea necesario.
-
-
-## 3.4. Ejercicio
-
-Realiza la siguiente tarea:
-
-- Crea un proyecto Maven y añade todas las dependencias que necesites.
-- Crea dos clases por ti mismo, pero pensando que estarán relacionadas en un futuro. Por ejemplo, Profesor y Tema, o Conductor y Coche, o Mascota y Veterinario. En este momento no hace falta que crees ninguna relación.
-- Cada clase debe tener un ID y al menos 4 campos, con varios tipos de datos (no es necesario que todos sean campos de tipo String).
-- Mapea las dos clases: 
-- Una con un archivo XML externo. 
-- La otra con anotaciones JPA.
-- Crea una aplicación principal donde pidas al usuario los datos y los almacene (y los guardes) en la misma base de datos.

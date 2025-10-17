@@ -7,7 +7,7 @@ Como mencionamos en la introducción, analizaremos cómo mapear los diferentes t
 - **Bidireccional** → Son relaciones en las que los elementos relacionados suelen tener el mismo peso o entidad. Por ejemplo, un _Grupo_ de un instituto y un _Tutor_. Desde un grupo tiene sentido conocer al tutor, y también podemos desde un profesor (el tutor) acceder al grupo que tutoriza. En este caso, dentro del objeto _Grupo_ tenemos una referencia al objeto _Tutor_ y viceversa.
 
 !!! warning "Aviso" 
-En este tipo de referencias, como puede deducirse, existe una recursión intrínseca. Por tanto, cuando gestionamos este tipo de relaciones bidireccionales, tenga mucho cuidado de no causar bucles, ya que incluso algo tan sencillo como imprimir puede hacer que nuestro programa se bloquee y aparezca la conocida `StackOverflowException`.
+    En este tipo de referencias, como puede deducirse, existe una recursión intrínseca. Por tanto, cuando gestionamos este tipo de relaciones bidireccionales, tenga mucho cuidado de no causar bucles, ya que incluso algo tan sencillo como imprimir puede hacer que nuestro programa se bloquee y aparezca la conocida `StackOverflowException`.
 
 A partir de ahora podríamos estudiar todas las representaciones con JPA.
 
@@ -25,64 +25,76 @@ En primer lugar, la clase que es apuntada por la clave foránea. Muy fácil porq
 
 
 ```java
-@Fecha
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name="Profesor")
-public class Profesor { 
+public class Profesor implements Serializable {
 
-static final long serialVersionUID = 1L; 
+    static final long serialVersionUID = 1L;
 
-@Id 
-@GeneratedValue(strategy=GenerationType.IDENTITY) 
-private int idTeacher; 
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int idTeacher;
 
-@Column 
-private String name; 
+    @Column
+    private String name;
 
-public Profesor(String name) { 
-this.name = name; 
-}
+    public Profesor(String name) {
+        this.name = name;
+    }
 }
 ```
 
 Y ahora, la clase que contiene la clave ajena. Aquí debemos marcar que un `Grupo` necesita un `Profesor` como tutor. Veámoslo:
 
 ```java
-@Fecha
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "Grupo")
-public class Grupo implements Serializable { 
+public class Grupo implements Serializable {
 
-static final long serialVersionUID = 137L; 
+    static final long serialVersionUID = 137L;
 
-@Id 
-@GeneratedValue(strategy = GenerationType.IDENTITY) 
-private long idGroup; 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long idGroup;
 
-@Column 
-private String level; 
+    @Column
+    private String level;
 
-@Column 
-private String course; 
+    @Column
+    private String course;
 
-@Column 
-private int year; 
+    @Column
+    private int year;
 
-@OneToOne(cascada = CascadeType.ALL) 
-@JoinColumn( 
-name="id_tutor", 
-referencedColumnName = "idTeacher", 
-unique=true, 
-foreignKey = @ForeignKey(name = "FK_GRP_TEACH")) 
-private Profesor tutor; 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name="id_tutor",
+            referencedColumnName = "idTeacher",
+            unique=true,
+            foreignKey = @ForeignKey(name = "FK_GRP_TEACH"))
+    private Profesor tutor;
 
-public Grupo(String level, String course, int year) { 
-this.level = level; 
-this.course = course; 
-this.year = year; 
-}
+    public Grupo(String level, String course, int year) {
+        this.level = level;
+        this.course = course;
+        this.year = year;
+    }
 
 }
 ```
