@@ -311,24 +311,44 @@ ConexionDB conDB = new ConexionDB("instituto");
 
         File script = new File("EsquemaCine.sql");
 
-        BufferedReader bfr = bfr = new BufferedReader(new FileReader(script));
+        try (BufferedReader bfr = new BufferedReader(new FileReader(script))) {
 
-        String line = null;
-        StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
+            String linea;
 
-        // Obtenemos el salto de línea del sistema subyacente
-        String breakLine = System.lineSeparator();
+            while ((linea = bfr.readLine()) != null) {
+                // Elimina los comentarios y espacios en blanco
+                linea = linea.trim();
+                if (linea.isEmpty() || linea.startsWith("--") || linea.startsWith("#")) {
+                    continue; // Omite líneas vacías y comentarios
+                }
 
-        while ((line = bfr.readLine()) != null) {
-            sb.append(line);
-            sb.append(breakLine);
+                sb.append(linea);
+
+                // Si la línea termina en ';', es el final de una sentencia y deberemos ejecutar esta.
+                if (linea.endsWith(";")) {
+                    String query = sb.toString();
+                    try (Statement stm = con.createStatement()) {
+                        stm.execute(query);
+                    }
+                 catch (SQLException e) {
+                     System.out.println("Error SQL ejecutando el script: " + e.getMessage());
+                 }
+                    // Reinicia el StringBuilder para la próxima sentencia
+                    sb.setLength(0);
+
+                } else {
+                    // Si no, añade un espacio para separar partes de la misma sentencia
+                    sb.append(" ");
+                }
+
+            }
+            System.out.println("Script ejecutado correctamente.");
+
+        } catch (IOException e) {
+            System.out.println("Error de I/O al leer el script: " + e.getMessage());
         }
 
-        String query = sb.toString(); // generamos el Script en un String
-        Statement stm = con.createStatement();
-        int result = stm.executeUpdate(query);
-        System.out.println("Script ejecutado con salida " + result);
-        stm.close();
 ```
 
 !!! tip "Consejo" 
