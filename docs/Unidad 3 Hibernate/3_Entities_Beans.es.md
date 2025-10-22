@@ -19,7 +19,7 @@ CREATE TABLE `Peli` (
 Aquí hay un script [DBCine.sql](./DBCine1.sql) con el que trabajar. 
 
 
-📁 Estructura del Proyecto
+ Estructura del Proyecto
 ```text
 JPAhibernate/
 ├── src/main/java/
@@ -36,9 +36,9 @@ JPAhibernate/
 
 ```
 
-## 3.1. ⚙️ Configuración de dependencias
+## 3.1. Configuración de dependencias
 
-### 📦 pom.xml
+###  pom.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -91,7 +91,7 @@ JPAhibernate/
 </project>
 
 ```
-### 🔍 Explicación de Dependencias
+###  Explicación de Dependencias
 
 | Dependencia               | Versión     | Propósito                       |
 | :------------------------ | :---------- | :------------------------------ |
@@ -100,9 +100,9 @@ JPAhibernate/
 | `jakarta.persistence-api` | 3.2.0       | API estándar de JPA (Jakarta)   |
 | `logback-classic`         | 1.5.19      | Sistema de logging avanzado     |
 
-## 3.2. 🛠️ Archivos de Configuración
+## 3.2.  Archivos de Configuración
 
-### 📄 persistence.xml
+###  persistence.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="3.2"
@@ -146,7 +146,7 @@ JPAhibernate/
     </persistence-unit>
 </persistence>
 ```
-### 🔧 Propiedades de Configuración Clave
+###  Propiedades de Configuración Clave
 
 | Propiedad                        | Valor          | Descripción                         |
 | :------------------------------- | :------------- | :---------------------------------- |
@@ -156,7 +156,7 @@ JPAhibernate/
 | `hibernate.format_sql`           | `true`         | Formatea SQL para mejor legibilidad |
 | `hibernate.connection.pool_size` | `5`            | Tamaño del pool de conexiones       |
 
-### 📊 logback.xml
+###  logback.xml
 
 
 
@@ -181,9 +181,9 @@ JPAhibernate/
 </configuration>
 ```
 
-## 3.3. 🎭 Modelo de Datos
+## 3.3.  Modelo de Datos
 
-### 🎬 Peli.java
+###  Peli.java
 
 
 
@@ -267,7 +267,7 @@ public class Peli implements Serializable {
 }
 ```
 
-### 📋 Anotaciones JPA Explicadas
+###  Anotaciones JPA Explicadas
 
 | Anotación         | Uso   | Descripción                             |
 | :---------------- | :---- | :-------------------------------------- |
@@ -283,7 +283,7 @@ public class Peli implements Serializable {
     Más información, [aquí](https://docs.jboss.org/hibernate/orm/7.1/introduction/html_single/Hibernate_Introduction.html)
 
 
-### 💾 Estrategia de Generación de IDs
+###  Estrategia de Generación de IDs
 
 ```java
 @Id
@@ -293,9 +293,9 @@ private Long idPeli;
 
 La estrategia `IDENTITY` usa la auto-incrementación de MySQL para generar los IDs automáticamente.
 
-## 3.4. 🔧 Utilidades JPA
+## 3.4.  Utilidades JPA
 
-### 🛠️ JpaUtil.java
+### JpaUtil.java
 
 ```java
 package util;
@@ -359,7 +359,7 @@ public class JpaUtil {
 }
 ```
 
-### 🎯 Patrón Singleton para EntityManagerFactory
+### Patrón Singleton para EntityManagerFactory
 
 El `EntityManagerFactory` es un objeto pesado que debe crearse **una sola vez** en toda la aplicación. Por eso usamos:
 
@@ -367,7 +367,7 @@ El `EntityManagerFactory` es un objeto pesado que debe crearse **una sola vez** 
 - **Singleton**: Una única instancia compartida
 - **Lazy initialization**: Se crea solo cuando se necesita
 
-### 🔄 Ciclo de Vida de EntityManager
+### Ciclo de Vida de EntityManager
 
 
 
@@ -393,9 +393,9 @@ try {
 ```
 
 
-## 3.5. 🚀 Aplicación Principal
+## 3.5. Aplicación Principal
 
-### 📱 Main.java
+### Main.java
 
 
 
@@ -466,7 +466,7 @@ public class Main {
 }
 ```
 
-### 🔍 Operaciones JPA Demostradas
+### Operaciones JPA Demostradas
 
 | Operación  | Método          | Descripción                      |
 | :--------- | :-------------- | :------------------------------- |

@@ -31,26 +31,40 @@ En nuestros proyectos se utilizarán dos herramientas básicas: Hibernate y un c
 === "Maven"
 
     ```xml
-    <!-- Hibernate como implementación JPA -->
-    <dependency>
-        <groupId>org.hibernate.orm</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>7.1.2.Final</version>
-    </dependency>
-
-    <!-- MySQL Connector -->
-    <dependency>
-        <groupId>com.mysql</groupId>
-        <artifactId>mysql-connector-j</artifactId>
-        <version>8.0.33</version>
-    </dependency>
-
-    <!-- API JPA (Jakarta Persistence) -->
-    <dependency>
-        <groupId>jakarta.persistence</groupId>
-        <artifactId>jakarta.persistence-api</artifactId>
-        <version>3.1.0</version>
-    </dependency>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.4.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>7.1.2.Final</version>
+        </dependency>
+        <!-- Jakarta Persistence API -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <!-- Logging -->
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.19</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.42</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
     ```
 === "Gradle"
 
@@ -59,14 +73,100 @@ En nuestros proyectos se utilizarán dos herramientas básicas: Hibernate y un c
     implementation("org.hibernate.orm:hibernate-core:7.1.2.Final")
 
     // MySQL Connector
-    implementation("com.mysql:mysql-connector-j:8.0.33")
+    // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
+    implementation("com.mysql:mysql-connector-j:9.4.0")
 
     // API JPA (Jakarta Persistence)
-    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    // https://mvnrepository.com/artifact/jakarta.persistence/jakarta.persistence-api
+    implementation("jakarta.persistence:jakarta.persistence-api:3.2.0")
+
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    implementation("org.projectlombok:lombok:1.18.42")
+
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+    implementation("ch.qos.logback:logback-classic:1.5.19")
+
     ```
 
 !!! note "Recuerda..." 
     Recuerda que puedes encontrar los paquetes en <https://mvnrepository.com/repos/central>
+
+
+Además vamos a hacer uso del paquete logback-classic el cual nos proporcionará información de los log de nuestra aplicación. La dependecia se puede ver en los gestores anteriores.
+
+Para ello necesitaremos configurar el fichero logback.xml:
+
+```text
+src/
+├── main/
+│   ├── java/
+│   │   └── (tu código de la librería)
+│   └── resources/
+│       ├── META-INF/
+│       │   └── persistence.xml
+│       └── logback.xml
+    
+```
+
+Antes de abordar la configuración, vamos a ver los niveles que queremos de log, fichero logback.xml
+
+### 2.2.1. Opción recomendada para las librerias
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Configuración para Hibernate -->
+    <logger name="org.hibernate.engine" level="INFO"/>
+    <logger name="org.hibernate.mapping.Table" level="INFO"/>
+    <logger name="org.hibernate.service.internal.SessionFactoryServiceRegistryImpl" level="INFO"/>
+
+     <!-- Tu librería - nivel INFO para mensajes importantes -->
+    <logger name="tu.paquete.libreria" level="INFO"/>
+
+    <!-- Configuración general -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+</configuration>
+```
+
+Esta es la información que nos va a dar cuando estemos probando nuestro desarrollo.
+
+### 2.2.2. Opción de producción
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Nivel WARN para evitar la mayoría de los logs -->
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.demo" level="WARN"/>
+    
+    <root level="WARN">
+        <appender-ref ref="CONSOLE" />
+    </root>
+    
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+</configuration>
+```
+
+### 2.2.3. Desactivar completamente los log
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <root level="OFF"/>
+</configuration>
+```
 
 
 ## 2.3. Estructura del proyecto
@@ -90,7 +190,6 @@ Como extensión de los POJOs, aparecen los **Beans**, sin restricciones en los a
 
     Si el receptor ha cargado una clase para el objeto que tiene un `serialVersionUID` distinto al de la clase del emisor correspondiente, entonces la deserialización dará lugar a una `InvalidClassException`. Una clase serializable puede declarar su propio `serialVersionUID` explícitament mediante la declaración de un campo llamado `serialVersionUID` que debe ser estático, final y de tipo long: 
 
-
 Así, los Beans son componentes de acceso a datos y representan a entidades en nuestra aplicación. Es una buena idea crear nuestros Beans en la misma carpeta, normalmente llamada `Modelo`.
 
 Nosotros vamos a trabajar con JPA que es lo que la industria hace uso actualmente.
@@ -98,8 +197,11 @@ Nosotros vamos a trabajar con JPA que es lo que la industria hace uso actualment
 ```java
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 @Entity
 @Table(name = "Peli")
 public class Peli implements Serializable {
@@ -107,18 +209,19 @@ public class Peli implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPeli;
-    
+
     @Column(name = "titulo", nullable = false)
     private String titulo;
-    
+
     @Column(name = "anyo")
     private int anyo;
-    
+
     @Column(name = "director")
     private String elDirector;
 
     // Constructor por defecto (OBLIGATORIO en JPA)
-    public Peli() {}
+    public Peli() {
+    }
 
     // Constructor con parámetros
     public Peli(String titulo, int anyo, String elDirector) {
@@ -127,10 +230,7 @@ public class Peli implements Serializable {
         this.elDirector = elDirector;
     }
 
-    // Getters y setters
-    public Long getIdPeli() { return idPeli; }
-    public void setIdPeli(Long idPeli) { this.idPeli = idPeli; }
-    // ... resto de getters y setters
+
 }
 
 ```
@@ -190,31 +290,29 @@ Vamos a examinar más detenidamente el archivo de configuración de Hibernate. E
 === "XML"
 
     ```xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence 
-                                    https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
-        <persistence-unit name="miUnidadPersistencia" transaction-type="RESOURCE_LOCAL">
-            <description>Unidad de persistencia para MySQL</description>
-            
-            <!-- Proveedor JPA -->
-            <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-            
-            <!-- Propiedades -->
-            <properties>
-                <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/DBName"/>
-                <property name="jakarta.persistence.jdbc.user" value="root"/>
-                <property name="jakarta.persistence.jdbc.password" value="root"/>
-                
-                <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-                <property name="hibernate.show_sql" value="true"/>
-                <property name="hibernate.format_sql" value="true"/>
-                <property name="hibernate.hbm2ddl.auto" value="update"/>
-            </properties>
-        </persistence-unit>
-    </persistence>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
+             version="3.2">
+    <persistence-unit name="PelisUP" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>Peli</class>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/Cine1_V1"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value="root"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
     ```
 ### 2.4.3 Opciones hbm2ddl.auto
 
@@ -439,42 +537,46 @@ Para múltiples scripts:
 === "Java"
 
     ```java
-    public class Main {
-        public static void main(String[] args) {
-            EntityManager em = JPAUtil.getEntityManager();
-            EntityTransaction tx = null;
-            
-            try {
-                tx = em.getTransaction();
-                tx.begin();
-                
-                // Crear y guardar nueva entidad
-                Peli peli = new Peli("The Matrix", 1999, "Lana Wachowski");
-                em.persist(peli);
-                
-                // Buscar entidad
-                Peli encontrada = em.find(Peli.class, peli.getIdPeli());
-                System.out.println("Encontrada: " + encontrada);
-                
-                // Consulta JPQL
-                TypedQuery<Peli> query = em.createQuery(
+import jakarta.persistence.*;
+
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PelisUP");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx = em.getTransaction();
+            tx.begin();
+
+            // Crear y guardar nueva entidad
+            Peli peli = new Peli("The Matrix", 1999, "Lana Wachowski");
+            em.persist(peli);
+
+            // Buscar entidad
+            Peli encontrada = em.find(Peli.class, peli.getIdPeli());
+            System.out.println("Encontrada: " + encontrada);
+
+            // Consulta JPQL
+            TypedQuery<Peli> query = em.createQuery(
                     "SELECT p FROM Peli p WHERE p.anyo >= :anio", Peli.class);
-                query.setParameter("anio", 2000);
-                List<Peli> pelisRecientes = query.getResultList();
-                
-                tx.commit();
-                
-            } catch (Exception e) {
-                if (tx != null && tx.isActive()) {
-                    tx.rollback();
-                }
-                e.printStackTrace();
-            } finally {
-                em.close();
-                JPAUtil.close();
+            query.setParameter("anio", 2000);
+            List<Peli> pelisRecientes = query.getResultList();
+            pelisRecientes.forEach(System.out::println);
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
             }
+            e.printStackTrace();
+        } finally {
+            em.close();
         }
     }
+}
     ```
 
 
@@ -504,3 +606,5 @@ Para múltiples scripts:
 
 !!! note "Atención"
     Esta implementación mantiene la compatibilidad con el patrón Singleton para SessionFactory/EntityManagerFactory, asegurando una única instancia en la aplicación.
+
+El proyecto completo lo puedes descargar aqui [demo1](./demo1.zip)

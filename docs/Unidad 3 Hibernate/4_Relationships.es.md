@@ -41,13 +41,13 @@ public class Profesor implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int idTeacher;
+    private int idProfesor;
 
     @Column
-    private String name;
+    private String nombre;
 
-    public Profesor(String name) {
-        this.name = name;
+    public Profesor(String nombre) {
+        this.nombre = nombre;
     }
 }
 ```
@@ -71,29 +71,29 @@ public class Grupo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idGroup;
+    private long idGrupo;
 
     @Column
-    private String level;
+    private String nivel;
 
     @Column
-    private String course;
+    private String curso;
 
     @Column
-    private int year;
+    private int anyo;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             name="id_tutor",
-            referencedColumnName = "idTeacher",
+            referencedColumnName = "idProfesor",
             unique=true,
             foreignKey = @ForeignKey(name = "FK_GRP_TEACH"))
     private Profesor tutor;
 
-    public Grupo(String level, String course, int year) {
-        this.level = level;
-        this.course = course;
-        this.year = year;
+    public Grupo(String nivel, String curso, int anyo) {
+        this.nivel = nivel;
+        this.curso = curso;
+        this.anyo = anyo;
     }
 
 }
@@ -129,62 +129,92 @@ Con `mappedBy="tutor"` estamos diciendo que en la clase `Grupo` existe un campo 
 Para esta explicación empezaremos con el siguiente modelo, en el que un **Libro** tiene un **Autor** que lo ha escrito, y un Autor puede haber escrito varios Libros. En el esquema relacional, la relación es desde `idAutor` en Libros, que es clave foránea en la tabla Autor (ID).
 
 <figure markdown="span">
-  ![Image title](./img/1_N.png){ width="700" }
+  ![Image title](./img/libro_autor.png){ width="700" }
   <figcaption>one to many<figcaption>
 </figure>
-
-Primero, podemos decidir quién es el propietario de la relación. Realmente no importa, pero en varios diseños es muy claro, por ejemplo entre `Estudiant` y `Email`, donde obviamente el propietario es `Estudiant`. Normalmente debería ser la clase con cardinalidad **muchos** el propietario. Veamos el ejemplo.
+Primero, podemos decidir quién es el propietario de la relación. Realmente no importa, pero en varios diseños es muy claro, por ejemplo entre `Estudiante` y `Email`, donde obviamente el propietario es `Estudiante`. Normalmente debería ser la clase con cardinalidad **muchos** el propietario. Veamos el ejemplo.
 
 ```java
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+
+@Data
+@NoArgsConstructor
+
 @Entity
-@Table(name="Libro")
-public class Libro implements Serializable { 
+@Table(name="libro")
+public class Libro implements Serializable {
 
-@Id 
-@GeneratedValue(strategy=GenerationType.IDENTITY) 
-private Long idLibro; 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idlibro;
 
-@Column 
-private String título; 
+    @Column
+    private String titulo;
 
-@Column 
-private String tipo; 
+    @Column
+    private String tipo;
 
-@ManyToOne(cascade=CascadeType.PERSIST) 
-@JoinColumn(name="idAutor", 
-foreignKey = @ForeignKey(name = "FK_LIB_AUT" )) 
-private Autor elAutor;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "idautor",
+            foreignKey = @ForeignKey(name = "FK_LIB_AUT"))
+    private Autor elAutor;
+
+    public Libro(String titulo, String tipo, Autor elAutor) {
+        this.titulo = titulo;
+        this.tipo = tipo;
+        this.elAutor = elAutor;
+    }
+}
 ```
 En este ejemplo, un `Libro` tiene un autor (único). Lo implementamos almacenando una referencia a un objeto Autor, llamado `elAutor` dentro de nuestro Libro. Debemos escribir la información de la relación en este campo:
 
 - Debemos marcar este campo como `@ManyToOne`, porque Libro está al lado de los muchos de la relación (recuerde que un Autor puede escribir varios Libros)
 - La clave foránea será anotada con la etiqueta `@JoinColumn`, con varios atributos: 
-- Puesto que `elAutor` es el punto inicial de la clave foránea, que apunta a la tabla `Author`, necesitamos decir el nombre de la clave primaria en esta clase. Este atributo es opcional pero es una buena opción para mejorar nuestro código. 
+- Puesto que `elAutor` es el punto inicial de la clave foránea, que apunta a la tabla `Autor`, necesitamos decir el nombre de la clave primaria en esta clase. Este atributo es opcional pero es una buena opción para mejorar nuestro código. 
 - Opcionalmente, podemos llamar la restricción de la clave foránea, con un nombre bien estructurado, con el atributo `foreignKey`
 
 ```java
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.Set;
+@Data
+@NoArgsConstructor
 @Entity
-@Table(name="Libro")
-public class Autor implements Serializable{ 
+@Table(name="autor")
+public class Autor implements Serializable{
 
-static final long serialVersionUID = 137L; 
+    @Serial
+    private static final long serialVersionUID = 137L;
 
-@Id 
-@GeneratedValue(strategy=GenerationType.IDENTITY) 
-private Long ydAutor; 
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long idautor;
 
-@Column 
-private String nombre; 
+    @Column
+    private String nombre;
 
-@Column 
-private String nacionalidad; 
+    @Column
+    private String nacionalidad;
 
-@OneToMany(mappedBy="elAutor", 
-cascade=CascadeType.PERSIST, 
-fetch = FetchType.LAZY) 
-private Set<Libro> losLibros; 
+    @OneToMany(mappedBy="elAutor",
+            cascade=CascadeType.PERSIST,
+            fetch = FetchType.LAZY)
+    private Set<Libro> losLibros;
 
-// resto de la clase
+    public Autor(String nombre, String nacionalidad, Set<Libro> losLibros) {
+        this.nombre = nombre;
+        this.nacionalidad = nacionalidad;
+        this.losLibros = losLibros;
+    }
+}
 ```
 
 La clase `Autor` está en el lado _un_, y esto significa que puede escribir _muchos_ `Libros`. Por esta razón, almacenamos todos los libros que ha escrito en un 'Set' de libros. Las anotaciones serán:
@@ -192,14 +222,14 @@ La clase `Autor` está en el lado _un_, y esto significa que puede escribir _muc
 - Puesto que un Autor puede escribir muchos libros, marcamos el Set de libros como `@OneToMany`. Como hemos escrito la especificación de la relación en Libro, podríamos decir que la relación está mapeada en el campo `elAutor` dentro de la clase `Libro`, con `mappedBy="elAutor"` fácilmente.
 
 !!! nota "Decisión" 
-En lugar de almacenar libros en un Set, se pueden almacenar en una Lista. La principal diferencia es responder a esta pregunta: _¿es importante el orden?_. Si respondes _sí_, debes utilizar una Lista. Si la respuesta es _no_, debes utilizar un Set.
+    En lugar de almacenar libros en un Set, se pueden almacenar en una Lista. La principal diferencia es responder a esta pregunta: _¿es importante el orden?_. Si respondes _sí_, debes utilizar una Lista. Si la respuesta es _no_, debes utilizar un Set.
 
 !!! importante "Espacio" 
 
-La relación `1:N` que hemos explicado es bidireccional. Esto significa que desde un Autor podemos obtener todos los Libros que ha escrito, y desde un Libro podemos obtener el Autor. 
+    La relación `1:N` que hemos explicado es bidireccional. Esto significa que desde un Autor podemos obtener todos los Libros que ha escrito, y desde un Libro podemos obtener el Autor. 
 
 <figure markdown="span">
-  ![Image title](./img/1_N_B.png){ width="700" }
+  ![Image title](./img/1_M_JPA.png){ width="700" }
   <figcaption>one to many bidirectional<figcaption>
 </figure>
 
@@ -212,7 +242,7 @@ Este atributo suele aparecer cuando tenemos una relación `1:N` o `N:M` en una c
 - `DateType.EAGER` → Literalmente traducido como **ansioso**. No podemos esperar, y cuando se carga al Autor, Hibernate resolverá la relación y cargará todos los libros con todos los datos internos de cada libro. Tenemos todos los datos en el momento.
 - `DateType.LAZY` → Literalmente como **perezoso** (vago), pero más representativo como _carga perezosa_. Si cargamos al Autor, Hibernate sólo carga los atributos propios del Autor, sin cargar sus Libros. Cuando intentamos acceder a sus libros desde nuestro programa, Hibernate se _activa_ y los carga. Es decir, en modo LAZY, los datos se cargan **cuando se necesitan**.
 
-**¿Qué haremos?***
+**¿Qué haremos?**
 
 ¿Qué es mejor o peor? La respuesta no es sencilla, ya queAmbos tienen ventajas y desventajas:
 
@@ -235,7 +265,7 @@ Dentro de las relaciones binarias, podemos encontrar dos posibilidades:
 En el modelo relacional, ambos casos se modelan como una nueva tabla (con o sin el atributo). Si nos encontramos en el segundo caso, se debe modelar una nueva tabla con los atributos que posee mediante una clase, por lo que la relación «N:M» entre dos tablas se convertirá en «dos relaciones uno a muchos 1:N y N:1» (actor-actuación y actuación-película). Nos centraremos en el primer caso, ya que estamos listos para resolver el segundo.
 
 !!! Nota "Mejora"
-En la segunda parte, este tutorial explica cómo crear [N_M con atributos](https://thorben-janssen.com/hibernate-tip-many-to-many-association-with-additional-attributes/). Se recomienda implementar un ejemplo.
+    En la segunda parte, este tutorial explica cómo crear [N_M con atributos](https://thorben-janssen.com/hibernate-tip-many-to-many-association-with-additional-attributes/). Se recomienda implementar un ejemplo.
 
 Modelemos el caso típico de un profesor que imparte varios módulos, que pueden ser impartidos por varios profesores. El esquema es el siguiente:
 
@@ -244,105 +274,261 @@ Modelemos el caso típico de un profesor que imparte varios módulos, que pueden
   <figcaption>one to many bidirectional<figcaption>
 </figure>
 
+### 4.3.1 Muchos a Muchos con 4 clases
 
-Como podemos ver, se mantiene la tabla central típica de la relación `N:M`. Como se mencionó anteriormente, la tabla "Enseñanza" no existirá en el modelo OO, ya que solo sirve para relacionar los elementos.
+Como podemos ver, se mantiene la tabla central típica de la relación `N:M`. Para implementar este caso vamos a necesitar 4 clase que se podrán ver ahora:
 
-Las clases Módulo y Profesor son las siguientes (solo se muestra la parte relacionada con la relación), eligiendo en este caso Profesor como propietario de la relación:
+Las clases Módulo y Profesor son las siguientes:
 
-```java
-// en Profesor, un conjunto de Módulo
-@ManyToMany(cascade=CascadeType.PERSIST,
-fetch=FetchType.LAZY)
-@JoinTable(name="Docencia",
-joinColumns = {@JoinColumn(
-name="idProfesor",
-foreignKey = @ForeignKey(name = "FK_DOC_PROF" ))},
-inverseJoinColumns = {@JoinColumn(
-name="idModulo",
-foreignKey = @ForeignKey(name = "FK_DOC_MOD" ))})
-private Set<Modulo> losModulos=new HashSet<>(); ```
 
 ```java
-// en Módulo... un conjunto de Profesores
-@ManyToMany(cascade = CascadeType.PERSIST,
-fetch = FetchType.LAZY,
-mappedBy = "losModulos")
-private Set<Professor> losProfesores=new HashSet<>();; ```
+package modelo;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "Profesor")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Profesor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idProfesor")
+    private Long idProfesor;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Docencia> docencias = new ArrayList<>();
+}
+```
+```java
+package modelo;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "Modulo")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Modulo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idModulo")
+    private Long idModulo;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Docencia> docencias = new ArrayList<>();
+
+}
+```
 
 Esta es la especificación más compleja, vamos:
 
-- En ambas clases, la asignación es `@ManyToMany`
+- En ambas clases, la asignación es `@OneToMany`
 - En ambos casos, indicamos cómo gestionamos las operaciones en cascada (`cascade`) y la carga de objetos relacionados desde la otra clase (`fetch`).
-- En la clase propietaria (`Professor`), se asignará un `Set<Module>` con la relación que comenzará desde mi clase actual `Professor` $\rightarrow$ teaching $\rightarrow$ `Modulo` (el tipo base del Set).
-- Con `@JoinTable` se indica que la relación enlaza a una tabla llamada `Teaching`, donde:
-- Se enlazará (`joincolumns`), y el enlace es con `@JoinColumn`:
-- Comienza desde el campo `idProfessor` dentro de la tabla `Teaching`
-- Termina en la clave primaria de `Professor`,
-- La clave principal se llama `foreignKey = @ForeignKey(name = "FK_DOC_PROF" )`.
-- Tenga en cuenta que los nombres dentro de @JoinTable son nombres de la tabla Docencia (que solo existen en la base de datos).
-- Se asigna de la tabla Docencia a la entidad fuente Módulo de forma inversa (desde el punto hasta el origen de la flecha):
-- Esto se logra con `inverseJoinColumns`:
-- Mediante la vinculación desde el campo `idModule` (`@JoinColumn`).
-- También asignamos un nombre a la FK.
-- En la clase relacionada (`Modulo`), que no es la propietaria, simplemente indicamos que el propietario es Profesor mediante `mappedBy="losModulos"`.
+- En la clase propietaria (`Profesor`), se asignará un `List<Docencia>` con la relación que comenzará desde mi clase actual `Profesor` → `Docencia` → `Modulo` (el tipo base del Set).
 
-Un ejemplo de código sería el siguiente:
+En este apartado como podemos ver sólo hemos mapeado 2 entidades, Profesor y Módulo. Estas se encuetran relacionadas por la tabla docencia. Puesto que esta tabla docencia no tiene más atributos, podríamos prescindir de crear una clase llamada `Docencia` de tal manera que mapearamos directamente. En este apartado vamos a ver con 4 clases y entender el motivo de realizar esta implementación.
+
+Clase `DocenciaId`
 
 ```java
-Profesor p1 = new Profesor("Mario Benedé");
-Profesor p2 = new Profesor("Jose Fernandez");
+package modelo;
 
-Módulo m1 = new Módulo("Acceso a Datos");
-Módulo m2 = new Módulo("Bases de Datos");
-Módulo m3 = new Módulo("Programación");
-Módulo m4 = new Módulo("Diseño de Interfaz");
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
-// añadir módulos a p1
-p1.addModule(m3);
-p1.addModule(m1);
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import java.io.Serializable;
+import java.util.Objects;
 
-// añadir módulos a p2
-p2.addModule(m2);
-p2.addModule(m3);
-p2.addModule(m4);
+@Embeddable
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class DocenciaId implements Serializable {
 
-// guardar
-laSession.persist(p1);
-laSession.persist(p2);
+    private static final long serialVersionUID = 1L;
+
+    @Column(name = "idProfesor")
+    private Long idProfesor;
+
+    @Column(name = "idModulo")
+    private Long idModulo;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DocenciaId that = (DocenciaId) o;
+        return Objects.equals(idProfesor, that.idProfesor) &&
+                Objects.equals(idModulo, that.idModulo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idProfesor, idModulo);
+    }
+}
+```
+!!! question "¿Por qué necesitamos la clase DocenciaId?"
+    - Porque la tabla Docencia tiene dos atributos como clave que son claves ajenas a su vez.
+    - **JPA** requiere que las claves primarias compuestas se representen como una clase separada que implemente Serializable.
+    - `@Embeddable`marca una clase cuyas instancias se almacenan como parte de una entidad dueña, en lugar de tener su propia identidad en la base de datos.
+
+Una vez se dispone de la clase `DocenciaId`implementaremos la clase `Docencia`
+
+```java
+package modelo;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Docencia")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Docencia {
+
+    @EmbeddedId
+    private DocenciaId id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idProfesor")
+    @JoinColumn(name = "idProfesor")
+    private Profesor profesor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("idModulo")
+    @JoinColumn(name = "idModulo")
+    private Modulo modulo;
+}
+
 ```
 
-y la salida de Hibernate será similar a:
+!!! info
 
-```sh
-Hibernate: eliminar tabla si existe Módulo
-Hibernate: eliminar tabla si existe Profesor
-Hibernate: crear table Docencia ( 
-idProfesor bigint not null, 
-idModulo bigint not null, 
-primary key (idProfesor, idModulo)) engine=InnoDB
-Hibernate: create table Modulo ( 
-idModulo bigint not null auto_increment, 
-número varchar(255), 
-primary key (idModulo)) engine=InnoDB
-Hibernate: create table Profesor ( 
-idProfe bigint not null auto_increment, 
-nombreProfe varchar(255), 
-primary key (idProfe)) engine=InnoDB
-Hibernate: alter table Docencia add constraint FK_DOC_MOD 
-foreign key (idModulo) references Modulo (idModulo)
-Hibernate: alter table Docencia add constraint FK_DOC_PROF 
-foreign key (idProfesor) references Profesor (idProfe)
-Hibernate: insert into Profesor (nombreProfe) values (?)
-Hibernate: insert into Modulo (número) values (?)
-Hibernate: insert into Modulo (número) values (?)
-Hibernate: insert into Profesor (nombreProfe) values (?)
-Hibernate: insert into Modulo (número) values (?)
-Hibernate: insert into Modulo (número) values (?)
-Hibernate: insert into Docencia (idProfesor, idModulo) values (?, ?)
-Hibernate: insert into Docencia (idProfesor, idModulo) values (?, ?)
-Hibernate: insert into Docencia (idProfesor, idModulo) values (?, ?)
-Hibernate: insert into Docencia (idProfesor, idModulo) values (?, ?)
-Hibernate: insert into Docencia (idProfesor, idModulo) values (?, ?)
+    - `@EmbeddedId` A través de este decorador indicamos la uniciddad de la clave primaria. Es más apto para consultas con JPL.
+    - `@MapsId` se usa para indicar que una relación JPA comparte la clave primaria con la entidad dueña. Específicamente, mapea una relación `@ManyToOne` o `@OneToOne` para que use la misma columna que forma parte de la clave primaria embebida.
+
+
+Este sería un ejemplo de programa principal
+
+```java
+import modelo.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+import java.time.LocalDateTime;
+
+public class Main{
+
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DocenciaConsultasPU");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+
+            // Crear un nuevo profesor y asignarle múltiples módulos
+            Profesor nuevoProfesor = new Profesor();
+            nuevoProfesor.setNombre("Jose Manuel Romero");
+            em.persist(nuevoProfesor);
+
+            // Asignar módulos al nuevo profesor
+            Modulo modulo1 = em.find(Modulo.class, 3L); // EIE
+            Modulo modulo2 = em.find(Modulo.class, 6L); // ACD
+
+
+
+            // Primera asignación
+            Docencia docencia1 = new Docencia();
+            docencia1.setId(new DocenciaId(nuevoProfesor.getIdProfesor(), modulo1.getIdModulo()));
+            docencia1.setProfesor(nuevoProfesor);
+            docencia1.setModulo(modulo1);
+            em.persist(docencia1);
+
+            // Segunda asignación
+            Docencia docencia2 = new Docencia();
+            docencia2.setId(new DocenciaId(nuevoProfesor.getIdProfesor(), modulo2.getIdModulo()));
+            docencia2.setProfesor(nuevoProfesor);
+            docencia2.setModulo(modulo2);
+            em.persist(docencia2);
+
+//            // Crear un nuevo alumno y agregarle exámenes
+//            Alumno nuevoAlumno = new Alumno();
+//            nuevoAlumno.setNombre("Marta");
+//            nuevoAlumno.setApellidos("Rodriguez Santos");
+//            nuevoAlumno.setEdad(23);
+//            nuevoAlumno.setRepetidor(true);
+//            em.persist(nuevoAlumno);
+//
+//            // Agregar exámenes al alumno
+//            Examen examen1 = new Examen();
+//            examen1.setFecha(LocalDateTime.of(2024, 1, 15, 10, 0));
+//            examen1.setNota(7.0);
+//            examen1.setAlumno(nuevoAlumno);
+//            examen1.setModulo(modulo1);
+//            em.persist(examen1);
+//
+//            Examen examen2 = new Examen();
+//            examen2.setFecha(LocalDateTime.of(2024, 1, 20, 9, 0));
+//            examen2.setNota(5.5);
+//            examen2.setAlumno(nuevoAlumno);
+//            examen2.setModulo(modulo2);
+//            em.persist(examen2);
+
+            tx.commit();
+            System.out.println("Inserción compleja completada:");
+            System.out.println("- Profesor: " + nuevoProfesor.getNombre() + " (ID: " + nuevoProfesor.getIdProfesor() + ")");
+//            System.out.println("- Alumno: " + nuevoAlumno.getNombre() + " " + nuevoAlumno.getApellidos());
+//            System.out.println("- Módulos asignados: " + modulo1.getNombre() + ", " + modulo2.getNombre());
+//            System.out.println("- Exámenes creados: 2");
+
+        } catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+}
+
 ```
 
-Después de crear las tablas, Hibernate creará las claves ajenas, y entonces insertará los registros. Primero `Profesor` y `Módulo` y seguidamente la relación entre ellos de `Docencia`
+Puedes acceder a este proyecto desde [aquí](./jakartaDocencia.zip)
+
+### 4.3.2 Muchos a Muchos con 2 clases
+
