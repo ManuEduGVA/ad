@@ -532,3 +532,848 @@ Puedes acceder a este proyecto desde [aquí](./jakartaDocencia.zip)
 
 ### 4.3.2 Muchos a Muchos con 2 clases
 
+La diferencia con respecto al método anterior es a nivel del clases y fichero `persistence.xml` en el cual se omitirán las clases de las que no se hace uso, `Docencia` y `DocenciaId`
+
+Clase `Modulo`
+
+```java
+package modelo;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "Modulo")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Modulo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idModulo")
+    private Long idModulo;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @ManyToMany(mappedBy = "modulos")
+    private List<Profesor> profesores = new ArrayList<>();
+
+    @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Examen> examenes = new ArrayList<>();
+    @Override
+    public String toString() {
+        return "Modulo{" +
+                "idModulo=" + idModulo +
+                ", nombre='" + nombre + '\'' +
+                ", profesoresCount=" + (profesores != null ? profesores.size() : 0) +
+                '}';
+    }
+}
+
+```
+!!! info "Detalle de la clase Modulo"
+
+    - `@ManyToMany(mappedBy = "modulos")` 
+        - `@ManyToMany`: Indica una relación muchos-a-muchos entre `Modulo` y `Profesor`
+        - `mappedBy = "modulos"`: Esta entidad es el lado inverso de la relación
+            - El dueño de la relación está en la clase `Profesor`, campo `modulos`
+            - Esta clase es el lado **esclavo/pasivo**
+    - Responsabilidades:
+        - **NO crea la tabla intermedia** (ya la crea el lado dueño)
+        - **NO define** `@JoinTable` (eso lo hace el lado dueño)
+        - **Solo refleja** la relación que ya existe del otro lado
+
+ 
+
+Clase `Profesor`
+
+```java
+package modelo;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "Profesor")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Profesor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idProfesor")
+    private Long idProfesor;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @ManyToMany
+    @JoinTable(
+            name = "Docencia",
+            joinColumns = @JoinColumn(name = "idProfesor"),
+            inverseJoinColumns = @JoinColumn(name = "idModulo")
+    )
+    private List<Modulo> modulos = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Profesor{" +
+                "idProfesor=" + idProfesor +
+                ", nombre='" + nombre + '\'' +
+                ", modulosCount=" + (modulos != null ? modulos.size() : 0) +
+                '}';
+    }
+}
+```
+
+!! info "Detalle de la clase Profesor"
+
+    - `@JoinTable` en el lado dueño 
+        - `name = "Docencia"`: Nombre de la tabla intermedia en la BD
+        - `joinColumns = @JoinColumn(name = "idProfesor")`:
+            - Columna que referencia al **dueño** de la relación (Profesor)
+        - `inverseJoinColumns = @JoinColumn(name = "idModulo")`:
+            - Columna que referencia al otro lado de la relación (Modulo)
+
+
+### Relaciones ManyToMany: Lado Dueño vs Lado Inverso
+
+#### Diferencias entre lado dueño y lado inverso
+
+| Aspecto          | Lado Dueño (Profesor)               | Lado Inverso (Modulo)                    |
+| :--------------- | :---------------------------------- | :--------------------------------------- |
+| **Anotación**    | `@ManyToMany` + `@JoinTable`        | `@ManyToMany(mappedBy)`                  |
+| **Responsable**  | Crea/define la tabla intermedia     | Solo refleja la relación                 |
+| **Persistencia** | Los cambios se persisten desde aquí | Los cambios NO se persisten directamente |
+| **Consultas**    | Puede hacer operaciones de join     | Opera a través del lado dueño            |
+
+
+#### Estructura de la tabla `Docencia`
+
+La configuración con `@JoinTable` crea exactamente esta estructura en la base de datos:
+
+```sql
+CREATE TABLE Docencia (
+    idProfesor BIGINT,  -- FK a Profesor (joinColumns)
+    idModulo   BIGINT,  -- FK a Modulo (inverseJoinColumns)
+    PRIMARY KEY (idProfesor, idModulo)
+);
+```
+
+​	
+
+### Ejemplo práctico de uso
+
+#### Persistencia (siempre desde el lado dueño)
+
+```java
+// CORRECTO - Desde el lado dueño
+Profesor profesor = new Profesor();
+Modulo modulo = new Modulo();
+profesor.getModulos().add(modulo);  // ← Cambio en el lado dueño
+em.persist(profesor);
+
+// INCORRECTO - Desde el lado inverso  
+Modulo modulo = new Modulo();
+Profesor profesor = new Profesor();
+modulo.getProfesores().add(profesor);  // ← NO se persistirá
+em.persist(modulo);
+```
+
+
+
+#### Consultas (funcionan en ambos lados)
+
+```java
+// Desde Profesor (lado dueño)
+Profesor p = em.find(Profesor.class, 1L);
+List<Modulo> modulos = p.getModulos();  // ← Funciona
+
+// Desde Modulo (lado inverso)  
+Modulo m = em.find(Modulo.class, 1L);
+List<Profesor> profesores = m.getProfesores();  // ← También funciona
+```
+
+
+
+### Reglas importantes
+
+1. **Solo un lado puede ser el dueño** en relaciones bidireccionales
+2. **`mappedBy` siempre va en el lado inverso**
+3. **La persistencia debe hacerse desde el lado dueño**
+4. **Las consultas funcionan en ambos lados** una vez persistido
+5. **La tabla intermedia se maneja automáticamente** por JPA
+
+
+Método `Main`
+
+```java
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+import modelo.Modulo;
+import modelo.Profesor;
+
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DocenciaConsultasPU");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+
+            tx.begin();
+
+            // Crear entidades
+            Profesor profesor = new Profesor();
+            profesor.setNombre("Mariano Faus Perez");
+
+            Modulo modulo = new Modulo();
+            modulo.setNombre("BBDD");
+
+            // Establecer relación desde el LADO DUEÑO
+            profesor.getModulos().add(modulo);
+
+            // Persistir
+            em.persist(profesor);
+            em.persist(modulo);
+
+            tx.commit();
+
+            // Consultar desde cualquier lado
+            List<Modulo> modulosDelProfesor = profesor.getModulos();  // ✓ Funciona
+            List<Profesor> profesoresDelModulo = modulo.getProfesores();  // x No funciona porque no se sincroniza
+            System.out.println("Los modulos son:");
+            modulosDelProfesor.forEach(System.out::println);
+            // No mostrara los profesores
+            System.out.println("Los profesores son:");
+            profesoresDelModulo.forEach(System.out::println);
+        } catch (Exception e) {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+}
+
+```
+Si lo ejecutamos vamos a ver que no muestra los profesores. El problema es que cuando persistes desde el lado dueño (Profesor), JPA no actualiza automáticamente el lado inverso (Modulo). Necesitas mantener sincronizadas ambas partes manualmente.
+
+Para ello vamos a definir un par de métodos en cada una de las clases que nos permitirán persistir los datos, de los cuales haremos uso:
+
+
+Clase `Modulo`
+
+```java
+package modelo;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "Modulo")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Modulo {
+
+....
+
+    public void anyadirProfesor(Profesor profesor) {
+        if (profesor != null) {
+            this.profesores.add(profesor);
+            profesor.getModulos().add(this); // Sincroniza el lado dueño
+        }
+    }
+
+    public void eliminarProfesor(Profesor profesor) {
+        if (profesor != null) {
+            this.profesores.remove(profesor);
+            profesor.getModulos().remove(this); // Sincroniza el lado dueño
+        }
+    }
+}
+
+```
+
+Clase `Profesor`
+
+```java
+package modelo;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "Profesor")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Profesor {
+
+...
+
+    public void anyadirModulo(Modulo modulo) {
+        if (modulo != null) {
+            this.modulos.add(modulo);
+            modulo.getProfesores().add(this); // Sincroniza el lado inverso
+        }
+    }
+
+    public void eliminarModulo(Modulo modulo) {
+        if (modulo != null) {
+            this.modulos.remove(modulo);
+            modulo.getProfesores().remove(this); // Sincroniza el lado inverso
+        }
+    }
+}
+
+```
+
+Ahora vamos a ver cuando usar `persist`o cuando usar `merge`
+
+### Ejemplo completo de `persist()` y `merge()` en Main
+
+#### **Código completo para tu proyecto**
+
+```java
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+import modelo.Profesor;
+import modelo.Modulo;
+import java.util.List;
+
+public class Main {
+
+    public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("DocenciaConsultasPU");
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            System.out.println("=== INICIO DEMOSTRACIÓN PERSIST vs MERGE ===\n");
+
+            // Primero: mostrar estado actual
+            mostrarEstadoActual(em);
+
+            // Ejemplo 1: Crear nuevas entidades con PERSIST
+            Persist(em);
+
+            // Ejemplo 2: Modificar entidades existentes (evitando duplicados)
+            ModificacionManaged(em);
+
+            // Ejemplo 3: Usar MERGE con entidades detached
+            MergeDetached(em);
+
+            // Ejemplo 4: Consultas finales
+            mostrarEstadoFinal(em);
+
+            System.out.println("\n=== FIN DEMOSTRACIÓN ===");
+
+        } catch (Exception e) {
+            System.err.println("Error durante la demostración: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    /**
+     * Mostrar estado actual de las relaciones
+     */
+    private static void mostrarEstadoActual(EntityManager em) {
+        System.out.println(" ESTADO ACTUAL DE LA BASE DE DATOS");
+
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+
+            // Consultar todos los profesores y sus módulos
+            List<Profesor> profesores = em.createQuery("SELECT p FROM Profesor p", Profesor.class).getResultList();
+
+            for (Profesor profesor : profesores) {
+                System.out.println(profesor.getNombre() + " (ID: " + profesor.getIdProfesor() + ")");
+                System.out.println("Módulos asignados:");
+                if (profesor.getModulos().isEmpty()) {
+                    System.out.println("- Ninguno");
+                } else {
+                    profesor.getModulos().forEach(modulo ->
+                            System.out.println("      - " + modulo.getNombre() + " (ID: " + modulo.getIdModulo() + ")")
+                    );
+                }
+                System.out.println();
+            }
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        }
+    }
+
+    /**
+     * EJEMPLO 1: PERSIST - Para entidades NUEVAS que no existen en la BD
+     */
+    private static void Persist(EntityManager em) {
+        System.out.println("1. USO DE PERSIST() - CREAR NUEVAS ENTIDADES");
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+
+            // Crear un nuevo profesor (entidad NUEVA)
+            Profesor nuevoProfesor = new Profesor();
+            nuevoProfesor.setNombre("Carlos Martínez");
+
+            // Crear un nuevo módulo (entidad NUEVA)
+            Modulo nuevoModulo = new Modulo();
+            nuevoModulo.setNombre("Blockchain");
+
+            // USO CORRECTO DE PERSIST: para entidades NUEVAS
+            em.persist(nuevoProfesor);
+            em.persist(nuevoModulo);
+
+            // Crear relación entre ellos
+            nuevoProfesor.anyadirModulo(nuevoModulo);
+
+            tx.commit();
+
+            System.out.println("   PERSIST exitoso:");
+            System.out.println("      - Nuevo Profesor: " + nuevoProfesor.getNombre() + " (ID: " + nuevoProfesor.getIdProfesor() + ")");
+            System.out.println("      - Nuevo Módulo: " + nuevoModulo.getNombre() + " (ID: " + nuevoModulo.getIdModulo() + ")");
+            System.out.println("      - Relación establecida correctamente\n");
+
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        }
+    }
+
+    /**
+     * EJEMPLO 2: Modificación de entidades MANAGED (EVITANDO DUPLICADOS)
+     */
+    private static void ModificacionManaged(EntityManager em) {
+        System.out.println("2. MODIFICACIÓN DE ENTIDADES MANAGED (SIN DUPLICADOS)");
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+
+            // Obtener entidades EXISTENTES
+            Profesor profesor = em.find(Profesor.class, 1L); // Mariano Faus
+            // Buscar un módulo que NO esté asignado a este profesor
+            Modulo moduloNoAsignado = encontrarModuloNoAsignado(em, profesor);
+
+            if (profesor != null && moduloNoAsignado != null) {
+                // Modificar propiedades
+                String nombreOriginal = profesor.getNombre();
+                if (!nombreOriginal.contains("[Actualizado]")) {
+                    profesor.setNombre(nombreOriginal + " [Actualizado]");
+                }
+
+                // Establecer relación SOLO si no existe
+                if (!existeRelacion(profesor, moduloNoAsignado)) {
+                    profesor.anyadirModulo(moduloNoAsignado);
+
+                    tx.commit();
+
+                    System.out.println("   Modificación exitosa:");
+                    System.out.println("      - Profesor: " + profesor.getNombre());
+                    System.out.println("      - Nuevo módulo agregado: " + moduloNoAsignado.getNombre());
+                    System.out.println("      - No se necesitó merge()\n");
+                } else {
+                    tx.rollback();
+                    System.out.println("     Relación ya existe, no se realizaron cambios\n");
+                }
+            } else {
+                tx.rollback();
+                System.out.println("     No se encontraron entidades para modificar\n");
+            }
+
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        }
+    }
+
+    /**
+     * EJEMPLO 3: MERGE - Para entidades DETACHED (evitando duplicados)
+     */
+    private static void MergeDetached(EntityManager em) {
+        System.out.println("3.  USO DE MERGE() - ENTIDADES DETACHED");
+
+        Profesor profesorDetached = null;
+
+        // Paso 1: Obtener entidad y cerrar transacción (se vuelve DETACHED)
+        EntityTransaction tx1 = em.getTransaction();
+        try {
+            tx1.begin();
+            profesorDetached = em.find(Profesor.class, 2L); // Anna Marto
+            tx1.commit();
+        } catch (Exception e) {
+            if (tx1.isActive()) tx1.rollback();
+            throw e;
+        }
+
+        // Ahora profesorDetached está DETACHED
+
+        EntityTransaction tx2 = em.getTransaction();
+        try {
+            tx2.begin();
+
+            // Buscar un módulo que NO esté asignado a este profesor
+            Modulo moduloNoAsignado = encontrarModuloNoAsignado(em, profesorDetached);
+
+            if (moduloNoAsignado != null) {
+                // Modificar la entidad DETACHED
+                String nombreOriginal = profesorDetached.getNombre();
+                if (!nombreOriginal.contains("[Modificado]")) {
+                    profesorDetached.setNombre(nombreOriginal + " [Modificado]");
+                }
+
+                // Agregar relación SOLO si no existe
+                if (!existeRelacion(profesorDetached, moduloNoAsignado)) {
+                    profesorDetached.anyadirModulo(moduloNoAsignado);
+                }
+
+                // ✅ USO CORRECTO DE MERGE: para entidades DETACHED
+                Profesor profesorReattached = em.merge(profesorDetached);
+
+                tx2.commit();
+
+                System.out.println("   MERGE exitoso:");
+                System.out.println("      - Entidad DETACHED modificada y reattached");
+                System.out.println("      - Nuevo nombre: " + profesorReattached.getNombre());
+                if (moduloNoAsignado != null) {
+                    System.out.println("      - Nuevo módulo: " + moduloNoAsignado.getNombre() + "\n");
+                }
+            } else {
+                tx2.rollback();
+                System.out.println("   No hay módulos disponibles para asignar\n");
+            }
+
+        } catch (Exception e) {
+            if (tx2.isActive()) tx2.rollback();
+            throw e;
+        }
+    }
+
+    /**
+     * Mostrar estado final
+     */
+    private static void mostrarEstadoFinal(EntityManager em) {
+        System.out.println("4. ESTADO FINAL DE LA BASE DE DATOS");
+
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+
+            // Consultar todos los profesores y sus módulos
+            List<Profesor> profesores = em.createQuery("SELECT p FROM Profesor p", Profesor.class).getResultList();
+
+            for (Profesor profesor : profesores) {
+                System.out.println( profesor.getNombre() + " (ID: " + profesor.getIdProfesor() + ")");
+                System.out.println("   Módulos asignados (" + profesor.getModulos().size() + "):");
+                profesor.getModulos().forEach(modulo ->
+                        System.out.println("      - " + modulo.getNombre() + " (ID: " + modulo.getIdModulo() + ")")
+                );
+                System.out.println();
+            }
+
+            tx.commit();
+
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        }
+    }
+
+    /**
+     * Método auxiliar: Encontrar un módulo NO asignado a un profesor
+     */
+    private static Modulo encontrarModuloNoAsignado(EntityManager em, Profesor profesor) {
+        try {
+            // Obtener todos los módulos
+            List<Modulo> todosModulos = em.createQuery("SELECT m FROM Modulo m", Modulo.class).getResultList();
+
+            // Buscar un módulo que NO esté en la lista del profesor
+            for (Modulo modulo : todosModulos) {
+                if (!existeRelacion(profesor, modulo)) {
+                    return modulo;
+                }
+            }
+
+            // Si todos están asignados, devolver null
+            return null;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * Método auxiliar: Verificar si existe relación entre profesor y módulo
+     */
+    private static boolean existeRelacion(Profesor profesor, Modulo modulo) {
+        return profesor.getModulos().stream()
+                .anyMatch(m -> m.getIdModulo().equals(modulo.getIdModulo()));
+    }
+}
+```
+
+
+
+#### **Dependencias necesarias en tus entidades**
+
+Asegúrate de que tus entidades tengan los métodos helper:
+
+**En Profesor.java:**
+
+```java
+public void anyadirModulo(Modulo modulo) {
+    if (modulo != null && !this.modulos.contains(modulo)) {
+        this.modulos.add(modulo);
+        modulo.getProfesores().add(this); // Sincronizar lado inverso
+    }
+}
+
+    // Método para verificar si tiene un módulo
+    public boolean tieneModulo(Long idModulo) {
+        return this.modulos.stream()
+                .anyMatch(modulo -> modulo.getIdModulo().equals(idModulo));
+    }
+```
+
+
+
+**En Modulo.java:**
+
+```java
+public void anyadirProfesor(Profesor profesor) {
+    if (profesor != null && !this.profesores.contains(profesor)) {
+        this.profesores.add(profesor);
+        profesor.getModulos().add(this); // Sincronizar lado dueño
+    }
+}
+```
+
+
+
+Este código puedes agregarlo directamente a tu proyecto y ejecutarlo. Te mostrará ejemplos prácticos de cuándo usar `persist()` vs `merge()` con casos reales de tu base de datos.
+
+### Explicación: `persist()` vs `merge()` en JPA
+
+#### **Conceptos Fundamentales**
+
+##### **Estado de las Entidades JPA**
+
+| Estado        | Descripción                        | Contexto                      |
+| :------------ | :--------------------------------- | :---------------------------- |
+| **TRANSIENT** | Entidad nueva, no asociada a la BD | Sin ID                        |
+| **MANAGED**   | Entidad gestionada por JPA         | En Persistence Context        |
+| **DETACHED**  | Entidad desconectada               | Fuera del Persistence Context |
+| **REMOVED**   | Entidad marcada para eliminar      | En proceso de borrado         |
+
+### **PERSIST() - Para entidades NUEVAS**
+
+#### **¿Cuándo usar `persist()`?**
+
+```java
+// ✅ CASOS CORRECTOS para PERSIST:
+
+// 1. Entidad completamente nueva
+Profesor nuevo = new Profesor();
+nuevo.setNombre("Nuevo Profesor");
+em.persist(nuevo); // ✅
+
+// 2. Primera vez que se guarda en BD
+Modulo modulo = new Modulo();
+modulo.setNombre("Nuevo Módulo");
+em.persist(modulo); // ✅
+```
+
+
+
+##### **Comportamiento de `persist()`**
+
+- **Asigna ID** automáticamente (si es `@GeneratedValue`)
+- **Convierte** entidad TRANSIENT → MANAGED
+- **NO inmediato** en BD (hasta commit/flush)
+- **Lanza excepción** si la entidad ya existe
+
+####  **MERGE() - Para entidades EXISTENTES o DETACHED**
+
+##### **¿Cuándo usar `merge()`?**
+
+java
+
+```
+// ✅ CASOS CORRECTOS para MERGE:
+
+// 1. Entidades DETACHED (fuera del contexto)
+Profesor detached = obtenerProfesorDeServicioExterno();
+detached.setNombre("Modificado");
+em.merge(detached); // ✅
+
+// 2. Entidades de otras capas/servicios
+Profesor profesor = servicioExterno.obtenerProfesor(1L);
+em.merge(profesor); // ✅
+```
+
+
+
+#### **Comportamiento de `merge()`**
+
+- **Devuelve copia** MANAGED de la entidad
+- **Sincroniza** cambios con la BD
+- **No modifica** la entidad original (si es DETACHED)
+- **Útil** en aplicaciones web/multicapa
+
+###  **CASOS COMUNES DE ERROR**
+
+#### **Error 1: Usar `persist()` en entidades existentes**
+
+java
+
+```
+Profesor existente = em.find(Profesor.class, 1L);
+em.persist(existente); // ❌ Lanza excepción!
+```
+
+
+
+#### **Error 2: Usar `merge()` innecesariamente**
+
+java
+
+```
+Profesor managed = em.find(Profesor.class, 1L);
+managed.setNombre("Nuevo nombre");
+em.merge(managed); // ❌ INNECESARIO - ya está MANAGED
+```
+
+
+
+#### **Error 3: No usar `merge()` cuando es necesario**
+
+java
+
+```
+Profesor detached = obtenerProfesorDetached();
+detached.setNombre("Cambio");
+// em.merge(detached); // ❌ FALTÓ - cambios no se guardan
+```
+
+
+
+###  **REGLA PRÁCTICA DECISORIA**
+
+``` mermaid
+graph TD
+    A[¿Tengo una entidad?] --> B{¿Existe en BD?};
+    B -->|NO| C[Usar PERSIST];
+    B -->|SÍ| D{¿Está MANAGED?};
+    D -->|SÍ| E[Modificar directamente];
+    D -->|NO| F[Usar MERGE];
+```
+
+
+#### **Flujo de trabajo recomendado**
+
+
+
+```java
+public void guardarProfesor(Profesor profesor) {
+    EntityTransaction tx = em.getTransaction();
+    tx.begin();
+    
+    if (profesor.getIdProfesor() == null) {
+        // Entidad NUEVA - usar PERSIST
+        em.persist(profesor);
+    } else {
+        // Entidad EXISTENTE - verificar estado
+        if (!em.contains(profesor)) {
+            // Entidad DETACHED - usar MERGE
+            profesor = em.merge(profesor);
+        }
+        // Si está MANAGED, modificar directamente
+    }
+    
+    tx.commit();
+}
+```
+
+
+
+### **DIFERENCIAS CLAVE RESUMEN**
+
+| Aspecto         | `persist()`       | `merge()`                |
+| :-------------- | :---------------- | :----------------------- |
+| **Propósito**   | Insertar nuevo    | Actualizar existente     |
+| **Entrada**     | Entidad TRANSIENT | Entidad DETACHED/MANAGED |
+| **Salida**      | Entidad MANAGED   | Copia MANAGED            |
+| **ID**          | Lo genera         | Ya debe tenerlo          |
+| **BD**          | INSERT            | UPDATE                   |
+| **Rendimiento** | Más rápido        | Más overhead             |
+
+### **MEJORES PRÁCTICAS**
+
+1. **Usa `persist()`** solo para entidades nuevas
+2. **Modifica directamente** entidades MANAGED
+3. **Usa `merge()`** solo para entidades DETACHED
+4. **Verifica el estado** con `em.contains()`
+5. **Maneja el retorno** de `merge()` (es una copia)
+
+###  **PATRÓN RECOMENDADO**
+
+
+
+```java
+@Entity
+public class ProfesorService {
+    
+    @PersistenceContext
+    private EntityManager em;
+    
+    public Profesor guardarOActualizar(Profesor profesor) {
+        if (profesor.getIdProfesor() == null) {
+            em.persist(profesor);
+            return profesor;
+        } else {
+            return em.merge(profesor);
+        }
+    }
+}
+```
+
+El proyecto de este segundo ejemplo lo tienes [aquí](./jakartaDocencia2Relations.zip)
