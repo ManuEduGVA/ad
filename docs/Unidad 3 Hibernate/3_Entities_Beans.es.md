@@ -475,3 +475,5 @@ public class Main {
 | **JPQL**   | `createQuery()` | Consulta con lenguaje JPA        |
 | **Flush**  | `em.flush()`    | Sincroniza con BD inmediatamente |
 
+
+Proyecto de ejemplo [aquí](./DocenciaConsultas.sql)
