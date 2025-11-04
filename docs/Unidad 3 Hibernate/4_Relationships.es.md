@@ -637,7 +637,7 @@ public class Profesor {
 }
 ```
 
-!! info "Detalle de la clase Profesor"
+!!! info "Detalle de la clase Profesor"
 
     - `@JoinTable` en el lado dueño 
         - `name = "Docencia"`: Nombre de la tabla intermedia en la BD
@@ -1066,7 +1066,7 @@ public class Main {
                     profesorDetached.anyadirModulo(moduloNoAsignado);
                 }
 
-                // ✅ USO CORRECTO DE MERGE: para entidades DETACHED
+                // USO CORRECTO DE MERGE: para entidades DETACHED
                 Profesor profesorReattached = em.merge(profesorDetached);
 
                 tx2.commit();
