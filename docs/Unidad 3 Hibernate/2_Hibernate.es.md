@@ -290,30 +290,31 @@ Vamos a examinar más detenidamente el archivo de configuración de Hibernate. E
 === "XML"
 
     ```xml
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
-             version="3.2">
-    <persistence-unit name="PelisUP" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"
+                version="3.2">
+        <persistence-unit name="PelisUP" transaction-type="RESOURCE_LOCAL">
+            <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>Peli</class>
+            <class>Peli</class>
 
-        <properties>
-            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/Cine1_V1"/>
-            <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="root"/>
+            <properties>
+                <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/Cine1_V1"/>
+                <property name="jakarta.persistence.jdbc.user" value="root"/>
+                <property name="jakarta.persistence.jdbc.password" value="root"/>
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-        </properties>
-    </persistence-unit>
-</persistence>
+                <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+                <property name="hibernate.show_sql" value="true"/>
+                <property name="hibernate.format_sql" value="true"/>
+                <property name="hibernate.hbm2ddl.auto" value="update"/>
+            </properties>
+        </persistence-unit>
+    </persistence>
     ```
+
 ### 2.4.3 Opciones hbm2ddl.auto
 
 | Opción        | Descripción                                                  |
