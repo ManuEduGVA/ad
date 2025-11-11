@@ -1,0 +1,2695 @@
+[
+  {
+    "parent_code": 0,
+    "label": "Comunitat Valenciana",
+    "code": 10,
+    "provinces": [
+      {
+        "parent_code": 10,
+        "code": 3,
+        "label": "Alicante/Alacant",
+        "towns": [
+          {
+            "parent_code": 3,
+            "town_code": 3001,
+            "label": "Agost"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3002,
+            "label": "Agres"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3003,
+            "label": "Aigües"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3004,
+            "label": "Albatera"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3005,
+            "label": "Alcalalí"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3006,
+            "label": "Alcocer de Planes"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3007,
+            "label": "Alcoleja"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3008,
+            "label": "Alcoy/Alcoi"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3009,
+            "label": "Alfafara"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3010,
+            "label": "Alfàs del Pi, l'"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3011,
+            "label": "Algorfa"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3012,
+            "label": "Algueña"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3013,
+            "label": "Alicante/Alacant"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3014,
+            "label": "Almoradí"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3015,
+            "label": "Almudaina"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3016,
+            "label": "Alqueria d'Asnar, l'"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3017,
+            "label": "Altea"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3018,
+            "label": "Aspe"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3019,
+            "label": "Atzúbia, l'"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3020,
+            "label": "Balones"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3021,
+            "label": "Banyeres de Mariola"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3022,
+            "label": "Benasau"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3023,
+            "label": "Beneixama"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3024,
+            "label": "Benejúzar"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3025,
+            "label": "Benferri"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3026,
+            "label": "Beniarbeig"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3027,
+            "label": "Beniardá"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3028,
+            "label": "Beniarrés"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3029,
+            "label": "Benidoleig"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3030,
+            "label": "Benidorm"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3031,
+            "label": "Benifallim"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3032,
+            "label": "Benifato"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3033,
+            "label": "Benigembla"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3034,
+            "label": "Benijófar"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3035,
+            "label": "Benilloba"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3036,
+            "label": "Benillup"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3037,
+            "label": "Benimantell"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3038,
+            "label": "Benimarfull"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3039,
+            "label": "Benimassot"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3040,
+            "label": "Benimeli"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3041,
+            "label": "Benissa"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3042,
+            "label": "Benitachell/Poble Nou de Benitatxell, el"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3043,
+            "label": "Biar"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3044,
+            "label": "Bigastro"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3045,
+            "label": "Bolulla"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3046,
+            "label": "Busot"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3047,
+            "label": "Callosa de Segura"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3048,
+            "label": "Callosa d'en Sarrià"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3049,
+            "label": "Calp"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3050,
+            "label": "Campello, el"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3051,
+            "label": "Campo de Mirra/Camp de Mirra, el"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3052,
+            "label": "Cañada"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3053,
+            "label": "Castalla"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3054,
+            "label": "Castell de Castells"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3055,
+            "label": "Castell de Guadalest, el"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3056,
+            "label": "Catral"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3057,
+            "label": "Cocentaina"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3058,
+            "label": "Confrides"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3059,
+            "label": "Cox"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3060,
+            "label": "Crevillent"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3061,
+            "label": "Daya Nueva"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3062,
+            "label": "Daya Vieja"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3063,
+            "label": "Dénia"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3064,
+            "label": "Dolores"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3065,
+            "label": "Elche/Elx"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3066,
+            "label": "Elda"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3067,
+            "label": "Facheca"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3068,
+            "label": "Famorca"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3069,
+            "label": "Finestrat"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3070,
+            "label": "Fondó de les Neus, el/Hondón de las Nieves"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3071,
+            "label": "Formentera del Segura"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3072,
+            "label": "Gaianes"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3073,
+            "label": "Gata de Gorgos"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3074,
+            "label": "Gorga"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3075,
+            "label": "Granja de Rocamora"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3076,
+            "label": "Guardamar del Segura"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3077,
+            "label": "Hondón de los Frailes"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3078,
+            "label": "Ibi"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3079,
+            "label": "Jacarilla"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3080,
+            "label": "Jávea/Xàbia"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3081,
+            "label": "Jijona/Xixona"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3082,
+            "label": "Llíber"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3083,
+            "label": "Lorcha/Orxa, l'"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3084,
+            "label": "Millena"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3085,
+            "label": "Monforte del Cid"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3086,
+            "label": "Monóvar/Monòver"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3087,
+            "label": "Montesinos, Los"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3088,
+            "label": "Murla"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3089,
+            "label": "Muro de Alcoy"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3090,
+            "label": "Mutxamel"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3091,
+            "label": "Novelda"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3092,
+            "label": "Nucia, la"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3093,
+            "label": "Ondara"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3094,
+            "label": "Onil"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3095,
+            "label": "Orba"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3096,
+            "label": "Orihuela"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3097,
+            "label": "Orxeta"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3098,
+            "label": "Parcent"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3099,
+            "label": "Pedreguer"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3100,
+            "label": "Pego"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3101,
+            "label": "Penàguila"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3102,
+            "label": "Petrer"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3103,
+            "label": "Pilar de la Horadada"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3104,
+            "label": "Pinós, el/Pinoso"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3105,
+            "label": "Planes"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3106,
+            "label": "Poblets, els"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3107,
+            "label": "Polop"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3108,
+            "label": "Quatretondeta"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3109,
+            "label": "Rafal"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3110,
+            "label": "Ràfol d'Almúnia, el"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3111,
+            "label": "Redován"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3112,
+            "label": "Relleu"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3113,
+            "label": "Rojales"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3114,
+            "label": "Romana, la"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3115,
+            "label": "Sagra"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3116,
+            "label": "Salinas"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3117,
+            "label": "San Fulgencio"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3118,
+            "label": "San Isidro"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3119,
+            "label": "San Miguel de Salinas"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3120,
+            "label": "San Vicente del Raspeig/Sant Vicent del Raspeig"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3121,
+            "label": "Sanet y Negrals"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3122,
+            "label": "Sant Joan d'Alacant"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3123,
+            "label": "Santa Pola"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3124,
+            "label": "Sax"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3125,
+            "label": "Sella"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3126,
+            "label": "Senija"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3127,
+            "label": "Tàrbena"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3128,
+            "label": "Teulada"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3129,
+            "label": "Tibi"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3130,
+            "label": "Tollos"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3131,
+            "label": "Tormos"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3132,
+            "label": "Torremanzanas/Torre de les Maçanes, la"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3133,
+            "label": "Torrevieja"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3134,
+            "label": "Vall d'Alcalà, la"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3135,
+            "label": "Vall de Gallinera"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3136,
+            "label": "Vall de Laguar, la"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3137,
+            "label": "Vall d'Ebo, la"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3138,
+            "label": "Verger, el"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3139,
+            "label": "Villajoyosa/Vila Joiosa, la"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3140,
+            "label": "Villena"
+          },
+          {
+            "parent_code": 3,
+            "town_code": 3141,
+            "label": "Xaló"
+          }
+        ]
+      },
+      {
+        "parent_code": 10,
+        "code": 12,
+        "label": "Castellón/Castelló",
+        "towns": [
+          {
+            "parent_code": 12,
+            "town_code": 12001,
+            "label": "Aín"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12002,
+            "label": "Albocàsser"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12003,
+            "label": "Alcalà de Xivert"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12004,
+            "label": "Alcora, l'"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12005,
+            "label": "Alcudia de Veo"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12006,
+            "label": "Alfondeguilla"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12007,
+            "label": "Algimia de Almonacid"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12008,
+            "label": "Almassora"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12009,
+            "label": "Almedíjar"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12010,
+            "label": "Almenara"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12011,
+            "label": "Alqueries, les/Alquerías del Niño Perdido"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12012,
+            "label": "Altura"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12013,
+            "label": "Arañuel"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12014,
+            "label": "Ares del Maestrat"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12015,
+            "label": "Argelita"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12016,
+            "label": "Artana"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12017,
+            "label": "Atzeneta del Maestrat"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12018,
+            "label": "Ayódar"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12019,
+            "label": "Azuébar"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12020,
+            "label": "Barracas"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12021,
+            "label": "Bejís"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12022,
+            "label": "Benafer"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12023,
+            "label": "Benafigos"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12024,
+            "label": "Benassal"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12025,
+            "label": "Benicarló"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12026,
+            "label": "Benicasim/Benicàssim"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12027,
+            "label": "Benlloc"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12028,
+            "label": "Betxí"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12029,
+            "label": "Borriana/Burriana"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12030,
+            "label": "Borriol"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12031,
+            "label": "Cabanes"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12032,
+            "label": "Càlig"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12033,
+            "label": "Canet lo Roig"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12034,
+            "label": "Castell de Cabres"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12035,
+            "label": "Castellfort"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12036,
+            "label": "Castellnovo"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12037,
+            "label": "Castellón de la Plana/Castelló de la Plana"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12038,
+            "label": "Castillo de Villamalefa"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12039,
+            "label": "Catí"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12040,
+            "label": "Caudiel"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12041,
+            "label": "Cervera del Maestre"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12042,
+            "label": "Chilches/Xilxes"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12043,
+            "label": "Chodos/Xodos"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12044,
+            "label": "Chóvar"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12045,
+            "label": "Cinctorres"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12046,
+            "label": "Cirat"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12047,
+            "label": "Cortes de Arenoso"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12048,
+            "label": "Costur"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12049,
+            "label": "Coves de Vinromà, les"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12050,
+            "label": "Culla"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12051,
+            "label": "Eslida"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12052,
+            "label": "Espadilla"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12053,
+            "label": "Fanzara"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12054,
+            "label": "Figueroles"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12055,
+            "label": "Forcall"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12056,
+            "label": "Fuente la Reina"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12057,
+            "label": "Fuentes de Ayódar"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12058,
+            "label": "Gaibiel"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12059,
+            "label": "Geldo"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12060,
+            "label": "Herbés"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12061,
+            "label": "Higueras"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12062,
+            "label": "Jana, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12063,
+            "label": "Jérica"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12064,
+            "label": "Llosa, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12065,
+            "label": "Llucena/Lucena del Cid"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12066,
+            "label": "Ludiente"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12067,
+            "label": "Mata de Morella, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12068,
+            "label": "Matet"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12069,
+            "label": "Moncofa"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12070,
+            "label": "Montán"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12071,
+            "label": "Montanejos"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12072,
+            "label": "Morella"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12073,
+            "label": "Navajas"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12074,
+            "label": "Nules"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12075,
+            "label": "Olocau del Rey"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12076,
+            "label": "Onda"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12077,
+            "label": "Oropesa del Mar/Orpesa"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12078,
+            "label": "Palanques"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12079,
+            "label": "Pavías"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12080,
+            "label": "Peníscola/Peñíscola"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12081,
+            "label": "Pina de Montalgrao"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12082,
+            "label": "Pobla de Benifassà, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12083,
+            "label": "Pobla Tornesa, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12084,
+            "label": "Portell de Morella"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12085,
+            "label": "Puebla de Arenoso"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12086,
+            "label": "Ribesalbes"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12087,
+            "label": "Rossell"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12088,
+            "label": "Sacañet"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12089,
+            "label": "Salzadella, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12090,
+            "label": "San Rafael del Río"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12091,
+            "label": "Sant Joan de Moró"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12092,
+            "label": "Sant Jordi/San Jorge"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12093,
+            "label": "Sant Mateu"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12094,
+            "label": "Santa Magdalena de Pulpis"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12095,
+            "label": "Segorbe"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12096,
+            "label": "Serratella, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12097,
+            "label": "Sierra Engarcerán"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12098,
+            "label": "Soneja"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12099,
+            "label": "Sot de Ferrer"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12100,
+            "label": "Sueras/Suera"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12101,
+            "label": "Tales"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12102,
+            "label": "Teresa"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12103,
+            "label": "Tírig"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12104,
+            "label": "Todolella"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12105,
+            "label": "Toga"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12106,
+            "label": "Torás"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12107,
+            "label": "Toro, El"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12108,
+            "label": "Torralba del Pinar"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12109,
+            "label": "Torre d'En Besora, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12110,
+            "label": "Torre d'en Doménec, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12111,
+            "label": "Torreblanca"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12112,
+            "label": "Torrechiva"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12113,
+            "label": "Traiguera"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12114,
+            "label": "Useras/Useres, les"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12115,
+            "label": "Vall d'Alba"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12116,
+            "label": "Vall de Almonacid"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12117,
+            "label": "Vall d'Uixó, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12118,
+            "label": "Vallat"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12119,
+            "label": "Vallibona"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12120,
+            "label": "Vilafamés"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12121,
+            "label": "Vilafranca/Villafranca del Cid"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12122,
+            "label": "Vilanova d'Alcolea"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12123,
+            "label": "Vilar de Canes"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12124,
+            "label": "Vila-real"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12125,
+            "label": "Vilavella, la"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12126,
+            "label": "Villahermosa del Río"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12127,
+            "label": "Villamalur"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12128,
+            "label": "Villanueva de Viver"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12129,
+            "label": "Villores"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12130,
+            "label": "Vinaròs"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12131,
+            "label": "Vistabella del Maestrat"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12132,
+            "label": "Viver"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12133,
+            "label": "Xert"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12134,
+            "label": "Zorita del Maestrazgo"
+          },
+          {
+            "parent_code": 12,
+            "town_code": 12135,
+            "label": "Zucaina"
+          }
+        ]
+      },
+      {
+        "parent_code": 10,
+        "code": 46,
+        "label": "Valencia/València",
+        "towns": [
+          {
+            "parent_code": 46,
+            "town_code": 46001,
+            "label": "Ademuz"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46002,
+            "label": "Ador"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46003,
+            "label": "Agullent"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46004,
+            "label": "Aielo de Malferit"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46005,
+            "label": "Aielo de Rugat"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46006,
+            "label": "Alaquàs"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46007,
+            "label": "Albaida"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46008,
+            "label": "Albal"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46009,
+            "label": "Albalat de la Ribera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46010,
+            "label": "Albalat dels Sorells"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46011,
+            "label": "Albalat dels Tarongers"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46012,
+            "label": "Alberic"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46013,
+            "label": "Alborache"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46014,
+            "label": "Alboraia/Alboraya"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46015,
+            "label": "Albuixech"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46016,
+            "label": "Alcàntera de Xúquer"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46017,
+            "label": "Alcàsser"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46018,
+            "label": "Alcublas"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46019,
+            "label": "Alcúdia de Crespins, l'"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46020,
+            "label": "Alcúdia, l'"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46021,
+            "label": "Aldaia"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46022,
+            "label": "Alfafar"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46023,
+            "label": "Alfara de la Baronia"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46024,
+            "label": "Alfara del Patriarca"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46025,
+            "label": "Alfarp"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46026,
+            "label": "Alfarrasí"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46027,
+            "label": "Alfauir"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46028,
+            "label": "Algar de Palancia"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46029,
+            "label": "Algemesí"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46030,
+            "label": "Algímia d'Alfara"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46031,
+            "label": "Alginet"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46032,
+            "label": "Almàssera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46033,
+            "label": "Almiserà"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46034,
+            "label": "Almoines"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46035,
+            "label": "Almussafes"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46036,
+            "label": "Alpuente"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46037,
+            "label": "Alqueria de la Comtessa, l'"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46038,
+            "label": "Alzira"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46039,
+            "label": "Andilla"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46040,
+            "label": "Anna"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46041,
+            "label": "Antella"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46042,
+            "label": "Aras de los Olmos"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46043,
+            "label": "Atzeneta d'Albaida"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46044,
+            "label": "Ayora"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46045,
+            "label": "Barx"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46046,
+            "label": "Barxeta"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46047,
+            "label": "Bèlgida"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46048,
+            "label": "Bellreguard"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46049,
+            "label": "Bellús"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46050,
+            "label": "Benagéber"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46051,
+            "label": "Benaguasil"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46052,
+            "label": "Benavites"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46053,
+            "label": "Beneixida"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46054,
+            "label": "Benetússer"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46055,
+            "label": "Beniarjó"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46056,
+            "label": "Beniatjar"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46057,
+            "label": "Benicolet"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46058,
+            "label": "Benicull de Xúquer"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46059,
+            "label": "Benifaió"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46060,
+            "label": "Benifairó de la Valldigna"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46061,
+            "label": "Benifairó de les Valls"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46062,
+            "label": "Beniflá"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46063,
+            "label": "Benigànim"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46064,
+            "label": "Benimodo"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46065,
+            "label": "Benimuslem"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46066,
+            "label": "Beniparrell"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46067,
+            "label": "Benirredrà"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46068,
+            "label": "Benissanó"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46069,
+            "label": "Benissoda"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46070,
+            "label": "Benissuera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46071,
+            "label": "Bétera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46072,
+            "label": "Bicorp"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46073,
+            "label": "Bocairent"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46074,
+            "label": "Bolbaite"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46075,
+            "label": "Bonrepòs i Mirambell"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46076,
+            "label": "Bufali"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46077,
+            "label": "Bugarra"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46078,
+            "label": "Buñol"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46079,
+            "label": "Burjassot"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46080,
+            "label": "Calles"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46081,
+            "label": "Camporrobles"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46082,
+            "label": "Canals"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46083,
+            "label": "Canet d'En Berenguer"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46084,
+            "label": "Carcaixent"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46085,
+            "label": "Càrcer"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46086,
+            "label": "Carlet"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46087,
+            "label": "Carrícola"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46088,
+            "label": "Casas Altas"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46089,
+            "label": "Casas Bajas"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46090,
+            "label": "Casinos"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46091,
+            "label": "Castelló de Rugat"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46092,
+            "label": "Castellonet de la Conquesta"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46093,
+            "label": "Castielfabib"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46094,
+            "label": "Catadau"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46095,
+            "label": "Catarroja"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46096,
+            "label": "Caudete de las Fuentes"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46097,
+            "label": "Cerdà"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46098,
+            "label": "Chella"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46099,
+            "label": "Chelva"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46100,
+            "label": "Chera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46101,
+            "label": "Cheste"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46102,
+            "label": "Chiva"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46103,
+            "label": "Chulilla"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46104,
+            "label": "Cofrentes"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46105,
+            "label": "Corbera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46106,
+            "label": "Cortes de Pallás"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46107,
+            "label": "Cotes"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46108,
+            "label": "Cullera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46109,
+            "label": "Daimús"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46110,
+            "label": "Domeño"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46111,
+            "label": "Dos Aguas"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46112,
+            "label": "Eliana, l'"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46113,
+            "label": "Emperador"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46114,
+            "label": "Enguera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46115,
+            "label": "Ènova, l'"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46116,
+            "label": "Estivella"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46117,
+            "label": "Estubeny"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46118,
+            "label": "Faura"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46119,
+            "label": "Favara"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46120,
+            "label": "Foios"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46121,
+            "label": "Font de la Figuera, la"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46122,
+            "label": "Font d'En Carròs, la"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46123,
+            "label": "Fontanars dels Alforins"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46124,
+            "label": "Fortaleny"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46125,
+            "label": "Fuenterrobles"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46126,
+            "label": "Gandia"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46127,
+            "label": "Gátova"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46128,
+            "label": "Gavarda"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46129,
+            "label": "Genovés, el"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46130,
+            "label": "Gestalgar"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46131,
+            "label": "Gilet"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46132,
+            "label": "Godella"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46133,
+            "label": "Godelleta"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46134,
+            "label": "Granja de la Costera, la"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46135,
+            "label": "Guadasséquies"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46136,
+            "label": "Guadassuar"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46137,
+            "label": "Guardamar de la Safor"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46138,
+            "label": "Higueruelas"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46139,
+            "label": "Jalance"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46140,
+            "label": "Jarafuel"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46141,
+            "label": "Llanera de Ranes"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46142,
+            "label": "Llaurí"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46143,
+            "label": "Llíria"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46144,
+            "label": "Llocnou de la Corona"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46145,
+            "label": "Llocnou de Sant Jeroni"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46146,
+            "label": "Llocnou d'En Fenollet"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46147,
+            "label": "Llombai"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46148,
+            "label": "Llosa de Ranes, la"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46149,
+            "label": "Llutxent"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46150,
+            "label": "Loriguilla"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46151,
+            "label": "Losa del Obispo"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46152,
+            "label": "Macastre"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46153,
+            "label": "Manises"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46154,
+            "label": "Manuel"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46155,
+            "label": "Marines"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46156,
+            "label": "Massalavés"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46157,
+            "label": "Massalfassar"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46158,
+            "label": "Massamagrell"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46159,
+            "label": "Massanassa"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46160,
+            "label": "Meliana"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46161,
+            "label": "Millares"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46162,
+            "label": "Miramar"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46163,
+            "label": "Mislata"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46164,
+            "label": "Mogente/Moixent"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46165,
+            "label": "Moncada"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46166,
+            "label": "Montaverner"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46167,
+            "label": "Montesa"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46168,
+            "label": "Montitxelvo/Montichelvo"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46169,
+            "label": "Montroi/Montroy"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46170,
+            "label": "Montserrat"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46171,
+            "label": "Museros"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46172,
+            "label": "Nàquera/Náquera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46173,
+            "label": "Navarrés"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46174,
+            "label": "Novelé/Novetlè"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46175,
+            "label": "Oliva"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46176,
+            "label": "Olleria, l'"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46177,
+            "label": "Olocau"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46178,
+            "label": "Ontinyent"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46179,
+            "label": "Otos"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46180,
+            "label": "Paiporta"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46181,
+            "label": "Palma de Gandía"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46182,
+            "label": "Palmera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46183,
+            "label": "Palomar, el"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46184,
+            "label": "Paterna"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46185,
+            "label": "Pedralba"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46186,
+            "label": "Petrés"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46187,
+            "label": "Picanya"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46188,
+            "label": "Picassent"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46189,
+            "label": "Piles"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46190,
+            "label": "Pinet"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46191,
+            "label": "Pobla de Farnals, la"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46192,
+            "label": "Pobla de Vallbona, la"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46193,
+            "label": "Pobla del Duc, la"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46194,
+            "label": "Pobla Llarga, la"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46195,
+            "label": "Polinyà de Xúquer"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46196,
+            "label": "Potries"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46197,
+            "label": "Puçol"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46198,
+            "label": "Puebla de San Miguel"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46199,
+            "label": "Puig de Santa Maria, el"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46200,
+            "label": "Quart de les Valls"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46201,
+            "label": "Quart de Poblet"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46202,
+            "label": "Quartell"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46203,
+            "label": "Quatretonda"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46204,
+            "label": "Quesa"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46205,
+            "label": "Rafelbunyol"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46206,
+            "label": "Rafelcofer"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46207,
+            "label": "Rafelguaraf"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46208,
+            "label": "Ráfol de Salem"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46209,
+            "label": "Real"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46210,
+            "label": "Real de Gandia, el"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46211,
+            "label": "Requena"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46212,
+            "label": "Riba-roja de Túria"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46213,
+            "label": "Riola"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46214,
+            "label": "Rocafort"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46215,
+            "label": "Rotglà i Corberà"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46216,
+            "label": "Rótova"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46217,
+            "label": "Rugat"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46218,
+            "label": "Sagunto/Sagunt"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46219,
+            "label": "Salem"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46220,
+            "label": "San Antonio de Benagéber"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46221,
+            "label": "Sant Joanet"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46222,
+            "label": "Sedaví"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46223,
+            "label": "Segart"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46224,
+            "label": "Sellent"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46225,
+            "label": "Sempere"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46226,
+            "label": "Senyera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46227,
+            "label": "Serra"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46228,
+            "label": "Siete Aguas"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46229,
+            "label": "Silla"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46230,
+            "label": "Simat de la Valldigna"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46231,
+            "label": "Sinarcas"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46232,
+            "label": "Sollana"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46233,
+            "label": "Sot de Chera"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46234,
+            "label": "Sueca"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46235,
+            "label": "Sumacàrcer"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46236,
+            "label": "Tavernes Blanques"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46237,
+            "label": "Tavernes de la Valldigna"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46238,
+            "label": "Teresa de Cofrentes"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46239,
+            "label": "Terrateig"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46240,
+            "label": "Titaguas"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46241,
+            "label": "Torrebaja"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46242,
+            "label": "Torrella"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46243,
+            "label": "Torrent"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46244,
+            "label": "Torres Torres"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46245,
+            "label": "Tous"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46246,
+            "label": "Tuéjar"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46247,
+            "label": "Turís"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46248,
+            "label": "Utiel"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46249,
+            "label": "València"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46250,
+            "label": "Vallada"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46251,
+            "label": "Vallanca"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46252,
+            "label": "Vallés"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46253,
+            "label": "Venta del Moro"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46254,
+            "label": "Vilallonga/Villalonga"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46255,
+            "label": "Vilamarxant"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46256,
+            "label": "Villanueva de Castellón"
+          },
+          {
+            "parent_code": 46,
+            "town_code": 46257,
+            "label": "Villar del Arzobispo"
+          }
+        ]
+      }
+    ]
+  }
+]
