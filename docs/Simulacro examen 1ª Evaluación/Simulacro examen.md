@@ -23,9 +23,10 @@ Este fichero contiene una estructura de **comunidades autónomas**, **provincias
 1. Obtener todos los municipios de la provincia de **Valencia** que comienzan por la letra **A**.
 2. Contar todos los municipios de la provincia de **Castellón** que comienzan por la letra **B**.
 3. Generar un fichero **CSV** (separador `;`) así con la cabecera de la siguiente información:
-   - Nombre de provincia
-   - Cantidad de municipios en la provincia
-   - Nombre de municipio
+
+    - Nombre de provincia
+    - Cantidad de municipios en la provincia
+    - Nombre de municipio
 
 ---
 
@@ -39,10 +40,11 @@ Este fichero contiene una estructura de **comunidades autónomas**, **provincias
 1. Crear una clase para conectar con el **SGBD** (no directamente con la BD). No debes conectar con una BD por defecto, sino sólo al gestor.
 2. Listar las **bases de datos** del SGBD.
 3. Conectar a la BD `comunidades_db` y:
-   - Obtener las **tablas**.
-   - Obtener la **definición de las tablas**.
-   - Generar una operación **INSERT** (teniendo en cuenta los **metadatos**).
-   - Generar una operación **SELECT** sobre cualquier tabla.
+
+    - Obtener las **tablas**.
+    - Obtener la **definición de las tablas**.
+    - Generar una operación **INSERT** (teniendo en cuenta los **metadatos**).
+    - Generar una operación **SELECT** sobre cualquier tabla.
 
 ---
 
