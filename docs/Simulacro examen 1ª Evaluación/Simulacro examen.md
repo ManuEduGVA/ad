@@ -22,7 +22,7 @@ Este fichero contiene una estructura de **comunidades autónomas**, **provincias
 ### 🔹 Operaciones requeridas
 1. Obtener todos los municipios de la provincia de **Valencia** que comienzan por la letra **A**.
 2. Contar todos los municipios de la provincia de **Castellón** que comienzan por la letra **B**.
-3. Generar un fichero **CSV** (separador `;`) con:
+3. Generar un fichero **CSV** (separador `;`) así con la cabecera de la siguiente información:
    - Nombre de provincia
    - Cantidad de municipios en la provincia
    - Nombre de municipio
