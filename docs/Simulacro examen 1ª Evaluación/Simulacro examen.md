@@ -67,9 +67,8 @@ Este fichero contiene una estructura de **comunidades autónomas**, **provincias
 
 ---
 
-Fichero con los datos en json [cavalenciana.json](./cvalenciana.json)
-Fichero con los datos en de la base de datos [cavalenciana.sql](./cvalenciana.sql)
-
-Solución ejercicio1 [json](./simulacroJSONtoCSV.zip)
-Solución ejercicio2 [BDA_Metadatos](./comunidadesSGBD.zip)
-Solución ejercicio3 [BDA con JPA](./comunidadesJPA.zip)
+  - Fichero con los datos en json [cavalenciana.json](./cvalenciana.json)
+  - Fichero con los datos en de la base de datos [cavalenciana.sql](./cvalenciana.sql)
+  - Solución ejercicio1 [json](./simulacroJSONtoCSV.zip)
+  - Solución ejercicio2 [BDA_Metadatos](./comunidadesSGBD.zip)
+  - Solución ejercicio3 [BDA con JPA](./comunidadesJPA.zip)
