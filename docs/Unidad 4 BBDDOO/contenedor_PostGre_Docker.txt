@@ -1,0 +1,11 @@
+sudo docker run --name postgres-db \
+  -e POSTGRES_PASSWORD=root \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_DB=appdb \
+  -p 5442:5432 \
+  -v postgres-data:/var/lib/postgresql/data \
+  -d postgres:15
+  
+  Comprueba los logs
+  
+  sudo docker logs postgres-db

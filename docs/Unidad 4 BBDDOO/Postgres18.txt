@@ -1,0 +1,8 @@
+docker run -d \
+  --name postgres18 \
+  -e POSTGRES_PASSWORD=root \
+  -e POSTGRES_USER=root \
+  -e PGDATA=/var/lib/postgresql/data/pgdata \
+  -v postgres18_data:/var/lib/postgresql/data \
+  -p 5442:5432 \
+  postgres:latest
