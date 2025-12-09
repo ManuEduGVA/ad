@@ -1171,6 +1171,8 @@ Si:
 - No aparece ninguna anotación: todos los roles pueden realizar esta solicitud
 - `@PreAuthorize("hasRole('role')")` → Esta anotación indica el rol que está autorizado para realizar esta solicitud. Puedes combinar más de un rol con `otro`
 
+El proyecto completo lo puedes encontrar [aqui](./HTTPS.zip)
+
 ## 8. Ejercicio. ¿Cómo utilizar este proyecto?
 
 Probablemente tendrás ya una API implementada y funcionando de forma no segura. Ahora tienes la tarea de **fusionar** con este proyecto para autorizar ciertas operaciones sólo a usuarios registrados. Es una tarea larga (que no complicada), pero el resultado final será muy gratificante.
