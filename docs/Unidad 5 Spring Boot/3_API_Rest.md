@@ -241,50 +241,58 @@ Para crear un DTO vamos a crear una clase con los atributos que queremos que con
 package com.manu.dto;
 
 import com.manu.model.Cliente;
-
+import com.manu.model.Cuenta;
+import com.manu.model.Direccion;
+import com.manu.model.Recomendacion;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class ClienteDTO {
 
-	private Integer IdCliente;
-	private String nif;
-	private String nombre;
-	private String apellidos;
-	private String claveSeguridad;
-	private String email;
+    private Integer idCliente;  // <- corregido
 
-	public static ClienteDTO convertToDTO(Cliente cliente) {
-		// Creamos el clienteDTO y asignamos los valores básicos 
-		ClienteDTO clienteDTO = new ClienteDTO();
-		clienteDTO.setIdCliente(cliente.getId());
-		clienteDTO.setNif(cliente.getNif());
-		clienteDTO.setNombre(cliente.getNombre());
-		clienteDTO.setApellidos(cliente.getApellidos());
-		clienteDTO.setClaveSeguridad(cliente.getClaveSeguridad());
-		clienteDTO.setEmail(cliente.getEmail());
+    private String nif;
+    private String nombre;
+    private String apellidos;
+    private String claveSeguridad;
+    private String email;
+    private Recomendacion recomendacion;
+    private List<Cuenta> listaCuentas;
+    private List<Direccion> direcciones;
 
-		return clienteDTO;
-	}
+    public static ClienteDTO convertToDTO(Cliente cliente) {
+        ClienteDTO clienteDTO = new ClienteDTO();
+        clienteDTO.setIdCliente(cliente.getId());
+        clienteDTO.setNif(cliente.getNif());
+        clienteDTO.setNombre(cliente.getNombre());
+        clienteDTO.setApellidos(cliente.getApellidos());
+        clienteDTO.setClaveSeguridad(cliente.getClaveSeguridad());
+        clienteDTO.setEmail(cliente.getEmail());
+        clienteDTO.setRecomendacion(cliente.getRecomendacion());
+        clienteDTO.setListaCuentas(cliente.getListaCuentas());
+        clienteDTO.setDirecciones(cliente.getListaDirecciones());
+        return clienteDTO;
+    }
 
-	// Convierte de un objeto a una entidad
-	public static Cliente convertToEntity(ClienteDTO clientedto) {
-		Cliente cliente = new Cliente();
-		cliente.setId(clientedto.getIdCliente());
-		cliente.setNif(clientedto.getNif());
-		cliente.setNombre(clientedto.getNombre());
-		cliente.setApellidos(clientedto.getApellidos());
-		cliente.setClaveSeguridad(clientedto.getClaveSeguridad());
-		cliente.setEmail(clientedto.getEmail());
-
-		return cliente;
-
-	}
+    public static Cliente convertToEntity(ClienteDTO clientedto) {
+        Cliente cliente = new Cliente();
+        cliente.setId(clientedto.getIdCliente());
+        cliente.setNif(clientedto.getNif());
+        cliente.setNombre(clientedto.getNombre());
+        cliente.setApellidos(clientedto.getApellidos());
+        cliente.setClaveSeguridad(clientedto.getClaveSeguridad());
+        cliente.setEmail(clientedto.getEmail());
+        cliente.setRecomendacion(clientedto.getRecomendacion());
+        cliente.setListaCuentas(clientedto.getListaCuentas());
+        cliente.setRecomendacion(clientedto.getRecomendacion());
+        return cliente;
+    }
 }
 ```
 
@@ -818,5 +826,8 @@ Fichero de la base de datos [aqui](./AD_UD5_Clientes.sql)
 Hemos terminado de crear nuestro controlador sobre la clase `Cliente`, pero podemos mejorar nuestra aplicación añadiendo más servicios y configuraciones en el servidor. Estos conceptos se estudiarán en las siguientes secciones.
 
 Recomendamos completar el controlador, servicios y repositorios de `Cuenta` , `Direccion` y `Recomendacion` con operaciones por defecto.
+
+!!! important "Antención" 
+    Para evitar la recursión y que no se devuelva recursivamente un json en el DAO de Cliente (modelo) en las referencias, relaciones, del resto de modelo que debes implementar, recurda indicar con el decorador `@JsonIgnore` el atributo que implementa la relación. Este lo que hace es no generar ese atributo en el json que se envía.
 
 Además, puedes añadir opciones para añadir una `Cuenta` a un `Cliente` o eliminarla, y lo mismo con `Direccion`.
