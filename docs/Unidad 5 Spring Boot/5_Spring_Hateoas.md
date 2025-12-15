@@ -256,7 +256,7 @@ Este ejemplo:
 - Carga un `ClienteDTO` del `ClienteService` actual.
 - Luego busca en la clase `CuentaController` un método llamado `listCuentasCliente`.
 - Hace una llamada interna y busca el camino y vincula el argumento al camino (¿recuerdas `@PathVariable`?)
-- Por último, obtiene el camino (ruta) completo con el argumento y lo almacena en el Link con la referencia `self`
+- Por último, obtiene el camino (ruta) completo con el argumento y lo almacena en el Link con la referencia `listaCuentas` pasada como parámetro a `withRel`
 
 El resultado será algo así:
 ```json
