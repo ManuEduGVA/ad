@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Chef Mistral - Generador de Recetas con IA</title>
+    <!-- Enlace a la hoja de estilo de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Enlace a las fuentes de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-bottom: 80px;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .chef-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .prediction-area {
+            margin-top: 45px;
+            text-align: center;
+        }
+        
+        .recipe-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: inline-block;
+            max-width: 700px;
+            text-align: left;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .myButton {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+        }
+        
+        .myButton:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .result-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 40px;
+            margin: 30px auto;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: left;
+            line-height: 1.8;
+        }
+        
+        /* Estilos para el contenido markdown renderizado */
+        .markdown-content h1 {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .markdown-content h2 {
+            color: #2a5298;
+            font-size: 1.6em;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            border-left: 4px solid #764ba2;
+            padding-left: 15px;
+        }
+        
+        .markdown-content h3 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .markdown-content h4 {
+            color: #764ba2;
+            font-size: 1.1em;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .markdown-content p {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .markdown-content strong {
+            color: #1e3c72;
+            font-weight: 700;
+        }
+        
+        .markdown-content em {
+            color: #764ba2;
+            font-style: italic;
+        }
+        
+        .markdown-content ul, .markdown-content ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .markdown-content li {
+            margin-bottom: 10px;
+            color: #444;
+            line-height: 1.6;
+        }
+        
+        .markdown-content ul li {
+            list-style-type: disc;
+        }
+        
+        .markdown-content ol li {
+            list-style-type: decimal;
+        }
+        
+        .markdown-content code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #d63384;
+        }
+        
+        .markdown-content pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border-left: 4px solid #667eea;
+        }
+        
+        .markdown-content blockquote {
+            border-left: 4px solid #ffd700;
+            background-color: #fffef7;
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .markdown-content hr {
+            border: none;
+            border-top: 2px solid #e0e0e0;
+            margin: 30px 0;
+        }
+        
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .markdown-content th, .markdown-content td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .markdown-content th {
+            background-color: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .markdown-content tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .label-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #1e3c72;
+            color: ivory;
+            text-align: center;
+            padding: 15px 0;
+            box-shadow: 0 -4px 6px rgba(0,0,0,0.1);
+        }
+        
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        footer a:hover {
+            color: #ffed4e;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Titulo de la web -->
+    <div class="header-section">
+        <div class="chef-icon">
+            <i class="fas fa-utensils"></i>
+        </div>
+        <h1 style="font-size: 2.5em; margin-bottom: 10px;">Chef Mistral</h1>
+        <div class='description'>
+            <p style="font-size: 20px;">Generador de Recetas Gourmet con Inteligencia Artificial</p>
+            <p style="font-size: 16px; opacity: 0.9;">Powered by Mistral AI & Flask</p>
+        </div>
+    </div>
+
+    <!-- Area de resultado de la consulta -->
+    {% if val %}
+    <div class="container">
+        <div class="result-section">
+            <h4 style='color: #667eea; margin-bottom: 20px; margin-top: 0;'>
+                <i class="fas fa-book-open"></i> Tu Receta Personalizada:
+            </h4>
+            <!-- Renderizar HTML desde markdown con autoescape desactivado -->
+            <div class="markdown-content">
+                {{ val|safe }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="prediction-area">
+        <!-- Formulario de petición de ingredientes -->
+        <div class="recipe-card">
+            <div class="label-text">
+                <i class="fas fa-shopping-basket"></i> 
+                Introduce los ingredientes para tu receta:
+            </div>
+            <form action="generar_receta" method="POST">
+                <textarea 
+                    class="form-input" 
+                    name="INGREDIENTES" 
+                    rows="6" 
+                    placeholder="Ejemplo: pollo, limón, ajo, romero, aceite de oliva, sal, pimienta..."
+                    style="resize: vertical;"
+                >{% if ingredientes_input %}{{ ingredientes_input }}{% endif %}</textarea>
+                
+                <div style="text-align: center;">
+                    <button type="submit" class="myButton">
+                        <i class="fas fa-magic"></i> Generar Receta Gourmet
+                    </button>
+                </div>
+            </form>
+            
+            <div style="margin-top: 25px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; font-size: 14px; color: #666;">
+                <i class="fas fa-lightbulb" style="color: #ffd700;"></i> 
+                <strong>Consejo:</strong> Proporciona ingredientes específicos separados por comas. 
+                Nuestro chef IA creará una receta única y detallada para ti.
+            </div>
+        </div>        
+    </div>
+
+    <footer>
+        <a href="https://portal.edu.gva.es/ieslluissimarro/" class="navbar-brand">
+            <i class="fas fa-university"></i> IES Simarro - Proyecto Chef Mistral
+        </a>
+    </footer>
+</body>
+</html>
