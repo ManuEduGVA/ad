@@ -252,9 +252,8 @@ public class ClienteHATEOAS extends RepresentationModel<ClienteDTO> implements S
 Entonces, utilizaremos el método `add(Link)` en nuestro envoltorio `ClienteHATEOAS` para añadir tantos `Link` como sea necesario.
 
 ```java
-import org.springframework.hateoas.Link;
+import static org.springframework.hateoas.server.core.DummyInvocationUtils.methodOn;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 Link self=linkTo(methodOn(controller_class.class)
     		.methodName(args))
@@ -274,6 +273,57 @@ Ejemplos de nuestro `Cliente controller` en la siguiente sección
 ### 3.1. Self links
 
 ```java
+package com.manu.controller;
+
+import com.manu.dto.ClienteDTO;
+import com.manu.hateoas.ClienteHATEOAS;
+import com.manu.service.ClienteService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+import static org.springframework.hateoas.server.core.DummyInvocationUtils.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
+@RestController
+public class ClienteController {
+
+    private static final Logger myLog = Logger.getLogger(ClienteController.class.getName());
+
+    @Autowired
+    private ClienteService clienteService;
+
+    @Autowired
+    private HttpServletRequest context;
+
+    @Value("${app.name}")
+    private String appName;
+
+    @Value("${developer.name}")
+    private String devName;
+
+
+    @GetMapping("/")
+    public String index() {
+        String res = "Hola desde Spring\n";
+        res += "Estas ejecutando " + appName + "\n";
+        res += ". Estando desarrollado por " + devName + "\n";
+        return res;
+    }
+
+        @GetMapping("/clientes")
+        public List<ClienteDTO> listClientes() {
+            myLog.info(context.getMethod() + " from " + context.getRemoteHost());
+            return clienteService.listAllClientes();
+        }
+
+
 
 ClienteDTO clienteDTO = clienteService.getClienteById(idCliente);
 if (clienteDTO == null) {
