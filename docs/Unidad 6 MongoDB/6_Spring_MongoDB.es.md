@@ -514,5 +514,705 @@ Finalmente, nos queda la implementación del controlador, que ya conocemos de Sp
 - Utilizar las anotaciones `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping` a los métodos que implementarán solicitudes de tipo GET, POST, PUT o DELETE, especificando su Endpoint.
 - Utilizar las anotaciones `@PathVariable` o `@RequestParam` o `@RequestBody` en los argumentos de los métodos anteriores para obtener los valores del camino, solicitud o cuerpo.
 
-# 2. OpenAPI (Swagger)
+## 2. OpenAPI (Swagger)
+
+Swagger, ahora OpenApi, es una herramienta que se integra completamente con Spring y nos va a permitir describir, producir, consumir y visualizar servicios web RESTful.[1]​ Comenzó como parte del marco Swagger, y se convirtió en un proyecto separado en 2016, supervisado por la Iniciativa OpenAPI, un proyecto de colaboración de código abierto de la Fundación Linux.[2]​ Swagger y algunas otras herramientas pueden generar código, documentación y casos de prueba con un archivo de interfaz.
+
+Lo primero que debemos hacer es añadir la dependencia en el pom.xl:
+
+```xml
+      <!-- Source: https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>3.0.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+```
+
+Generamos el paquete `config`en el cual definiremos la configuración de OpenAPI en una clase:
+
+
+```java
+package org.cipfpcheste.dam2.springmongodb.config;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
+
+@Configuration
+public class OpenAPIConfig {
+
+    @Bean
+    public OpenAPI peliculasAPI() {
+        Server localServer = new Server();
+        localServer.setUrl("http://localhost:8080");
+        localServer.setDescription("Servidor de Desarrollo Local de 2º DAM");
+
+        Contact contact = new Contact();
+        contact.setEmail("manu@cipfpcheste.dam2");
+        contact.setName("José Manuel Romero");
+        contact.setUrl("https://portal.edu.gva.es/fpcheste/");
+
+        License mitLicense = new License()
+                .name("MIT License")
+                .url("https://choosealicense.com/licenses/mit/");
+
+        Info info = new Info()
+                .title("API de Gestión de Películas")
+                .version("1.0.0")
+                .contact(contact)
+                .description("API REST para la gestión de películas con MongoDB")
+                .termsOfService("https://www.cipfpcheste.dam2/terms")
+                .license(mitLicense);
+
+        return new OpenAPI()
+                .info(info)
+                .servers(List.of(localServer));
+    }
+}
+
+```
+
+
+
+- **Paquete:** `org.springframework.context.annotation.Configuration`
+- **Propósito:** Indica que esta clase contiene **definiciones de beans de Spring**
+- **Comportamiento:** Spring procesará esta clase al iniciar la aplicación y registrará los beans definidos
+- **Alternativa:** Podría usar `@SpringBootConfiguration` pero `@Configuration` es más estándar
+
+- **Anotación:** `@Bean` marca este método como productor de un bean de Spring
+- **Tipo de retorno:** - objeto principal que contiene toda la configuración de la documentación `OpenAPI`
+- **Nombre del bean:** Por defecto es el nombre del método (`peliculasAPI`)
+- **Ciclo de vida:** Singleton - se crea una sola instancia durante la vida de la aplicación
+
+
+
+### Configuración del servidor
+
+```java
+Server localServer = new Server();
+localServer.setUrl("http://localhost:8080");
+localServer.setDescription("Servidor de Desarrollo Local");
+```
+
+
+
+#### Componentes:
+
+- **Clase:** `io.swagger.v3.oas.models.servers.Server`
+- **`setUrl()`:** Define la URL base donde está corriendo tu API
+- **`setDescription()`:** Descripción legible del servidor
+
+#### ¿Para qué sirve?
+
+- Define dónde están disponibles los endpoints de tu API
+- Puedes tener múltiples servidores (desarrollo, staging, producción)
+- Swagger UI usará esta URL para hacer las peticiones de prueba
+
+
+
+#### Ejemplo con múltiples servidores:
+
+```java
+Server devServer = new Server();
+devServer.setUrl("http://localhost:8080");
+devServer.setDescription("Desarrollo");
+
+Server prodServer = new Server();
+prodServer.setUrl("https://api.produccion.com");
+prodServer.setDescription("Producción");
+
+return new OpenAPI()
+    .info(info)
+    .servers(List.of(devServer, prodServer));
+```
+
+
+
+### **Información de Contacto**
+
+```java
+Contact contact = new Contact();
+contact.setEmail("tu-email@cipfpcheste.dam2");
+contact.setName("Tu Nombre");
+contact.setUrl("https://www.cipfpcheste.dam2");
+```
+
+- **Clase:** `io.swagger.v3.oas.models.info.Contact`
+- **`setEmail()`:** Email de contacto del responsable de la API
+- **`setName()`:** Nombre del desarrollador o equipo
+- **`setUrl()`:** URL del sitio web del desarrollador/organización
+
+#### ¿Dónde se muestra?
+
+Esta información aparece en la sección "Contact" de Swagger UI, permitiendo a los usuarios de la API saber a quién contactar para soporte o preguntas.
+
+
+
+### **Licencia**
+
+```java
+License mitLicense = new License()
+        .name("MIT License")
+        .url("https://choosealicense.com/licenses/mit/");
+```
+
+- **Clase:** `io.swagger.v3.oas.models.info.License`
+- **`name()`:** Nombre de la licencia bajo la cual se distribuye la API
+- **`url()`:** URL con el texto completo de la licencia
+
+#### Licencias comunes:
+
+```java
+// MIT License
+new License().name("MIT").url("https://opensource.org/licenses/MIT");
+
+// Apache 2.0
+new License().name("Apache 2.0").url("https://www.apache.org/licenses/LICENSE-2.0.html");
+
+// GPL v3
+new License().name("GPL v3").url("https://www.gnu.org/licenses/gpl-3.0.html");
+```
+
+
+
+### **Información General de la API**
+
+```java
+Info info = new Info()
+        .title("API de Gestión de Películas")
+        .version("1.0.0")
+        .contact(contact)
+        .description("API REST para la gestión de películas con MongoDB")
+        .termsOfService("https://www.cipfpcheste.dam2/terms")
+        .license(mitLicense);
+```
+
+
+
+- **Clase:** `io.swagger.v3.oas.models.info.Info`
+- **`title()`:** Título principal de tu API (aparece en la parte superior de Swagger UI)
+- **`version()`:** Versión de la API (útil para control de versiones)
+- **`contact()`:** Objeto Contact definido anteriormente
+- **`description()`:** Descripción detallada de qué hace tu API
+- **`termsOfService()`:** URL con los términos de servicio
+- **`license()`:** Objeto License definido anteriormente
+
+#### Versionado semántico recomendado:
+
+```text
+version("1.0.0")  // MAYOR.MENOR.PARCHE
+//        ^-- Cambios incompatibles
+//     ^----- Nueva funcionalidad compatible
+//  ^-------- Correcciones de bugs
+```
+
+
+
+### **Objeto OpenAPI Final**
+
+```java
+return new OpenAPI()
+        .info(info)
+        .servers(List.of(localServer));
+```
+
+- **Clase:** `io.swagger.v3.oas.models.OpenAPI`
+- **`info()`:** Adjunta toda la información de la API
+- **`servers()`:** Lista de servidores disponibles
+
+#### Este objeto es el que Spring usará para:
+
+1. Generar la documentación JSON en `/api-docs`
+2. Renderizar Swagger UI en `/swagger-ui.html`
+3. Proveer metadatos a herramientas de cliente (Postman, etc.)
+
+### Documentar el Controlador
+
+Veamos las anotaciones que se visualizarán en el interfaz Web:
+
+
+
+```java
+package org.cipfpcheste.dam2.springmongodb.controller;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.cipfpcheste.dam2.springmongodb.model.Pelicula;
+import org.cipfpcheste.dam2.springmongodb.service.PeliculaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/peliculas")
+@Tag(name = "Películas", description = "API para la gestión de películas")
+public class PeliculaController {
+
+    @Autowired
+    private PeliculaService peliculaService;
+
+    @Operation(
+        summary = "Obtener todas las películas",
+        description = "Retorna una lista completa de todas las películas almacenadas en la base de datos"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista de películas obtenida exitosamente"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping
+    public ResponseEntity<List<Pelicula>> obtenerTodasLasPeliculas() {
+        return ResponseEntity.ok(peliculaService.obtenerTodasLasPeliculas());
+    }
+
+    @Operation(
+        summary = "Obtener película por ID",
+        description = "Retorna una película específica basada en su identificador único"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Película encontrada",
+                     content = @Content(schema = @Schema(implementation = Pelicula.class))),
+        @ApiResponse(responseCode = "404", description = "Película no encontrada"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/{id}")
+    public ResponseEntity<Pelicula> obtenerPeliculaPorId(
+            @Parameter(description = "ID de la película a buscar", required = true)
+            @PathVariable String id) {
+        return peliculaService.obtenerPeliculaPorId(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+    }
+
+    @Operation(
+        summary = "Crear nueva película",
+        description = "Crea y almacena una nueva película en la base de datos"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "201", description = "Película creada exitosamente",
+                     content = @Content(schema = @Schema(implementation = Pelicula.class))),
+        @ApiResponse(responseCode = "400", description = "Datos de película inválidos"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @PostMapping
+    public ResponseEntity<Pelicula> crearPelicula(
+            @Parameter(description = "Datos de la película a crear", required = true)
+            @RequestBody Pelicula pelicula) {
+        Pelicula nuevaPelicula = peliculaService.crearPelicula(pelicula);
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaPelicula);
+    }
+
+    @Operation(
+        summary = "Actualizar película",
+        description = "Actualiza los datos de una película existente"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Película actualizada exitosamente",
+                     content = @Content(schema = @Schema(implementation = Pelicula.class))),
+        @ApiResponse(responseCode = "404", description = "Película no encontrada"),
+        @ApiResponse(responseCode = "400", description = "Datos de película inválidos"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @PutMapping("/{id}")
+    public ResponseEntity<Pelicula> actualizarPelicula(
+            @Parameter(description = "ID de la película a actualizar", required = true)
+            @PathVariable String id,
+            @Parameter(description = "Nuevos datos de la película", required = true)
+            @RequestBody Pelicula pelicula) {
+        Pelicula peliculaActualizada = peliculaService.actualizarPelicula(id, pelicula);
+        if (peliculaActualizada != null) {
+            return ResponseEntity.ok(peliculaActualizada);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Operation(
+        summary = "Eliminar película",
+        description = "Elimina una película de la base de datos"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "204", description = "Película eliminada exitosamente"),
+        @ApiResponse(responseCode = "404", description = "Película no encontrada"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminarPelicula(
+            @Parameter(description = "ID de la película a eliminar", required = true)
+            @PathVariable String id) {
+        if (peliculaService.eliminarPelicula(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @Operation(
+        summary = "Buscar películas por título",
+        description = "Busca películas que contengan el texto especificado en el título (sin distinción de mayúsculas/minúsculas)"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Búsqueda completada exitosamente"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/buscar/titulo")
+    public ResponseEntity<List<Pelicula>> buscarPorTitulo(
+            @Parameter(description = "Texto a buscar en el título", required = true)
+            @RequestParam String titulo) {
+        return ResponseEntity.ok(peliculaService.buscarPorTitulo(titulo));
+    }
+
+    @Operation(
+        summary = "Buscar películas por director",
+        description = "Busca películas dirigidas por el director especificado"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Búsqueda completada exitosamente"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/buscar/director")
+    public ResponseEntity<List<Pelicula>> buscarPorDirector(
+            @Parameter(description = "Nombre del director", required = true)
+            @RequestParam String director) {
+        return ResponseEntity.ok(peliculaService.buscarPorDirector(director));
+    }
+
+    @Operation(
+        summary = "Buscar películas por país",
+        description = "Busca películas producidas en el país especificado"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Búsqueda completada exitosamente"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/buscar/pais")
+    public ResponseEntity<List<Pelicula>> buscarPorPais(
+            @Parameter(description = "País de producción", required = true)
+            @RequestParam String pais) {
+        return ResponseEntity.ok(peliculaService.buscarPorPais(pais));
+    }
+
+    @Operation(
+        summary = "Buscar películas por año",
+        description = "Busca películas estrenadas en el año especificado"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Búsqueda completada exitosamente"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/buscar/anyo")
+    public ResponseEntity<List<Pelicula>> buscarPorAnyo(
+            @Parameter(description = "Año de estreno", required = true, example = "1972")
+            @RequestParam Integer anyo) {
+        return ResponseEntity.ok(peliculaService.buscarPorAnyo(anyo));
+    }
+
+    @Operation(
+        summary = "Buscar películas por género",
+        description = "Busca películas que pertenezcan al género especificado"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Búsqueda completada exitosamente"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/buscar/genero")
+    public ResponseEntity<List<Pelicula>> buscarPorGenero(
+            @Parameter(description = "Género de la película", required = true, example = "Drama")
+            @RequestParam String genero) {
+        return ResponseEntity.ok(peliculaService.buscarPorGenero(genero));
+    }
+
+    @Operation(
+        summary = "Buscar películas por puntuación mínima",
+        description = "Busca películas con una puntuación IMDB mayor o igual a la especificada"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Búsqueda completada exitosamente"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/buscar/puntuacion")
+    public ResponseEntity<List<Pelicula>> buscarPorPuntuacionMinima(
+            @Parameter(description = "Puntuación mínima en IMDB", required = true, example = "8.0")
+            @RequestParam Double puntuacion) {
+        return ResponseEntity.ok(peliculaService.buscarPorPuntuacionMinima(puntuacion));
+    }
+
+    @Operation(
+        summary = "Obtener películas ganadoras de Oscars",
+        description = "Retorna todas las películas que han ganado premios Oscar"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/premios/oscars")
+    public ResponseEntity<List<Pelicula>> obtenerPeliculasConOscars() {
+        return ResponseEntity.ok(peliculaService.obtenerPeliculasConOscars());
+    }
+
+    @Operation(
+        summary = "Obtener películas ganadoras de Goyas",
+        description = "Retorna todas las películas que han ganado premios Goya"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Lista obtenida exitosamente"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
+    })
+    @GetMapping("/premios/goyas")
+    public ResponseEntity<List<Pelicula>> obtenerPeliculasConGoyas() {
+        return ResponseEntity.ok(peliculaService.obtenerPeliculasConGoyas());
+    }
+}
+```
+
+
+
+### Modelo de datos (Pelicula)
+
+Actualizamos la clase Película con las anotaciones de OpenAPI:
+
+
+
+```java
+package org.cipfpcheste.dam2.springmongodb.model;
+
+import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.List;
+
+@Document(collection = "Peli")
+@Schema(description = "Modelo que representa una película en el sistema")
+public class Pelicula {
+
+    @Id
+    @Schema(description = "Identificador único de la película", 
+            example = "507f1f77bcf86cd799439011", 
+            accessMode = Schema.AccessMode.READ_ONLY)
+    private String id;
+
+    @Schema(description = "Título de la película", 
+            example = "El Padrino", 
+            required = true)
+    private String titulo;
+
+    @Schema(description = "Año de estreno", 
+            example = "1972", 
+            required = true)
+    private Integer anyo;
+
+    @Schema(description = "Nombre del director", 
+            example = "Francis Ford Coppola", 
+            required = true)
+    private String director;
+
+    @Schema(description = "País de producción", 
+            example = "Estados Unidos", 
+            required = true)
+    private String pais;
+
+    @Schema(description = "Lista de géneros de la película", 
+            example = "[\"Drama\", \"Crimen\"]", 
+            required = true)
+    private List<String> genero;
+
+    @Field("duracion_minutos")
+    @Schema(description = "Duración de la película en minutos", 
+            example = "175")
+    private Integer duracionMinutos;
+
+    @Schema(description = "Clasificación por edad", 
+            example = "R")
+    private String clasificacion;
+
+    @Field("actores_principales")
+    @Schema(description = "Lista de actores principales", 
+            example = "[\"Marlon Brando\", \"Al Pacino\", \"James Caan\"]")
+    private List<String> actoresPrincipales;
+
+    @Field("puntuacion_imdb")
+    @Schema(description = "Puntuación en IMDB", 
+            example = "9.2", 
+            minimum = "0", 
+            maximum = "10")
+    private Double puntuacionImdb;
+
+    @Field("taquilla_global_millones")
+    @Schema(description = "Recaudación global en millones de dólares", 
+            example = "246.1")
+    private Double taquillaGlobalMillones;
+
+    @Schema(description = "Número de premios Oscar ganados", 
+            example = "3")
+    private Integer oscars;
+
+    @Field("premios_goya")
+    @Schema(description = "Número de premios Goya ganados", 
+            example = "0")
+    private Integer premiosGoya;
+
+    // Constructores
+    public Pelicula() {
+    }
+
+    public Pelicula(String titulo, Integer anyo, String director, String pais,
+                    List<String> genero, Integer duracionMinutos, String clasificacion,
+                    List<String> actoresPrincipales, Double puntuacionImdb,
+                    Double taquillaGlobalMillones) {
+        this.titulo = titulo;
+        this.anyo = anyo;
+        this.director = director;
+        this.pais = pais;
+        this.genero = genero;
+        this.duracionMinutos = duracionMinutos;
+        this.clasificacion = clasificacion;
+        this.actoresPrincipales = actoresPrincipales;
+        this.puntuacionImdb = puntuacionImdb;
+        this.taquillaGlobalMillones = taquillaGlobalMillones;
+    }
+
+    // Getters y Setters
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public Integer getAnyo() {
+        return anyo;
+    }
+
+    public void setAnyo(Integer anyo) {
+        this.anyo = anyo;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public List<String> getGenero() {
+        return genero;
+    }
+
+    public void setGenero(List<String> genero) {
+        this.genero = genero;
+    }
+
+    public Integer getDuracionMinutos() {
+        return duracionMinutos;
+    }
+
+    public void setDuracionMinutos(Integer duracionMinutos) {
+        this.duracionMinutos = duracionMinutos;
+    }
+
+    public String getClasificacion() {
+        return clasificacion;
+    }
+
+    public void setClasificacion(String clasificacion) {
+        this.clasificacion = clasificacion;
+    }
+
+    public List<String> getActoresPrincipales() {
+        return actoresPrincipales;
+    }
+
+    public void setActoresPrincipales(List<String> actoresPrincipales) {
+        this.actoresPrincipales = actoresPrincipales;
+    }
+
+    public Double getPuntuacionImdb() {
+        return puntuacionImdb;
+    }
+
+    public void setPuntuacionImdb(Double puntuacionImdb) {
+        this.puntuacionImdb = puntuacionImdb;
+    }
+
+    public Double getTaquillaGlobalMillones() {
+        return taquillaGlobalMillones;
+    }
+
+    public void setTaquillaGlobalMillones(Double taquillaGlobalMillones) {
+        this.taquillaGlobalMillones = taquillaGlobalMillones;
+    }
+
+    public Integer getOscars() {
+        return oscars;
+    }
+
+    public void setOscars(Integer oscars) {
+        this.oscars = oscars;
+    }
+
+    public Integer getPremiosGoya() {
+        return premiosGoya;
+    }
+
+    public void setPremiosGoya(Integer premiosGoya) {
+        this.premiosGoya = premiosGoya;
+    }
+}
+```
+
+
+
+### Configuración Opcional en application.properties
+
+```properties
+springdoc.api-docs.path=/api-docs
+springdoc.swagger-ui.path=/swagger-ui.html
+springdoc.swagger-ui.operationsSorter=method
+springdoc.swagger-ui.tagsSorter=alpha
+springdoc.swagger-ui.tryItOutEnabled=true
+```
+
+No es necesaria.
+
+
+
+### Acceso con el interfaz Web
+
+Por defecto podemos acceder a la aplicación desde esta url: http://localhost:8080/swagger-ui/index.html
+
+![SpringIA_conf_proyect](./img/OpenAPI.png)
 
