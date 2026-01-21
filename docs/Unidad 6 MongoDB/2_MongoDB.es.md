@@ -77,7 +77,7 @@ Pulsa a Test Connection y si es ok, Save.
 
 Puesto que la herramienta no nos permite cargar ficheros json directamente, lo que vamos a realizar es hacerlo cargando una colección de películas directamente.
 
-Esta colección la podemos descargar es ![pelis.json](pelis.json)
+Esta colección la podemos descargar es [pelis.json](pelis.json)
 
 Luego nos situaremos en el directorio en el que se encuentre este fichero y desde el terminal lanzaremos el siguiente comando:
 
