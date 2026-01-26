@@ -1,0 +1,2785 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://sitename.example.com/Unidad%206%20MongoDB/4_Queries.es/">
+      
+      
+        <link rel="prev" href="../3_ShellOperations.es/">
+      
+      
+        <link rel="next" href="../5_Mongo_Java.es/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/Cheste.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>4. Consultas en Mongo - Acceso a Datos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRed+Hat+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Red Hat Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-consultas-en-mongo" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Acceso a Datos" class="md-header__button md-logo" aria-label="Acceso a Datos" data-md-component="logo">
+      
+  <img src="../../assets/Cheste.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acceso a Datos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Consultas en Mongo
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="deep-purple"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Acceso a Datos" class="md-nav__button md-logo" aria-label="Acceso a Datos" data-md-component="logo">
+      
+  <img src="../../assets/Cheste.png" alt="logo">
+
+    </a>
+    Acceso a Datos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulacro examen 1ª Evaluación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Simulacro examen 1ª Evaluación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Simulacro%20examen%201%C2%AA%20Evaluaci%C3%B3n/Simulacro%20examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Simulacro de examen: Acceso a Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1 Ficheros
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1 Ficheros
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/1_File_System.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Sistema de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/2_Reading_and_writing_files.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Lectura y escritura de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/3_XML_Files.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Archivos XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/4_JSON_Files.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Archivos JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/5_Extra_Formats.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Formatos extra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/6_Ejercicios.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios sistema de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2 Conectores de BBDD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2 Conectores de BBDD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/1_Object_relational_impedance_mismatch.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Desfase objeto-relacional
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/2_Connectors.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Conectores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/3_Connecting.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Conectando a bases de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/4_Resultset.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Clase ResultSet.
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/5_Metadata.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Metadata de la base de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/6_CRUD.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Statements and CRUD operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/7_Row_to_Object.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. De filas a Objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/clienteSQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad Cliente MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3 Hibernate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3 Hibernate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/1_Mapping.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/2_Hibernate.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Hibernate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/3_Entities_Beans.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Mapeo de Entidades con JPA y Hibernate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/4_Relationships.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Mapeando Relaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/5_HQL.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Hibernate Query Language (HQL) / JPQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/6_Ejercicio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 Ejercicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4 BBDDOO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4 BBDDOO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%204%20BBDDOO/1_Introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%204%20BBDDOO/2_ORDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 ORDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%204%20BBDDOO/3_OODB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 OODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 5 Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 5 Spring Boot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/1_Servicios%20de%20Acceso%20a%20Datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Servicios de Acceso a Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/2_Spring_Spring%20Boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 Spring Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/3_API_Rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 API Rest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/4_Spring_Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 Spring Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/5_Spring_Hateoas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 Spring Hateoas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 6 MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 6 MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1_NoSQL.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Bases de datos NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2_MongoDB.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3_ShellOperations.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Trabajando con MongoDB: Operaciones básicas de shell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Consultas en Mongo
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Consultas en Mongo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-find" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. find()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1. find()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-que-claves-recuperar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1. ¿Qué claves recuperar?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-operaciones-de-comparacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2. Operaciones de comparación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-operacion-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3. Operación OR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414-operadores-in-y-nin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.4. Operadores $IN y $NIN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#415-operador-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.5. Operador $OR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#416-operador-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.6. Operador $NOT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#417-operador-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.7. Operador $EXISTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-resultados-de-las-consultas-y-tipos-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Resultados de las consultas y tipos de datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2. Resultados de las consultas y tipos de datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421-valores-nulos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.1. valores nulos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422-expresiones-regulares-y-cadenas-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.2. Expresiones regulares y cadenas de caracteres
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-consideraciones-sobre-el-tipo-de-datos-de-las-consultas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Consideraciones sobre el tipo de datos de las consultas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. Consideraciones sobre el tipo de datos de las consultas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-consultas-con-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1. Consultas con arrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-el-operador-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2. El operador $all
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433-el-operador-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3. El operador $size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#434-el-operador-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.4. El operador $slice
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-cursores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Cursores
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4. Cursores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441-limite-skip-y-suerte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.1. Límite, Skip y Suerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-introduccion-al-marco-de-agrupacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Introducción al Marco de Agrupación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-ejercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. Ejercicios
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5_Mongo_Java.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. MongoDB y Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6_Spring_MongoDB.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Spring Data MongoDB y API REST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 7 IA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 7 IA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%207%20IA/Configuraci%C3%B3n%20del%20entorno%20de%20trabajo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del entorno de trabajo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%207%20IA/NLP%20Transformers%20y%20LLMs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP: Transformers y LLMs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%207%20IA/NLP%20con%20Spring%20AI%20Desarrollo%20de%20Chatbots%20en%20Java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP: SpringAI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChefAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ChefAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%207%20IA/ChefAI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChefAI - Documentacion didactica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%207%20IA/ChefAI/clases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clases del backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%207%20IA/ChefAI/configuracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuracion (application.properties)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%207%20IA/ChefAI/frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frontend (HTML, CSS y JavaScript)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#41-find" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1. find()
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1. find()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-que-claves-recuperar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1. ¿Qué claves recuperar?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-operaciones-de-comparacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2. Operaciones de comparación
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-operacion-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3. Operación OR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#414-operadores-in-y-nin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.4. Operadores $IN y $NIN
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#415-operador-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.5. Operador $OR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#416-operador-not" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.6. Operador $NOT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#417-operador-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.7. Operador $EXISTS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-resultados-de-las-consultas-y-tipos-de-datos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2. Resultados de las consultas y tipos de datos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2. Resultados de las consultas y tipos de datos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#421-valores-nulos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.1. valores nulos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#422-expresiones-regulares-y-cadenas-de-caracteres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2.2. Expresiones regulares y cadenas de caracteres
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-consideraciones-sobre-el-tipo-de-datos-de-las-consultas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3. Consideraciones sobre el tipo de datos de las consultas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.3. Consideraciones sobre el tipo de datos de las consultas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#431-consultas-con-arrays" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.1. Consultas con arrays
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#432-el-operador-all" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.2. El operador $all
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#433-el-operador-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.3. El operador $size
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#434-el-operador-slice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3.4. El operador $slice
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-cursores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4. Cursores
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4. Cursores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#441-limite-skip-y-suerte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4.1. Límite, Skip y Suerte
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#45-introduccion-al-marco-de-agrupacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5. Introducción al Marco de Agrupación
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#46-ejercicios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6. Ejercicios
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="4-consultas-en-mongo">4. Consultas en Mongo</h1>
+<h2 id="41-find">4.1. find()</h2>
+<p>El comando find nos permite recuperar los documentos de una colección que coinciden con un <strong>criterio especificado como documento JSON</strong>. Su sintaxis básica es la siguiente:</p>
+<p><div class="language-js highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">critería_in_JSON_formato</span><span class="p">});</span>
+</span></code></pre></div>
+Debemos tener en cuenta aspectos como los tipos de datos que utilizamos, que es importante, puesto que el documento <code>{edad:20}</code> no es el mismo que <code>{edad:"20"}</code>.</p>
+<p>Por otro lado, también debemos considerar que <strong>el documento vacío <code>{}</code> coincide con todos los documentos</strong>, por lo que la consulta
+<code>db.collection.find({})</code> devolvería todos los objetos de la colección.</p>
+<h3 id="411-que-claves-recuperar">4.1.1. ¿Qué claves recuperar?</h3>
+<p>El comando find devuelve los documentos completos que coinciden con los criterios de selección. Si no queremos obtener todas las claves, podemos especificar qué claves queremos consultar, incluyéndolas en un segundo parámetro:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">query_document</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">key_1</span><span class="o">:</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">key_2</span><span class="o">:</span><span class="mf">1</span><span class="p">});</span>
+</span></code></pre></div>
+<p>Como podemos ver, este segundo parámetro también se expresa en formato JSON (de nuevo) y está formado por dos claves (<code>key_1</code> y <code>key_2</code>), ambas con un valor de 1. Este valor numérico también se interpreta como <code>true</code>. Es decir, aquí especificamos cuáles son los campos que queremos mostrar. En caso de que queramos mostrar todos los campos y esconder algunos, utilizaríamos la misma sintaxis, pero ahora utilizando un 0 para aquellos campos que queremos esconder.</p>
+<h3 id="412-operaciones-de-comparacion">4.1.2. Operaciones de comparación</h3>
+<p>MongoDB nos permite realizar comparaciones con datos numéricos, siempre utilizando el formato de documento JSON
+<code>db.collection.find({key: {$operator:value} });</code></p>
+<p>Los operadores de comparación que podemos utilizar en MongoDB son:</p>
+<ul>
+<li><code>$lt</code> → Menor que</li>
+<li><code>$lte</code> → Menor o igual que</li>
+<li><code>$gt</code> → Mayor que</li>
+<li><code>$gte</code> → Mayor o igual que</li>
+</ul>
+<h3 id="413-operacion-or">4.1.3. Operación OR</h3>
+<p>Si queremos realizar un filtro o consulta donde se cumplan varias condiciones (una operación AND), sólo deberemos separarlas por comas en el mismo documento JSON que utilizamos como criterio. Por otra parte, si lo que queremos es llevar a cabo una operación OR, debemos utilizar un operador especial.</p>
+<h3 id="414-operadores-in-y-nin">4.1.4. Operadores <code>$IN</code> y <code>$NIN</code></h3>
+<p>Un caso especial de OR es cuando queremos comprobar si un campo se encuentra dentro de un conjunto específico de valores. Es decir, si es un valor u otro. Por eso utilizamos el operador <code>$in</code>, de la siguiente manera:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span><span class="p">{</span><span class="nx">$in</span><span class="o">:</span><span class="p">[</span><span class="nx">vector_de_valores</span><span class="p">]}})</span>
+</span></code></pre></div>
+<p>De forma similar, existe el operador <code>$nin</code> (<strong>Not In</strong>), que obtiene los documentos donde el valor especificado no se encuentra en la lista. Debemos tener en cuenta que en este último caso también se mostrarán aquellos documentos que tengan un valor nulo para la clave.</p>
+<h3 id="415-operador-or">4.1.5. Operador <code>$OR</code></h3>
+<p>Cuando queremos realizar la operación OR en diferentes campos del documento, utilizaremos el operador <code>$OR</code>, al que pasamos un vector de posibles condiciones, de la siguiente manera:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">$or</span><span class="o">:</span><span class="p">[</span><span class="nx">condition1</span><span class="p">,</span><span class="w"> </span><span class="nx">condition2</span><span class="p">,...]})</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Attention</p>
+</div>
+<p>Las condiciones del array son condiciones en json</p>
+<h3 id="416-operador-not">4.1.6. Operador <code>$NOT</code></h3>
+<p>El operador <code>$NOT</code> es un operador metacondicional, es decir, siempre se aplica a otro criterio, invirtiendo su valor de certeza. Su sintaxis sería:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span><span class="p">{</span><span class="nx">$not</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">criterion</span><span class="p">}}}).</span><span class="nx">pretty</span><span class="p">();</span>
+</span></code></pre></div>
+<h3 id="417-operador-exists">4.1.7. Operador <code>$EXISTS</code></h3>
+<p>Recordemos que en MongoDB, los documentos no tienen una estructura o esquema común, por lo que es posible que existan claves definidas sólo en algunos de ellos. El operador <code>$exists</code> se utiliza para comprobar la existencia o no de una determinada clave.
+La sintaxis a utilizar sería:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span><span class="p">{</span><span class="w"> </span><span class="nx">$exists</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="o">|</span><span class="kc">false</span><span class="w"> </span><span class="p">}})</span>
+</span></code></pre></div>
+<p>Con esto obtenemos los documentos para los que la clave existe o no, dependiendo de si hemos indicado true o false en la consulta.</p>
+<h2 id="42-resultados-de-las-consultas-y-tipos-de-datos">4.2. Resultados de las consultas y tipos de datos</h2>
+<p>Los tipos de datos en MongoDB pueden tener algunos comportamientos especiales. Veremos algunos casos para saber qué hacer en determinadas situaciones.</p>
+<h3 id="421-valores-nulos">4.2.1. valores nulos</h3>
+<p>El valor null coincide con las siguientes situaciones:</p>
+<ul>
+<li>Cuando el valor de la clave es null, o</li>
+<li>Cuando la clave no existe en el documento (en este caso, normalmente se dice que el campo no está informado)</li>
+</ul>
+<h3 id="422-expresiones-regulares-y-cadenas-de-caracteres">4.2.2. Expresiones regulares y cadenas de caracteres</h3>
+<p>Cuando aplicamos un filtro de documento por un campo de texto, puede que no conozcamos exactamente el valor del campo por el que queremos filtrar. Las expresiones regulares ofrecen un potente mecanismo para la coincidencia de cadenas.</p>
+<p>MongoDB nos permite utilizar estas expresiones de diversas formas, ya sea utilizando expresiones regulares de Javascript o utilizando el operador <code>$regex</code>, que utiliza <strong>Expresiones Regulares Compatibles con Perl</strong> (PCRE). Las expresiones regulares de Javascript se expresan utilizando la siguiente sintaxis:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span><span class="w"> </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="sr">/pattern/</span><span class="o">&lt;</span><span class="nx">options</span><span class="o">&gt;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p>Como podemos ver, utilizamos un patrón similar a una cadena de texto, pero utilizando la barra inclinada <code>/</code> como delimitador en lugar de las comillas (<code>``). Por su parte, si utilizamos el operador</code>$regex`, podemos utilizar la siguiente sintaxi:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span><span class="w"> </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">$regex</span><span class="o">:</span><span class="w"> </span><span class="sr">/pattern/</span><span class="p">,</span><span class="w"> </span><span class="nx">$options</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&lt;options&gt;&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">{</span><span class="w"> </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">$regex</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;pattern&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">$options</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;&lt;options&gt;&#39;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">{</span><span class="w"> </span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">$regex</span><span class="o">:</span><span class="w"> </span><span class="sr">/pattern/</span><span class="o">&lt;</span><span class="nx">options</span><span class="o">&gt;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p>Podemos encontrar varias opciones para expresiones regulares:</p>
+<ul>
+<li><code>i</code> → Las coincidencias no distinguen entre mayúsculas y minúsculas: </li>
+<li><code>{name:/john/i}</code> </li>
+<li><code>{name: { $regex: 'john',$options: 'y'}}</code></li>
+<li><code>m</code> → Permite incluir caracteres como <code>^</code> o <code>$</code>, para coincidir al principio o al final, en cadenas con múltiples líneas. </li>
+<li><code>{name:/^John/m}</code> </li>
+<li><code>{name: { $regex: 'John', $options: 'm'}}</code></li>
+<li><code>x</code> Ignora los espacios en blanco en el patrón <code>$regex</code>, siempre que no estén escapados o incluidos en una clase de caracteres. </li>
+<li><code>{name: { $regex: ' J oh n',$options: 'x'}}</code></li>
+<li><code>s</code> Permite que el carácter punto (<code>.</code>) represente cualquier carácter, incluyendo el carácter de nueva línea. </li>
+<li><code>{name:/ju.n/s}</code> </li>
+<li><code>{name: { $regex: 'thu.n',$options: 's'}}</code></li>
+</ul>
+<p>Puede encontrar más información sobre expresiones regulares y casos particulares en los que se recomienda utilizar un tipo de expresión u otra en la documentación oficial de MongoDB sobre <code>$regex</code> <a href="https://www.mongodb.com/docs/manual/reference/operator/query/regex/">aquí</a>.</p>
+<h2 id="43-consideraciones-sobre-el-tipo-de-datos-de-las-consultas">4.3. Consideraciones sobre el tipo de datos de las consultas</h2>
+<h3 id="431-consultas-con-arrays">4.3.1. Consultas con arrays</h3>
+<p>Para buscar elementos coincidentes dentro de un array, procedemos con la misma sintaxis como si fuera cualquier otra clave, utilizando el documento de consulta <code>{key:value}</code>, siendo la clave un array, y el valor, ya sea un <em>n valor</em> que debe contener el array, u otro vector ordenado que queremos que coincida exactamente.</p>
+<p>Por ejemplo:</p>
+<ul>
+<li><code>db.collection.find({ my_vector : value })</code> → Coincide con todos los documentos en los que el vector <code>my_vector</code> aparece, en la posición que sea, el valor indicado. </li>
+<li><code>db.users.find({roles:"admin"})</code> muestra los usuarios que en el array <code>roles</code> tienen el rol <em>admin</em> (u otros).</li>
+<li><code>db.collection.find({ my_vector : [value] })</code> → Coincide con todos los documentos en los que el vector <code>my_vector</code> aparece sólo el valor indicado. </li>
+<li><code>db.users.find({roles:["admin"]})</code> muestra a los usuarios que tienen exactamente el rol <em>admin</em>.</li>
+</ul>
+<p>Además, también podemos utilizar expresiones regulares o demás operadores que hemos visto como condiciones.</p>
+<p>Por otra parte, también podemos referirnos a un elemento específico del vector por su índice, utilizando la notación de puntos y entre comillas:</p>
+<ul>
+<li><code>db.collection.find({"my_vector.position" :[value]})</code> </li>
+<li><code>db.users.find({"roles.2":["admin"]})</code> muestra el usuario que tiene como tercer rol admin</li>
+</ul>
+<h3 id="432-el-operador-all">4.3.2. El operador <code>$all</code></h3>
+<p>Con <code>$all</code> podemos especificar más de un elemento coincidente dentro del array:</p>
+<ul>
+<li><code>db.collection.find({ my_vector : {$all:[value1, value2,...]}})</code> </li>
+<li><code>db.users.find({roles:{$all:["mod","admin"]}})</code> muestra los usuarios que tienen los roles <em>mod</em> y <em>admin</em> (y posiblemente otros).</li>
+</ul>
+<h3 id="433-el-operador-size">4.3.3. El operador <code>$size</code></h3>
+<p>Utilizando <code>$size</code> podemos incluir condiciones sobre la longitud de los vectores:</p>
+<ul>
+<li><code>db.collection.find({ my_vector : {$size:size} })</code></li>
+</ul>
+<h3 id="434-el-operador-slice">4.3.4. El operador <code>$slice</code></h3>
+<p>El operador slice nos permite obtener un subconjunto de los elementos del vector, con la siguiente sintaxis:</p>
+<ul>
+<li><code>key: {$slice: x}</code>: </li>
+<li>si x&gt;0 obtiene los primeros x elementos </li>
+<li>si x&lt;0, obtiene los últimos x elementos</li>
+<li><code>key: {$slice: [ x , y ] }</code> Obtener <em>y</em> elementos desde el elemento a la posición <em>x</em> del documento embebido</li>
+</ul>
+<p>Para consultar documentos embebidos, simplemente especifique el camino completo de la clave, cerrado entre comillas y separado por puntos:
+<code>db.collection.find({"path.to.key":value_or_condition})</code></p>
+<h2 id="44-cursores">4.4. Cursores</h2>
+<p>Cuando realizamos una consulta, MongoDB devuelve los resultados utilizando cursos, que son punteros en los resultados de la consulta, como conectores en la unidad 2. Los clientes que utilizan Mongo iteran sobre estos cursos para recuperar los resultados, y ofrecen un conjunto de funcionalidades, como limitar los resultados, etc.</p>
+<p>Cuando realizamos una consulta en una base de datos con muchos resultados, el cliente (<code>mongosh</code>) devuelve sólo 20 resultados y el mensaje <code>Type "it" for more</code>, para continuar iterando el cursor.</p>
+<h3 id="441-limite-skip-y-suerte">4.4.1. Límite, Skip y Suerte</h3>
+<p>MongoDB nos permite realizar ciertas limitaciones en los resultados. Entre ellas, podemos destacar:</p>
+<ul>
+<li><code>limit</code> → Para limitar el número de resultados</li>
+<li><code>skip</code> → Salta un número específico de resultados.</li>
+<li><code>sort</code> → Ordena los resultados. Necesita un objeto JSON con las claves para ordenar, y un valor de 1 para ordenar ascendentemente o -1 para ordenar descendentemente.</li>
+</ul>
+<h2 id="45-introduccion-al-marco-de-agrupacion">4.5. Introducción al Marco de Agrupación</h2>
+<p>Las consultas de agrupación que realizábamos con operadores como <code>GROUP BY</code>, <code>SUM</code> o <code>COUNT</code> en SQL se pueden realizar con el Marco de Agrupación de MongoDB. Las consultas de agrupación tienen la siguiente sintaxis:</p>
+<div class="language-js highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span><span class="w"> </span><span class="p">[</span><span class="o">&lt;</span><span class="nx">pipeline</span><span class="o">&gt;</span><span class="p">]</span><span class="w"> </span><span class="p">)</span>
+</span></code></pre></div>
+<p>El pipeline o <em>tuberia</em> tiene un concepto similar a las tiberías de Unix: los resultados de una orden se pasan como entrada a otra, para obtener resultados conjuntamente.</p>
+<p>Las operaciones que podemos realizar dentro de estas consultas de agrupación son:</p>
+<ul>
+<li><code>$project</code> → Para realizar una proyección sobre un conjunto de datos de entrada, añadiendo, eliminando o recalculando campos para que la salida sea diferente.</li>
+<li><code>$match</code> → Filtra la entrada para reducir el número de documentos, dejando sólo aquellos que cumplen ciertas condiciones.</li>
+<li><code>$limit</code> → Restringe el número de resultados.</li>
+<li><code>$skip</code> → Salta un cierto número de registros.</li>
+<li><code>$unwind</code> → Convierte un array para devolverlo separado en documentos.</li>
+<li><code>$group</code> → Agrupa documentos según cierta condición.</li>
+<li><code>$sort</code> → Ordena un conjunto de documentos, según el campo especificado.</li>
+<li><code>$geoNear</code>→ Se utiliza como datos geoespaciales, devolviendo los documentos ordenados por proximidad según un punto geoespacial.</li>
+</ul>
+<p>Para realizar cálculos sobre los datos producidos por las tuberías, utilizaremos expresiones. Las expresiones son funciones que realizan cierta operación sobre un grupo de documentos, vector o campo específico. Algunas de estas expresiones son <code>$max</code>, <code>$min</code>, <code>$divide</code> o <code>$substr</code>.</p>
+<p>Puede encontrar mucha más información sobre agregaciones a la documentación oficial de MongoDB.</p>
+<h2 id="46-ejercicios">4.6. Ejercicios</h2>
+<p>Seguimos trabajando con la colección de películas. En este caso, utilizaremos el terminal mongosh (o Studio3T si lo prefieres), y realizaremos las siguientes consultas sobre esta colección.</p>
+<ol>
+<li>Obtenga todas las producciones que se estrenaron en <code>2023</code> o que tienen 180 o más minutos de duración.</li>
+<li>Obtenga todas las películas que <strong>NO</strong> se estrenaron entre los años <code>2000</code> y <code>2010</code>.</li>
+<li>Obtenga todas las películas para las que la clave "oscars" no está definida.</li>
+<li>Obtenga el título de todas las películas que comienzan con la cadena <code>The</code>, independientemente de mayúsculas o minúsculas.</li>
+<li>Obtenga el título de todas las películas que contienen el género comedia (<code>Comedia</code>).</li>
+<li>Muestre el título y los géneros de las películas que contienen el género comedia (<code>Comedia</code>) o thriller (<code>Thriller</code>) o acción (<code>Acción</code>).</li>
+<li>Obtenga el título y los géneros de las películas que tienen tres géneros.</li>
+<li>Obtenga las películas con una calificación de <code>puntuacion_imdb</code> superior a <code>4</code>.</li>
+<li>Haga la misma consulta que antes, pero limitando el número de documentos a 10.</li>
+<li>Ahora muestre el título y la calificación de aquellas películas con una calificación superior a 4, ordenadas por calificación (de más alta a más baja) y limitando los resultados a 10.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../3_ShellOperations.es/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 3. Trabajando con MongoDB: Operaciones básicas de shell">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                3. Trabajando con MongoDB: Operaciones básicas de shell
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../5_Mongo_Java.es/" class="md-footer__link md-footer__link--next" aria-label="Next: 5. MongoDB y Java">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                5. MongoDB y Java
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manu Romero
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://youtube.com/@ciclosformativosinfo" target="_blank" rel="noopener" title="youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/malsonvalencia.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.footer", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
