@@ -1,0 +1,21 @@
+site_name: ChefAI - Documentacion
+site_description: Documentacion didactica del proyecto ChefAI
+site_author: CIP FP Cheste
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.instant
+    - navigation.top
+    - content.code.copy
+nav:
+  - Inicio: index.md
+  - Backend:
+      - Clases: clases.md
+      - Configuracion: configuracion.md
+  - Frontend: frontend.md
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
