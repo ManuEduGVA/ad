@@ -1,0 +1,3625 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://sitename.example.com/Unidad%207%20IA/NLP%20con%20Spring%20AI%20Desarrollo%20de%20Chatbots%20en%20Java/">
+      
+      
+        <link rel="prev" href="../NLP%20Transformers%20y%20LLMs/">
+      
+      
+        <link rel="next" href="../ChefAI/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/Cheste.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>NLP: SpringAI - Acceso a Datos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRed+Hat+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Red Hat Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nlp-springai" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Acceso a Datos" class="md-header__button md-logo" aria-label="Acceso a Datos" data-md-component="logo">
+      
+  <img src="../../assets/Cheste.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acceso a Datos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NLP: SpringAI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="deep-purple"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Acceso a Datos" class="md-nav__button md-logo" aria-label="Acceso a Datos" data-md-component="logo">
+      
+  <img src="../../assets/Cheste.png" alt="logo">
+
+    </a>
+    Acceso a Datos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulacro examen 1ª Evaluación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Simulacro examen 1ª Evaluación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Simulacro%20examen%201%C2%AA%20Evaluaci%C3%B3n/Simulacro%20examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Simulacro de examen: Acceso a Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1 Ficheros
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1 Ficheros
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/1_File_System.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Sistema de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/2_Reading_and_writing_files.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Lectura y escritura de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/3_XML_Files.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Archivos XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/4_JSON_Files.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Archivos JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/5_Extra_Formats.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Formatos extra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/6_Ejercicios.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios sistema de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2 Conectores de BBDD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2 Conectores de BBDD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/1_Object_relational_impedance_mismatch.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Desfase objeto-relacional
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/2_Connectors.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Conectores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/3_Connecting.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Conectando a bases de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/4_Resultset.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Clase ResultSet.
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/5_Metadata.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Metadata de la base de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/6_CRUD.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Statements and CRUD operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/7_Row_to_Object.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. De filas a Objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/clienteSQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad Cliente MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3 Hibernate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3 Hibernate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/1_Mapping.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/2_Hibernate.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Hibernate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/3_Entities_Beans.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Mapeo de Entidades con JPA y Hibernate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/4_Relationships.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Mapeando Relaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/5_HQL.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Hibernate Query Language (HQL) / JPQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/6_Ejercicio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 Ejercicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4 BBDDOO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4 BBDDOO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%204%20BBDDOO/1_Introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%204%20BBDDOO/2_ORDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 ORDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%204%20BBDDOO/3_OODB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 OODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 5 Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 5 Spring Boot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/1_Servicios%20de%20Acceso%20a%20Datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Servicios de Acceso a Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/2_Spring_Spring%20Boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 Spring Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/3_API_Rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 API Rest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/4_Spring_Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 Spring Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/5_Spring_Hateoas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 Spring Hateoas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 6 MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 6 MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/1_NoSQL.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Bases de datos NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/2_MongoDB.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/3_ShellOperations.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Trabajando con MongoDB: Operaciones básicas de shell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/4_Queries.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Consultas en Mongo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/5_Mongo_Java.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. MongoDB y Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/6_Spring_MongoDB.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Spring Data MongoDB y API REST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 7 IA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 7 IA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Configuraci%C3%B3n%20del%20entorno%20de%20trabajo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del entorno de trabajo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP%20Transformers%20y%20LLMs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP: Transformers y LLMs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP: SpringAI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP: SpringAI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ia-java-vs-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IA: Java vs. Python:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IA: Java vs. Python:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-utilizaremos-java-y-no-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué utilizaremos Java y no Python?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring-ai-dependencias-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spring AI – Dependencias disponibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring-ai-documentacion-oficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spring AI – Documentación oficial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ecosistema-groq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ecosistema Groq
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ecosistema Groq">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-api_key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creación de API_KEY
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación de API_KEY">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ecosistema-groq_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ecosistema Groq:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-variable-de-entorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de variable de entorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-de-modelos-groq-octubre-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla de modelos Groq (Octubre 2025)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuestro-primer-chatbot-de-ia-en-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nuestro primer chatbot de IA en Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nuestro primer chatbot de IA en Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-crear-proyecto-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Crear proyecto Spring Boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configuracion-de-applicationproperties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Configuración de application.properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estructura del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-interfaz-groqaiservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Interfaz: GroqAIService
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-controlador-groqaicontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Controlador: GroqAIController
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Controlador: GroqAIController">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-depurando-y-probando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Depurando y probando
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-frontend-con-thymeleaf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Frontend con Thymeleaf
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Frontend con Thymeleaf">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-frontendcontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. FrontendController
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontendcontrollerjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FrontendController.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archivos-estaticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Archivos estáticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-ejecucion-y-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Ejecución y prueba
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creatividad-del-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creatividad del LLM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creatividad del LLM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros de control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parámetros de control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#temperatura-temperature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temperatura (temperature)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-p-nucleus-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Top-P (Nucleus Sampling)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combinaciones-recomendadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combinaciones recomendadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combinaciones recomendadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guia-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guía rápida
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega-chatbot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrega: Chatbot
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChefAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ChefAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ChefAI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChefAI - Documentacion didactica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ChefAI/clases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clases del backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ChefAI/configuracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuracion (application.properties)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ChefAI/frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frontend (HTML, CSS y JavaScript)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ia-java-vs-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IA: Java vs. Python:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="IA: Java vs. Python:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-utilizaremos-java-y-no-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Por qué utilizaremos Java y no Python?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring-ai-dependencias-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spring AI – Dependencias disponibles
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#spring-ai-documentacion-oficial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Spring AI – Documentación oficial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ecosistema-groq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ecosistema Groq
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ecosistema Groq">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creacion-de-api_key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creación de API_KEY
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creación de API_KEY">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ecosistema-groq_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ecosistema Groq:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuracion-de-variable-de-entorno" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuración de variable de entorno
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-de-modelos-groq-octubre-2025" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabla de modelos Groq (Octubre 2025)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nuestro-primer-chatbot-de-ia-en-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nuestro primer chatbot de IA en Java
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nuestro primer chatbot de IA en Java">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-crear-proyecto-spring-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Crear proyecto Spring Boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-configuracion-de-applicationproperties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Configuración de application.properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estructura del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-interfaz-groqaiservice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Interfaz: GroqAIService
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-controlador-groqaicontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Controlador: GroqAIController
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Controlador: GroqAIController">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-depurando-y-probando" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1. Depurando y probando
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-frontend-con-thymeleaf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Frontend con Thymeleaf
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Frontend con Thymeleaf">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-frontendcontroller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1. FrontendController
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#frontendcontrollerjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FrontendController.java
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archivos-estaticos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Archivos estáticos
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-ejecucion-y-prueba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Ejecución y prueba
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creatividad-del-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creatividad del LLM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creatividad del LLM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parametros-de-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parámetros de control
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parámetros de control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#temperatura-temperature" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Temperatura (temperature)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#top-p-nucleus-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Top-P (Nucleus Sampling)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combinaciones-recomendadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combinaciones recomendadas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Combinaciones recomendadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guia-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Guía rápida
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega-chatbot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrega: Chatbot
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="nlp-springai">NLP: SpringAI</h1>
+<p><strong>Ponente:</strong> Jose Ramón Cebolla Cebolla
+<strong>Objetivos de la sesión:</strong></p>
+<p>En esta sesión aprenderemos a: </p>
+<ul>
+<li>Utilizar otro <strong>lenguaje de programación diferente a Python para IA</strong>.</li>
+<li>Comprender como funciona el ecosistema de <strong>LLMs</strong> que proporciona <strong>Groq</strong>.</li>
+<li>Crear un chatbot con <strong>Spring AI</strong>.</li>
+</ul>
+<hr />
+<h2 id="ia-java-vs-python">IA: Java vs. Python:</h2>
+<p>En esta práctica vamos a utilizar Java para realizar un chatbot cuentachistes.</p>
+<h3 id="por-que-utilizaremos-java-y-no-python">¿Por qué utilizaremos Java y no Python?</h3>
+<ul>
+<li>Aunque actualmente el <strong>lenguaje dominante en IA es claramente Python</strong>, no solo se puede hacer IA con Python.</li>
+<li><strong>Spring Boot</strong> está abriendo una puerta enorme a utilizar la IA en proyectos Java con sus <strong>dependencias de Maven relacionadas con la IA</strong>.</li>
+<li>The New Stack, una plataforma de medios tecnológicos enfocada en noticias, análisis y recursos sobre Desarrollo Software, Tecnologías Cloud Nativas y herramientas Open Source ha publicado recientemente (7 de Febrero de 2025) un artículo sobre este tema y afirma que Java se está posicionando para superar a Python como lenguaje dominante en el desarrollo de inteligencia artificial en un máximo de 3 años, especialmente en entornos empresariales. Afirman que Python probablemente mantendrá su posición en investigación y prototipado rápido, pero Java está ganando terreno en implementaciones empresariales de IA gracias a su rendimiento, escalabilidad y ecosistema maduro. La industria parece estar moviéndose hacia un modelo donde Python se usa para experimentación inicial y Java para implementación a producción. Este cambio podría redefinir el panorama de desarrollo de IA en los próximos años, con Java recuperando terreno en un dominio donde Python ha reinado durante más de una década.</li>
+</ul>
+<hr />
+<h3 id="spring-ai-dependencias-disponibles">Spring AI – Dependencias disponibles</h3>
+<p>Como podemos ver, el framework de Java <strong>Spring Boot</strong> ya pone a nuestra disposición muchas <strong>dependencias relacionadas con IA</strong>:</p>
+<p><img alt="SpringBootIA_dependencies" src="../img/SpringBootIA_dependencies.png" /></p>
+<p><img alt="SpringBootIA_dependencies_2" src="../img/SpringBootIA_dependencies_2.png" /></p>
+<hr />
+<h3 id="spring-ai-documentacion-oficial">Spring AI – Documentación oficial</h3>
+<p>Spring Boot también nos proporciona con <strong>Spring AI</strong> una web centrada en Inteligencia Artificial desde <a href="https://docs.spring.io/spring-ai/reference/index.html">https://docs.spring.io/spring-ai/reference/index.html</a>:</p>
+<p><img alt="SpringAI_Web" src="../img/SpringAI_Web.png" /></p>
+<hr />
+<h2 id="ecosistema-groq">Ecosistema Groq</h2>
+<p>Antes de crear nuestra aplicación debemos tener claro qué LLM queremos utilizar para conseguir una <strong>API_KEY del LLM seleccionado</strong>.</p>
+<p>Con Spring Boot podemos seleccionar <strong>múltiples LLMs de manera nativa con las dependencias de Spring Boot</strong>: Mistral, OpenAI, Ollama, …</p>
+<p>En la práctica anterior utilizábamos Mistral, ahora podríamos seguir utilizándola, pero cambiemos y pasemos a utilizar el <strong>ecosistema Groq</strong>, que pone a nuestra disposición un listado de modelos de manera totalmente gratuita y que podemos utilizar durante las prácticas y ejercicios de prueba.</p>
+<blockquote>
+<p>⚠️ <strong>Aviso:</strong> la información que le pasas en los prompts puede ser utilizada por la empresa y no debe ser confidencial.</p>
+</blockquote>
+<p>Para empezar a utilizar Groq debemos de crear la API_KEY que usaremos para acceder al modelo. Accede a <a href="https://console.groq.com/keys">https://console.groq.com/keys</a>.</p>
+<p>Al pulsar en “<strong>Login</strong>” nos podemos logear con nuestra cuenta de Gmail o cualquiera de los métodos que nos propone de manera gratuita</p>
+<p><img alt="Groq_login" src="../img/Groq_login.png" /></p>
+<h3 id="creacion-de-api_key">Creación de API_KEY</h3>
+<p><img alt="groq_API_KEY" src="../img/groq_API_KEY.png" /></p>
+<p><img alt="groq_APY_KEY_Created." src="../img/groq_APY_KEY_Created.png" /></p>
+<p>Hemos escogido <strong>Groq</strong> por la variedad de modelos que nos permite utilizar de manera totalmente gratuita que nos permite programar sin tener GPU.</p>
+<p><img alt="groq_models" src="../img/groq_models.png" /></p>
+<h4 id="ecosistema-groq_1">Ecosistema Groq:</h4>
+<p>Vemos que la oferta es muy grande si ejecutamos el curl que nos devuelve los modelos que Groq permite utilizar :</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>https://api.groq.com/openai/v1/models<span class="w"> </span><span class="se">\ </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer </span><span class="nv">$GROQ_API_KEY</span><span class="s2">&quot;</span>
+</span></code></pre></div>
+<h3 id="configuracion-de-variable-de-entorno">Configuración de variable de entorno</h3>
+<p>Podemos poner directamente la API_KEY donde hemos escrito $GROQ_API_KEY o configurar $GROQ_API_KEY en Ubuntu en el fichero “.bashrc” añadiendo al final del fichero una linea con:</p>
+<p>En Ubuntu (en <code>.bashrc</code>):</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">GROQ_API_KEY</span><span class="o">=</span><span class="s2">&quot;aquí_tu_clave&quot;</span>
+</span></code></pre></div>
+<hr />
+<h3 id="tabla-de-modelos-groq-octubre-2025">Tabla de modelos Groq (Octubre 2025)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Categoría</th>
+<th style="text-align: left;">Nombre del Modelo (ID)</th>
+<th style="text-align: left;">Propietario</th>
+<th style="text-align: left;">Ventana de Contexto</th>
+<th style="text-align: left;">Límite de Respuesta</th>
+<th style="text-align: left;">Uso Recomendado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Text-to-Speech</td>
+<td style="text-align: left;">playai-tts</td>
+<td style="text-align: left;">PlayAI</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">Síntesis de voz general</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text-to-Speech</td>
+<td style="text-align: left;">playai-tts-arabic</td>
+<td style="text-align: left;">PlayAI</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">Síntesis de voz en árabe</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">groq/compound</td>
+<td style="text-align: left;">Groq</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">Generación de texto general</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">meta-llama/llama-4-scout-17b-16e-instruct</td>
+<td style="text-align: left;">Meta</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">Instrucciones y conversaciones</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">alam-2-7b</td>
+<td style="text-align: left;">SDAIA</td>
+<td style="text-align: left;">4096</td>
+<td style="text-align: left;">4096</td>
+<td style="text-align: left;">Generación de texto básico</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">openalign-oss-20b</td>
+<td style="text-align: left;">OpenAI</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">65536</td>
+<td style="text-align: left;">Texto largo y complejo</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">querytower-3-32b</td>
+<td style="text-align: left;">Alibaba Cloud</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">40500</td>
+<td style="text-align: left;">Chat multilingüe</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">llama-3.3-70b-versatile</td>
+<td style="text-align: left;">Meta</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">32766</td>
+<td style="text-align: left;">Tareas versátiles</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">moonshotalk/mini-k2-instruct</td>
+<td style="text-align: left;">Moonshot AI</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">16384</td>
+<td style="text-align: left;">Instrucciones y razonamiento</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">moonshotalk/mini-k2-instruct-0905</td>
+<td style="text-align: left;">Moonshot AI</td>
+<td style="text-align: left;">262144</td>
+<td style="text-align: left;">16384</td>
+<td style="text-align: left;">Contextos muy largos</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">groq/compound-mini</td>
+<td style="text-align: left;">Groq</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">Generación eficiente</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">meta-llama/llama-4-maverick-17b-128e-instruct</td>
+<td style="text-align: left;">Meta</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">8192</td>
+<td style="text-align: left;">Instrucciones especializadas</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">openalign-oss-120b</td>
+<td style="text-align: left;">OpenAI</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">65536</td>
+<td style="text-align: left;">Tareas complejas</td>
+</tr>
+<tr>
+<td style="text-align: left;">Text Generation</td>
+<td style="text-align: left;">llama-3.1-8b-instant</td>
+<td style="text-align: left;">Meta</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">Respuestas instantáneas</td>
+</tr>
+<tr>
+<td style="text-align: left;">Speech-to-Text</td>
+<td style="text-align: left;">whisper-large-v3-turbo</td>
+<td style="text-align: left;">OpenAI</td>
+<td style="text-align: left;">448</td>
+<td style="text-align: left;">448</td>
+<td style="text-align: left;">Transcripción rápida</td>
+</tr>
+<tr>
+<td style="text-align: left;">Speech-to-Text</td>
+<td style="text-align: left;">whisper-large-v3</td>
+<td style="text-align: left;">OpenAI</td>
+<td style="text-align: left;">448</td>
+<td style="text-align: left;">448</td>
+<td style="text-align: left;">Transcripción de alta calidad</td>
+</tr>
+<tr>
+<td style="text-align: left;">Specialized (Moderation)</td>
+<td style="text-align: left;">meta-llama/llama-guard-4-12b</td>
+<td style="text-align: left;">Meta</td>
+<td style="text-align: left;">131072</td>
+<td style="text-align: left;">1024</td>
+<td style="text-align: left;">Moderación de contenido</td>
+</tr>
+<tr>
+<td style="text-align: left;">Specialized (Moderation)</td>
+<td style="text-align: left;">meta-llama/llama-prompt-guard-2-22m</td>
+<td style="text-align: left;">Meta</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">Moderación básica de prompts</td>
+</tr>
+<tr>
+<td style="text-align: left;">Specialized (Moderation)</td>
+<td style="text-align: left;">meta-llama/llama-prompt-guard-2-96m</td>
+<td style="text-align: left;">Meta</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">512</td>
+<td style="text-align: left;">Moderación avanzada de prompts</td>
+</tr>
+</tbody>
+</table>
+<p>Normalmente si superas la ventana de contexto (limite del texto de la pregunta) el modelo olvidará las primeras palabras. <strong>1 token ≈ 0.75 palabras en inglés</strong>.</p>
+<blockquote>
+<p>⚠️ <strong>Nota:</strong> <strong>Groq actualiza la lista de modelos sin previo aviso</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="nuestro-primer-chatbot-de-ia-en-java">Nuestro primer chatbot de IA en Java</h2>
+<h3 id="1-crear-proyecto-spring-boot">1. Crear proyecto Spring Boot</h3>
+<p>Accede a <a href="https://start.spring.io/">https://start.spring.io</a> y configura:</p>
+<ul>
+<li><strong>Project:</strong> Maven</li>
+<li><strong>Spring Boot:</strong> 3.5.9 (o la más reciente estable) . En la fecha de generar esta documentación la dependencia OpenAI no está todavía para Spring 4.</li>
+<li><strong>Dependencies:</strong></li>
+<li>Spring Web</li>
+<li>Thymeleaf</li>
+<li>OpenAI (Spring AI)</li>
+<li><strong>Java:</strong> 17 o 21</li>
+</ul>
+<p><img alt="SpringIA_conf_proyect" src="../img/SpringIA_conf_proyect.png" /></p>
+<p>Genera y descarga el proyecto, luego ábrelo con <strong>IntelliJ</strong>.</p>
+<p>El pom.xml deberá contener la siguiente información:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nt">&lt;project</span><span class="w"> </span><span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span><span class="w"> </span><span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span><span class="nt">&gt;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="nt">&lt;parent&gt;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-parent<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">        </span><span class="nt">&lt;version&gt;</span>3.5.9<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="nt">&lt;relativePath/&gt;</span><span class="w"> </span><span class="cm">&lt;!-- lookup parent from repository --&gt;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="nt">&lt;/parent&gt;</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>com.cipfpcheste.dam2<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>chatbot<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="nt">&lt;name&gt;</span>chatbot<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">    </span><span class="nt">&lt;description&gt;</span>Ejemplo<span class="w"> </span>de<span class="w"> </span>chatbot<span class="w"> </span>con<span class="w"> </span>SpringIA<span class="nt">&lt;/description&gt;</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="nt">&lt;url/&gt;</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">    </span><span class="nt">&lt;licenses&gt;</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">        </span><span class="nt">&lt;license/&gt;</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">    </span><span class="nt">&lt;/licenses&gt;</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">    </span><span class="nt">&lt;developers&gt;</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">        </span><span class="nt">&lt;developer/&gt;</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">    </span><span class="nt">&lt;/developers&gt;</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">    </span><span class="nt">&lt;scm&gt;</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">        </span><span class="nt">&lt;connection/&gt;</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">        </span><span class="nt">&lt;developerConnection/&gt;</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">        </span><span class="nt">&lt;tag/&gt;</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">        </span><span class="nt">&lt;url/&gt;</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">    </span><span class="nt">&lt;/scm&gt;</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">    </span><span class="nt">&lt;properties&gt;</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">        </span><span class="nt">&lt;java.version&gt;</span>21<span class="nt">&lt;/java.version&gt;</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">        </span><span class="nt">&lt;spring-ai.version&gt;</span>1.1.2<span class="nt">&lt;/spring-ai.version&gt;</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="w">    </span><span class="nt">&lt;/properties&gt;</span>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="w">    </span><span class="nt">&lt;dependencies&gt;</span>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-thymeleaf<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.ai<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-ai-starter-model-openai<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>
+</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a><span class="w">        </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a><span class="w">            </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a><span class="w">            </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-test<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a><span class="w">            </span><span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+</span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a><span class="w">        </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a><span class="w">    </span><span class="nt">&lt;/dependencies&gt;</span>
+</span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a><span class="w">    </span><span class="nt">&lt;dependencyManagement&gt;</span>
+</span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a><span class="w">        </span><span class="nt">&lt;dependencies&gt;</span>
+</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a><span class="w">            </span><span class="nt">&lt;dependency&gt;</span>
+</span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a><span class="w">                </span><span class="nt">&lt;groupId&gt;</span>org.springframework.ai<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a><span class="w">                </span><span class="nt">&lt;artifactId&gt;</span>spring-ai-bom<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a><span class="w">                </span><span class="nt">&lt;version&gt;</span>${spring-ai.version}<span class="nt">&lt;/version&gt;</span>
+</span><span id="__span-2-59"><a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a><span class="w">                </span><span class="nt">&lt;type&gt;</span>pom<span class="nt">&lt;/type&gt;</span>
+</span><span id="__span-2-60"><a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a><span class="w">                </span><span class="nt">&lt;scope&gt;</span>import<span class="nt">&lt;/scope&gt;</span>
+</span><span id="__span-2-61"><a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a><span class="w">            </span><span class="nt">&lt;/dependency&gt;</span>
+</span><span id="__span-2-62"><a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a><span class="w">        </span><span class="nt">&lt;/dependencies&gt;</span>
+</span><span id="__span-2-63"><a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a><span class="w">    </span><span class="nt">&lt;/dependencyManagement&gt;</span>
+</span><span id="__span-2-64"><a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>
+</span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a><span class="w">    </span><span class="nt">&lt;build&gt;</span>
+</span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a><span class="w">        </span><span class="nt">&lt;plugins&gt;</span>
+</span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a><span class="w">            </span><span class="nt">&lt;plugin&gt;</span>
+</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a><span class="w">                </span><span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+</span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a><span class="w">                </span><span class="nt">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+</span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a><span class="w">            </span><span class="nt">&lt;/plugin&gt;</span>
+</span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a><span class="w">        </span><span class="nt">&lt;/plugins&gt;</span>
+</span><span id="__span-2-72"><a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a><span class="w">    </span><span class="nt">&lt;/build&gt;</span>
+</span><span id="__span-2-73"><a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>
+</span><span id="__span-2-74"><a id="__codelineno-2-74" name="__codelineno-2-74" href="#__codelineno-2-74"></a><span class="nt">&lt;/project&gt;</span>
+</span></code></pre></div>
+<h3 id="2-configuracion-de-applicationproperties">2. Configuración de <code>application.properties</code></h3>
+<div class="language-properties highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="na">spring.application.name</span><span class="o">=</span><span class="s">chatbot</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="na">server.port</span><span class="o">=</span><span class="s">8090</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1">#Configuramos el encoding</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="na">server.servlet.encoding.charset</span><span class="o">=</span><span class="s">UTF-8</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="na">server.servlet.encoding.enabled</span><span class="o">=</span><span class="s">true</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="na">server.servlet.encoding.force</span><span class="o">=</span><span class="s">true</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Para obtener API_KEY DE Groq: https://console.groq.com/keys</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1"># 2 OPCIONES para configurar la API_KEY en la webapp de Spring Boot:</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># 1º Poner la clave directamente:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># spring.ai.openai.api-key=aqui tu clave</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1"># 2º Utilizar una variable del sistema operativo (GROQ_API_KEY) y leerla aquí:</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="na">spring.ai.openai.api-key</span><span class="o">=</span><span class="s">${GROQ_API_KEY} </span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="c1"># si no te funciona, coloca esto:</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1"># spring.ai.openai.api-key=sk-aqui tu clave</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="c1"># Url de la API de GROQ:</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="na">spring.ai.openai.base-url</span><span class="o">=</span><span class="s">https://api.groq.com/openai</span>
+</span></code></pre></div>
+<p><img alt="Properties" src="../img/Properties_ChatBot.png" /></p>
+<h3 id="3-estructura-del-proyecto">3. Estructura del proyecto</h3>
+<div class="language-tex highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>src/main/java/com/example/chatbot/
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── ChatbotApplication.java
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├── controller/
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│   ├── GroqAIController.java
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│   └── FrontendController.java
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>└── service/
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    ├── GroqAIService.java
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    └── impl/
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        └── GroqAIServiceImpl.java
+</span></code></pre></div>
+<h3 id="4-interfaz-groqaiservice">4. Interfaz: <code>GroqAIService</code></h3>
+<p>Empezamos nuestra API Rest definiendo los 2 método públicos que queremos que tenga el servicio GroqAIService, la presentación del <strong>humorista</strong> y el <strong>chiste</strong>.
+Para aquellos que no han trabajado nunca con SpringBoot, creamos el fichero GroqAIService.java en el mismo directorio que ChatbotApplication.java y al indicar el nombre del paquete nos situamos encima de la linea en rojo y seleccionamos <strong>Quick Fix</strong> y <strong>Move</strong>:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">com.cipfpcheste.dam2.chatbot.service</span><span class="p">;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">GroqAIService</span><span class="w"> </span><span class="p">{</span><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="cm"> * Genera una respuesta de presentación personalizada para el usuario.</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="cm"> *</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="cm"> * @param nombre El nombre del usuario que se incluirá en la presentación</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="cm"> * @return Un String que contiene la respuesta de presentación generada por la IA</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="cm"> */</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="n">String</span><span class="w"> </span><span class="nf">getPresentacionAlUsuario</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">);</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="cm">     * Genera una respuesta con un chiste sobre la temática especificada.</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="cm">     *</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="cm">     * @param tema La temática sobre la cual se generará el chiste</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="cm">     * @return Un String que contiene el chiste generado por la IA</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="cm">     */</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="nf">getChisteTematico</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">tema</span><span class="p">);</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="p">}</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="err">``</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="o">![</span><span class="n">GroqAIService</span><span class="o">]</span><span class="p">(.</span><span class="o">/</span><span class="n">img</span><span class="o">/</span><span class="n">GroqAIService</span><span class="p">.</span><span class="na">png</span><span class="p">)</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="err">###</span><span class="w"> </span><span class="mf">5.</span><span class="w"> </span><span class="n">Servicio</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="n">GroqAIServiceImpl</span><span class="err">`</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="n">Una</span><span class="w"> </span><span class="n">vez</span><span class="w"> </span><span class="n">declarada</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">GroqAIService</span><span class="w"> </span><span class="n">ya</span><span class="w"> </span><span class="n">podemos</span><span class="w"> </span><span class="n">declarar</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">el</span><span class="w"> </span><span class="n">subpaquete</span><span class="w"> </span><span class="err">‘</span><span class="n">impl</span><span class="err">’</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">clase</span><span class="w"> </span><span class="n">que</span><span class="w"> </span><span class="n">implementará</span><span class="w"> </span><span class="n">ese</span><span class="w"> </span><span class="n">servicio</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">práctica</span><span class="p">:</span><span class="w"> </span><span class="n">GroqAIServiceImpl</span><span class="p">.</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="n">En</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="n">implementación</span><span class="w"> </span><span class="n">nos</span><span class="w"> </span><span class="n">apoyaremos</span><span class="w"> </span><span class="n">en</span><span class="w"> </span><span class="n">los</span><span class="w"> </span><span class="n">método</span><span class="w"> </span><span class="n">privados</span><span class="p">:</span><span class="w"> </span><span class="n">getOptions</span><span class="p">,</span><span class="w"> </span><span class="n">generateResponse</span><span class="p">,</span><span class="w"> </span><span class="n">getPromptPresentacionAlUsuario</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="n">getPromptChisteTematico</span><span class="p">:</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="err">```</span><span class="n">java</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="kn">package</span><span class="w"> </span><span class="nn">com.cipfpcheste.dam2.chatbot.service.impl</span><span class="p">;</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.cipfpcheste.dam2.chatbot.service.GroqAIService</span><span class="p">;</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.ai.chat.messages.Message</span><span class="p">;</span>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.ai.chat.model.ChatModel</span><span class="p">;</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.ai.chat.model.ChatResponse</span><span class="p">;</span>
+</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.ai.chat.prompt.Prompt</span><span class="p">;</span>
+</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.ai.chat.prompt.PromptTemplate</span><span class="p">;</span>
+</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.ai.openai.OpenAiChatOptions</span><span class="p">;</span>
+</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Service</span><span class="p">;</span>
+</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.List</span><span class="p">;</span>
+</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+</span><span id="__span-5-45"><a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>
+</span><span id="__span-5-46"><a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a><span class="cm">/**</span>
+</span><span id="__span-5-47"><a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a><span class="cm"> * Clase de servicio para interactuar con un modelo de chat y generar respuestas basadas en prompts.</span>
+</span><span id="__span-5-48"><a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a><span class="cm"> * Este servicio está diseñado para proporcionar una experiencia de chatbot con la capacidad de</span>
+</span><span id="__span-5-49"><a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a><span class="cm"> * presentarse y contar chistes temáticos de manera sensible y amigable para el usuario.</span>
+</span><span id="__span-5-50"><a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a><span class="cm"> */</span>
+</span><span id="__span-5-51"><a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a><span class="nd">@Service</span>
+</span><span id="__span-5-52"><a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GroqAIServiceImpl</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">GroqAIService</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-53"><a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>
+</span><span id="__span-5-54"><a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">ChatModel</span><span class="w"> </span><span class="n">chatModel</span><span class="p">;</span>
+</span><span id="__span-5-55"><a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>
+</span><span id="__span-5-56"><a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-5-57"><a id="__codelineno-5-57" name="__codelineno-5-57" href="#__codelineno-5-57"></a><span class="cm">     * Construye una nueva instancia de GroqAIService con el modelo de chat especificado.</span>
+</span><span id="__span-5-58"><a id="__codelineno-5-58" name="__codelineno-5-58" href="#__codelineno-5-58"></a><span class="cm">     *</span>
+</span><span id="__span-5-59"><a id="__codelineno-5-59" name="__codelineno-5-59" href="#__codelineno-5-59"></a><span class="cm">     * @param chatModel el modelo de chat que se utilizará para generar respuestas</span>
+</span><span id="__span-5-60"><a id="__codelineno-5-60" name="__codelineno-5-60" href="#__codelineno-5-60"></a><span class="cm">     */</span>
+</span><span id="__span-5-61"><a id="__codelineno-5-61" name="__codelineno-5-61" href="#__codelineno-5-61"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">GroqAIServiceImpl</span><span class="p">(</span><span class="n">ChatModel</span><span class="w"> </span><span class="n">chatModel</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-62"><a id="__codelineno-5-62" name="__codelineno-5-62" href="#__codelineno-5-62"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">chatModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chatModel</span><span class="p">;</span>
+</span><span id="__span-5-63"><a id="__codelineno-5-63" name="__codelineno-5-63" href="#__codelineno-5-63"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-64"><a id="__codelineno-5-64" name="__codelineno-5-64" href="#__codelineno-5-64"></a><span class="w">    </span><span class="c1">// Definir el nombre del modelo de Groq (LLM) que utilizaremos</span>
+</span><span id="__span-5-65"><a id="__codelineno-5-65" name="__codelineno-5-65" href="#__codelineno-5-65"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">modelName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;llama-3.3-70b-versatile&quot;</span><span class="p">;</span>
+</span><span id="__span-5-66"><a id="__codelineno-5-66" name="__codelineno-5-66" href="#__codelineno-5-66"></a><span class="w">    </span><span class="c1">//Definir el limite de tokens de respuesta para el modelo llama-3.3-70b-versatile</span>
+</span><span id="__span-5-67"><a id="__codelineno-5-67" name="__codelineno-5-67" href="#__codelineno-5-67"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">maxTokens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;32768&quot;</span><span class="p">;</span>
+</span><span id="__span-5-68"><a id="__codelineno-5-68" name="__codelineno-5-68" href="#__codelineno-5-68"></a>
+</span><span id="__span-5-69"><a id="__codelineno-5-69" name="__codelineno-5-69" href="#__codelineno-5-69"></a><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-5-70"><a id="__codelineno-5-70" name="__codelineno-5-70" href="#__codelineno-5-70"></a><span class="cm">     * Configura y devuelve las opciones para el modelo de chat Groq AI.</span>
+</span><span id="__span-5-71"><a id="__codelineno-5-71" name="__codelineno-5-71" href="#__codelineno-5-71"></a><span class="cm">     *</span>
+</span><span id="__span-5-72"><a id="__codelineno-5-72" name="__codelineno-5-72" href="#__codelineno-5-72"></a><span class="cm">     * Este método crea un objeto OpenAiChatOptions con configuraciones predefinidas:</span>
+</span><span id="__span-5-73"><a id="__codelineno-5-73" name="__codelineno-5-73" href="#__codelineno-5-73"></a><span class="cm">     * - Utiliza el modelo especificado en modelName</span>
+</span><span id="__span-5-74"><a id="__codelineno-5-74" name="__codelineno-5-74" href="#__codelineno-5-74"></a><span class="cm">     * - Establece la temperatura en 0.4 para equilibrar creatividad/consistencia</span>
+</span><span id="__span-5-75"><a id="__codelineno-5-75" name="__codelineno-5-75" href="#__codelineno-5-75"></a><span class="cm">     * - Establece el máximo de tokens basado en la configuración maxTokens</span>
+</span><span id="__span-5-76"><a id="__codelineno-5-76" name="__codelineno-5-76" href="#__codelineno-5-76"></a><span class="cm">     *</span>
+</span><span id="__span-5-77"><a id="__codelineno-5-77" name="__codelineno-5-77" href="#__codelineno-5-77"></a><span class="cm">     * @return OpenAiChatOptions objeto configurado con los parámetros especificados</span>
+</span><span id="__span-5-78"><a id="__codelineno-5-78" name="__codelineno-5-78" href="#__codelineno-5-78"></a><span class="cm">     */</span>
+</span><span id="__span-5-79"><a id="__codelineno-5-79" name="__codelineno-5-79" href="#__codelineno-5-79"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">OpenAiChatOptions</span><span class="w"> </span><span class="nf">getOptions</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-80"><a id="__codelineno-5-80" name="__codelineno-5-80" href="#__codelineno-5-80"></a><span class="w">        </span><span class="n">OpenAiChatOptions</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">OpenAiChatOptions</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+</span><span id="__span-5-81"><a id="__codelineno-5-81" name="__codelineno-5-81" href="#__codelineno-5-81"></a><span class="w">                </span><span class="p">.</span><span class="na">model</span><span class="p">(</span><span class="n">modelName</span><span class="p">)</span>
+</span><span id="__span-5-82"><a id="__codelineno-5-82" name="__codelineno-5-82" href="#__codelineno-5-82"></a><span class="w">                </span><span class="p">.</span><span class="na">temperature</span><span class="p">(</span><span class="mf">0.4</span><span class="p">)</span>
+</span><span id="__span-5-83"><a id="__codelineno-5-83" name="__codelineno-5-83" href="#__codelineno-5-83"></a><span class="w">                </span><span class="p">.</span><span class="na">maxTokens</span><span class="p">(</span><span class="n">Integer</span><span class="p">.</span><span class="na">parseInt</span><span class="p">(</span><span class="n">maxTokens</span><span class="p">))</span>
+</span><span id="__span-5-84"><a id="__codelineno-5-84" name="__codelineno-5-84" href="#__codelineno-5-84"></a><span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</span><span id="__span-5-85"><a id="__codelineno-5-85" name="__codelineno-5-85" href="#__codelineno-5-85"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">options</span><span class="p">;</span>
+</span><span id="__span-5-86"><a id="__codelineno-5-86" name="__codelineno-5-86" href="#__codelineno-5-86"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-87"><a id="__codelineno-5-87" name="__codelineno-5-87" href="#__codelineno-5-87"></a>
+</span><span id="__span-5-88"><a id="__codelineno-5-88" name="__codelineno-5-88" href="#__codelineno-5-88"></a><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-5-89"><a id="__codelineno-5-89" name="__codelineno-5-89" href="#__codelineno-5-89"></a><span class="cm">     * Genera una respuesta utilizando el modelo de chat basado en el prompt proporcionado.</span>
+</span><span id="__span-5-90"><a id="__codelineno-5-90" name="__codelineno-5-90" href="#__codelineno-5-90"></a><span class="cm">     *</span>
+</span><span id="__span-5-91"><a id="__codelineno-5-91" name="__codelineno-5-91" href="#__codelineno-5-91"></a><span class="cm">     * @param prompt El objeto prompt que contiene el mensaje de entrada para generar una respuesta</span>
+</span><span id="__span-5-92"><a id="__codelineno-5-92" name="__codelineno-5-92" href="#__codelineno-5-92"></a><span class="cm">     * @return La respuesta generada como texto en formato String</span>
+</span><span id="__span-5-93"><a id="__codelineno-5-93" name="__codelineno-5-93" href="#__codelineno-5-93"></a><span class="cm">     * @throws RuntimeException si el modelo de chat falla al generar una respuesta</span>
+</span><span id="__span-5-94"><a id="__codelineno-5-94" name="__codelineno-5-94" href="#__codelineno-5-94"></a><span class="cm">     */</span>
+</span><span id="__span-5-95"><a id="__codelineno-5-95" name="__codelineno-5-95" href="#__codelineno-5-95"></a>
+</span><span id="__span-5-96"><a id="__codelineno-5-96" name="__codelineno-5-96" href="#__codelineno-5-96"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">generateResponse</span><span class="p">(</span><span class="n">Prompt</span><span class="w"> </span><span class="n">prompt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-97"><a id="__codelineno-5-97" name="__codelineno-5-97" href="#__codelineno-5-97"></a><span class="w">        </span><span class="n">ChatResponse</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chatModel</span><span class="p">.</span><span class="na">call</span><span class="p">(</span><span class="n">prompt</span><span class="p">);</span>
+</span><span id="__span-5-98"><a id="__codelineno-5-98" name="__codelineno-5-98" href="#__codelineno-5-98"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">response</span><span class="p">.</span><span class="na">getResult</span><span class="p">().</span><span class="na">getOutput</span><span class="p">().</span><span class="na">getText</span><span class="p">();</span>
+</span><span id="__span-5-99"><a id="__codelineno-5-99" name="__codelineno-5-99" href="#__codelineno-5-99"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-100"><a id="__codelineno-5-100" name="__codelineno-5-100" href="#__codelineno-5-100"></a>
+</span><span id="__span-5-101"><a id="__codelineno-5-101" name="__codelineno-5-101" href="#__codelineno-5-101"></a><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-5-102"><a id="__codelineno-5-102" name="__codelineno-5-102" href="#__codelineno-5-102"></a><span class="cm">     * Genera una respuesta de presentación personalizada para el usuario.</span>
+</span><span id="__span-5-103"><a id="__codelineno-5-103" name="__codelineno-5-103" href="#__codelineno-5-103"></a><span class="cm">     *</span>
+</span><span id="__span-5-104"><a id="__codelineno-5-104" name="__codelineno-5-104" href="#__codelineno-5-104"></a><span class="cm">     * @param nombre El nombre del usuario que se incluirá en la presentación</span>
+</span><span id="__span-5-105"><a id="__codelineno-5-105" name="__codelineno-5-105" href="#__codelineno-5-105"></a><span class="cm">     * @return Un String que contiene la respuesta de presentación generada por la IA</span>
+</span><span id="__span-5-106"><a id="__codelineno-5-106" name="__codelineno-5-106" href="#__codelineno-5-106"></a><span class="cm">     */</span>
+</span><span id="__span-5-107"><a id="__codelineno-5-107" name="__codelineno-5-107" href="#__codelineno-5-107"></a>
+</span><span id="__span-5-108"><a id="__codelineno-5-108" name="__codelineno-5-108" href="#__codelineno-5-108"></a><span class="w">    </span><span class="nd">@Override</span>
+</span><span id="__span-5-109"><a id="__codelineno-5-109" name="__codelineno-5-109" href="#__codelineno-5-109"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getPresentacionAlUsuario</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-110"><a id="__codelineno-5-110" name="__codelineno-5-110" href="#__codelineno-5-110"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">generateResponse</span><span class="p">(</span><span class="n">getPromptPresentacionAlUsuario</span><span class="p">(</span><span class="n">nombre</span><span class="p">));</span>
+</span><span id="__span-5-111"><a id="__codelineno-5-111" name="__codelineno-5-111" href="#__codelineno-5-111"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-112"><a id="__codelineno-5-112" name="__codelineno-5-112" href="#__codelineno-5-112"></a>
+</span><span id="__span-5-113"><a id="__codelineno-5-113" name="__codelineno-5-113" href="#__codelineno-5-113"></a><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-5-114"><a id="__codelineno-5-114" name="__codelineno-5-114" href="#__codelineno-5-114"></a><span class="cm">     * Genera una respuesta con un chiste sobre la temática especificada.</span>
+</span><span id="__span-5-115"><a id="__codelineno-5-115" name="__codelineno-5-115" href="#__codelineno-5-115"></a><span class="cm">     *</span>
+</span><span id="__span-5-116"><a id="__codelineno-5-116" name="__codelineno-5-116" href="#__codelineno-5-116"></a><span class="cm">     * @param tema La temática sobre la cual se generará el chiste</span>
+</span><span id="__span-5-117"><a id="__codelineno-5-117" name="__codelineno-5-117" href="#__codelineno-5-117"></a><span class="cm">     * @return Un String que contiene el chiste generado por la IA</span>
+</span><span id="__span-5-118"><a id="__codelineno-5-118" name="__codelineno-5-118" href="#__codelineno-5-118"></a><span class="cm">     */</span>
+</span><span id="__span-5-119"><a id="__codelineno-5-119" name="__codelineno-5-119" href="#__codelineno-5-119"></a><span class="w">    </span><span class="nd">@Override</span>
+</span><span id="__span-5-120"><a id="__codelineno-5-120" name="__codelineno-5-120" href="#__codelineno-5-120"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getChisteTematico</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">tema</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-121"><a id="__codelineno-5-121" name="__codelineno-5-121" href="#__codelineno-5-121"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">generateResponse</span><span class="p">(</span><span class="n">getPromptChisteTematico</span><span class="p">(</span><span class="n">tema</span><span class="p">));</span>
+</span><span id="__span-5-122"><a id="__codelineno-5-122" name="__codelineno-5-122" href="#__codelineno-5-122"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-123"><a id="__codelineno-5-123" name="__codelineno-5-123" href="#__codelineno-5-123"></a>
+</span><span id="__span-5-124"><a id="__codelineno-5-124" name="__codelineno-5-124" href="#__codelineno-5-124"></a><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-5-125"><a id="__codelineno-5-125" name="__codelineno-5-125" href="#__codelineno-5-125"></a><span class="cm">     * Crea un prompt para la interacción inicial con el usuario, configurando un chatbot de IA</span>
+</span><span id="__span-5-126"><a id="__codelineno-5-126" name="__codelineno-5-126" href="#__codelineno-5-126"></a><span class="cm">     * que se especializa en contar chistes.</span>
+</span><span id="__span-5-127"><a id="__codelineno-5-127" name="__codelineno-5-127" href="#__codelineno-5-127"></a><span class="cm">     *</span>
+</span><span id="__span-5-128"><a id="__codelineno-5-128" name="__codelineno-5-128" href="#__codelineno-5-128"></a><span class="cm">     * El método configura una plantilla de prompt que presenta al chatbot con un nombre dado</span>
+</span><span id="__span-5-129"><a id="__codelineno-5-129" name="__codelineno-5-129" href="#__codelineno-5-129"></a><span class="cm">     * y lo prepara para contar chistes sobre cualquier tema solicitado por el usuario.</span>
+</span><span id="__span-5-130"><a id="__codelineno-5-130" name="__codelineno-5-130" href="#__codelineno-5-130"></a><span class="cm">     *</span>
+</span><span id="__span-5-131"><a id="__codelineno-5-131" name="__codelineno-5-131" href="#__codelineno-5-131"></a><span class="cm">     * @param nombre El nombre que se usará para el chatbot en la interacción</span>
+</span><span id="__span-5-132"><a id="__codelineno-5-132" name="__codelineno-5-132" href="#__codelineno-5-132"></a><span class="cm">     * @return Prompt Un objeto prompt configurado que contiene el mensaje y las opciones de chat OpenAI</span>
+</span><span id="__span-5-133"><a id="__codelineno-5-133" name="__codelineno-5-133" href="#__codelineno-5-133"></a><span class="cm">     */</span>
+</span><span id="__span-5-134"><a id="__codelineno-5-134" name="__codelineno-5-134" href="#__codelineno-5-134"></a>
+</span><span id="__span-5-135"><a id="__codelineno-5-135" name="__codelineno-5-135" href="#__codelineno-5-135"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Prompt</span><span class="w"> </span><span class="nf">getPromptPresentacionAlUsuario</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-136"><a id="__codelineno-5-136" name="__codelineno-5-136" href="#__codelineno-5-136"></a><span class="w">        </span><span class="c1">// 1. Crear plantilla de prompt con variables</span>
+</span><span id="__span-5-137"><a id="__codelineno-5-137" name="__codelineno-5-137" href="#__codelineno-5-137"></a><span class="w">        </span><span class="n">PromptTemplate</span><span class="w"> </span><span class="n">promptTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PromptTemplate</span><span class="p">(</span>
+</span><span id="__span-5-138"><a id="__codelineno-5-138" name="__codelineno-5-138" href="#__codelineno-5-138"></a><span class="w">                </span><span class="s">&quot;&quot;&quot;</span>
+</span><span id="__span-5-139"><a id="__codelineno-5-139" name="__codelineno-5-139" href="#__codelineno-5-139"></a><span class="s">                    Por favor, actúa como chatBot de inteligencia artificial llamado &#39;{nombre}&#39;</span>
+</span><span id="__span-5-140"><a id="__codelineno-5-140" name="__codelineno-5-140" href="#__codelineno-5-140"></a><span class="s">                    que siempre tiene ingenio para contar chistes sobre cualquier temática.</span>
+</span><span id="__span-5-141"><a id="__codelineno-5-141" name="__codelineno-5-141" href="#__codelineno-5-141"></a><span class="s">                    No hace falta que hagas una introducción, simplemente preséntate y pregunta </span>
+</span><span id="__span-5-142"><a id="__codelineno-5-142" name="__codelineno-5-142" href="#__codelineno-5-142"></a><span class="s">                    sobre qué temática le gustaría al usuario que le contaras un chiste en una </span>
+</span><span id="__span-5-143"><a id="__codelineno-5-143" name="__codelineno-5-143" href="#__codelineno-5-143"></a><span class="s">                    frase no demasiado larga.</span>
+</span><span id="__span-5-144"><a id="__codelineno-5-144" name="__codelineno-5-144" href="#__codelineno-5-144"></a><span class="s">                    Por favor, ten cuidado y sé sensible respecto al contenido.</span>
+</span><span id="__span-5-145"><a id="__codelineno-5-145" name="__codelineno-5-145" href="#__codelineno-5-145"></a><span class="s">                &quot;&quot;&quot;</span>
+</span><span id="__span-5-146"><a id="__codelineno-5-146" name="__codelineno-5-146" href="#__codelineno-5-146"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-5-147"><a id="__codelineno-5-147" name="__codelineno-5-147" href="#__codelineno-5-147"></a><span class="w">        </span><span class="c1">// 2. Reemplazar variables en el prompt</span>
+</span><span id="__span-5-148"><a id="__codelineno-5-148" name="__codelineno-5-148" href="#__codelineno-5-148"></a><span class="w">        </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">promptTemplate</span><span class="p">.</span><span class="na">createMessage</span><span class="p">(</span>
+</span><span id="__span-5-149"><a id="__codelineno-5-149" name="__codelineno-5-149" href="#__codelineno-5-149"></a><span class="w">                </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;nombre&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">nombre</span><span class="p">)</span>
+</span><span id="__span-5-150"><a id="__codelineno-5-150" name="__codelineno-5-150" href="#__codelineno-5-150"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-5-151"><a id="__codelineno-5-151" name="__codelineno-5-151" href="#__codelineno-5-151"></a><span class="w">        </span><span class="c1">// 3. Leer las opciones del modelo</span>
+</span><span id="__span-5-152"><a id="__codelineno-5-152" name="__codelineno-5-152" href="#__codelineno-5-152"></a><span class="w">        </span><span class="n">OpenAiChatOptions</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getOptions</span><span class="p">();</span>
+</span><span id="__span-5-153"><a id="__codelineno-5-153" name="__codelineno-5-153" href="#__codelineno-5-153"></a><span class="w">        </span><span class="c1">// 4. Crear Prompt combinando mensaje y opciones</span>
+</span><span id="__span-5-154"><a id="__codelineno-5-154" name="__codelineno-5-154" href="#__codelineno-5-154"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Prompt</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">message</span><span class="p">),</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
+</span><span id="__span-5-155"><a id="__codelineno-5-155" name="__codelineno-5-155" href="#__codelineno-5-155"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-156"><a id="__codelineno-5-156" name="__codelineno-5-156" href="#__codelineno-5-156"></a>
+</span><span id="__span-5-157"><a id="__codelineno-5-157" name="__codelineno-5-157" href="#__codelineno-5-157"></a><span class="w">    </span><span class="cm">/**</span>
+</span><span id="__span-5-158"><a id="__codelineno-5-158" name="__codelineno-5-158" href="#__codelineno-5-158"></a><span class="cm">     * Crea un prompt para generar un chiste sobre una temática específica.</span>
+</span><span id="__span-5-159"><a id="__codelineno-5-159" name="__codelineno-5-159" href="#__codelineno-5-159"></a><span class="cm">     *</span>
+</span><span id="__span-5-160"><a id="__codelineno-5-160" name="__codelineno-5-160" href="#__codelineno-5-160"></a><span class="cm">     * El método configura una plantilla de prompt que solicita al modelo</span>
+</span><span id="__span-5-161"><a id="__codelineno-5-161" name="__codelineno-5-161" href="#__codelineno-5-161"></a><span class="cm">     * generar un chiste apropiado sobre el tema proporcionado, asegurando</span>
+</span><span id="__span-5-162"><a id="__codelineno-5-162" name="__codelineno-5-162" href="#__codelineno-5-162"></a><span class="cm">     * que el contenido sea adecuado y sensible.</span>
+</span><span id="__span-5-163"><a id="__codelineno-5-163" name="__codelineno-5-163" href="#__codelineno-5-163"></a><span class="cm">     *</span>
+</span><span id="__span-5-164"><a id="__codelineno-5-164" name="__codelineno-5-164" href="#__codelineno-5-164"></a><span class="cm">     * @param tema La temática sobre la cual se generará el chiste</span>
+</span><span id="__span-5-165"><a id="__codelineno-5-165" name="__codelineno-5-165" href="#__codelineno-5-165"></a><span class="cm">     * @return Prompt Un objeto prompt configurado con el mensaje y las opciones de chat</span>
+</span><span id="__span-5-166"><a id="__codelineno-5-166" name="__codelineno-5-166" href="#__codelineno-5-166"></a><span class="cm">     */</span>
+</span><span id="__span-5-167"><a id="__codelineno-5-167" name="__codelineno-5-167" href="#__codelineno-5-167"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Prompt</span><span class="w"> </span><span class="nf">getPromptChisteTematico</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">tema</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-168"><a id="__codelineno-5-168" name="__codelineno-5-168" href="#__codelineno-5-168"></a><span class="w">        </span><span class="c1">// 1. Crear plantilla de prompt con variables</span>
+</span><span id="__span-5-169"><a id="__codelineno-5-169" name="__codelineno-5-169" href="#__codelineno-5-169"></a><span class="w">        </span><span class="n">PromptTemplate</span><span class="w"> </span><span class="n">promptTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">PromptTemplate</span><span class="p">(</span>
+</span><span id="__span-5-170"><a id="__codelineno-5-170" name="__codelineno-5-170" href="#__codelineno-5-170"></a><span class="w">                </span><span class="s">&quot;&quot;&quot;</span>
+</span><span id="__span-5-171"><a id="__codelineno-5-171" name="__codelineno-5-171" href="#__codelineno-5-171"></a><span class="s">                    Vas a actuar como una persona graciosa y contarme un chiste sobre la temática </span>
+</span><span id="__span-5-172"><a id="__codelineno-5-172" name="__codelineno-5-172" href="#__codelineno-5-172"></a><span class="s">                    &#39;{tema}&#39; teniendo en cuenta lo siguiente:</span>
+</span><span id="__span-5-173"><a id="__codelineno-5-173" name="__codelineno-5-173" href="#__codelineno-5-173"></a><span class="s">                    · Si crees que la temática es sobre un tema controvertido que puede ofender a alguien,</span>
+</span><span id="__span-5-174"><a id="__codelineno-5-174" name="__codelineno-5-174" href="#__codelineno-5-174"></a><span class="s">                    por favor, cambia la temática a algo más seguro lo más parecido posible a la temática original,</span>
+</span><span id="__span-5-175"><a id="__codelineno-5-175" name="__codelineno-5-175" href="#__codelineno-5-175"></a><span class="s">                    pero no digas que has cambiado de temática.</span>
+</span><span id="__span-5-176"><a id="__codelineno-5-176" name="__codelineno-5-176" href="#__codelineno-5-176"></a><span class="s">                    · No empieces diciendo la temática del chiste ni cuál es tu intención al contarlo, simplemente </span>
+</span><span id="__span-5-177"><a id="__codelineno-5-177" name="__codelineno-5-177" href="#__codelineno-5-177"></a><span class="s">                    cuenta el chiste de una manera graciosa y divertida sin ser demasiado escueto ni demasiado largo.</span>
+</span><span id="__span-5-178"><a id="__codelineno-5-178" name="__codelineno-5-178" href="#__codelineno-5-178"></a><span class="s">                    · El chiste debe ser adecuado para un público general pensando que lo está contando un </span>
+</span><span id="__span-5-179"><a id="__codelineno-5-179" name="__codelineno-5-179" href="#__codelineno-5-179"></a><span class="s">                    profesor a sus alumnos. Por favor, ten cuidado y sé sensible respecto al contenido.</span>
+</span><span id="__span-5-180"><a id="__codelineno-5-180" name="__codelineno-5-180" href="#__codelineno-5-180"></a><span class="s">                    · Por último, acaba preguntando al usuario de manera divertida y sobre todo escueta sobre qué </span>
+</span><span id="__span-5-181"><a id="__codelineno-5-181" name="__codelineno-5-181" href="#__codelineno-5-181"></a><span class="s">                    otra temática le gustaría que le contaras un chiste.</span>
+</span><span id="__span-5-182"><a id="__codelineno-5-182" name="__codelineno-5-182" href="#__codelineno-5-182"></a><span class="s">                &quot;&quot;&quot;</span>
+</span><span id="__span-5-183"><a id="__codelineno-5-183" name="__codelineno-5-183" href="#__codelineno-5-183"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-5-184"><a id="__codelineno-5-184" name="__codelineno-5-184" href="#__codelineno-5-184"></a><span class="w">        </span><span class="c1">// 2. Reemplazar variables en el prompt</span>
+</span><span id="__span-5-185"><a id="__codelineno-5-185" name="__codelineno-5-185" href="#__codelineno-5-185"></a><span class="w">        </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">promptTemplate</span><span class="p">.</span><span class="na">createMessage</span><span class="p">(</span>
+</span><span id="__span-5-186"><a id="__codelineno-5-186" name="__codelineno-5-186" href="#__codelineno-5-186"></a><span class="w">                </span><span class="n">Map</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="s">&quot;tema&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tema</span><span class="p">)</span>
+</span><span id="__span-5-187"><a id="__codelineno-5-187" name="__codelineno-5-187" href="#__codelineno-5-187"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-5-188"><a id="__codelineno-5-188" name="__codelineno-5-188" href="#__codelineno-5-188"></a><span class="w">        </span><span class="c1">// 3. Leer las opciones del modelo</span>
+</span><span id="__span-5-189"><a id="__codelineno-5-189" name="__codelineno-5-189" href="#__codelineno-5-189"></a><span class="w">        </span><span class="n">OpenAiChatOptions</span><span class="w"> </span><span class="n">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getOptions</span><span class="p">();</span>
+</span><span id="__span-5-190"><a id="__codelineno-5-190" name="__codelineno-5-190" href="#__codelineno-5-190"></a><span class="w">        </span><span class="c1">// 4. Crear Prompt combinando mensaje y opciones</span>
+</span><span id="__span-5-191"><a id="__codelineno-5-191" name="__codelineno-5-191" href="#__codelineno-5-191"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Prompt</span><span class="p">(</span><span class="n">List</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">message</span><span class="p">),</span><span class="w"> </span><span class="n">options</span><span class="p">);</span>
+</span><span id="__span-5-192"><a id="__codelineno-5-192" name="__codelineno-5-192" href="#__codelineno-5-192"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-5-193"><a id="__codelineno-5-193" name="__codelineno-5-193" href="#__codelineno-5-193"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><img alt="GroqAIServiceImpl" src="../img/GroqAIServiceImpl.png" /></p>
+<h3 id="6-controlador-groqaicontroller">6. Controlador: <code>GroqAIController</code></h3>
+<p>El controlador de esta API Rest cuenta chistes es muy reducido porque utiliza el servicio para llamar a las funciones ‘getPresentacionAlUsuario’ para presentarse y ‘getChisteTematico’ para contar un chiste de un tema concreto:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">com.cipfpcheste.dam2.chatbot.service.controller</span><span class="p">;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">com.cipfpcheste.dam2.chatbot.service.GroqAIService</span><span class="p">;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="p">;</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RequestParam</span><span class="p">;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="p">;</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="nd">@RestController</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="nd">@RequestMapping</span><span class="p">(</span><span class="s">&quot;api/v1&quot;</span><span class="p">)</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">GroqAIController</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">GroqAIService</span><span class="w"> </span><span class="n">groqService</span><span class="p">;</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">GroqAIController</span><span class="p">(</span><span class="n">GroqAIService</span><span class="w"> </span><span class="n">groqService</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">groqService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groqService</span><span class="p">;</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/getPresentacionAlUsuario&quot;</span><span class="p">)</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getPresentacionAlUsuario</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">groqService</span><span class="p">.</span><span class="na">getPresentacionAlUsuario</span><span class="p">(</span><span class="s">&quot;Simarret&quot;</span><span class="p">);</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/getChisteTematico&quot;</span><span class="p">)</span>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">getChisteTematico</span><span class="p">(</span><span class="nd">@RequestParam</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">tema</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">groqService</span><span class="p">.</span><span class="na">getChisteTematico</span><span class="p">(</span><span class="n">tema</span><span class="p">);</span>
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><img alt="GroqAIController" src="../img/GroqAIController.png" /></p>
+<h4 id="61-depurando-y-probando">6.1. Depurando y probando</h4>
+<p>Vamos al explorador del proyecto y entramos en el controlador. Pongamos un punto de interrupción en la linea 21 (donde el controller solicita al servicio de Groq que se presente). Para hacerlo pulsamos en la parte izquierda del número de linea y aparecerá un punto rojo. Si en el navegador entramos en la url veremos como se para en esa linea. Si
+queremos continuar le damos al play y nos mostrará la presentación:</p>
+<p><img alt="GroqAIService_brak_point" src="../img/GroqAIService_brak_point.png" /></p>
+<p>Accede desde el navegador a la url: http://localhost:8090/api/v1/getPresentacionAlUsuario</p>
+<p>Si vas dando un step by step verás que al final te devuelve lo siguiente:</p>
+<p><img alt="GroqAIService_brak_point_result" src="../img/GroqAIService_brak_point_result.png" /></p>
+<p>Quita el break point y bamos ahora a probar el API.</p>
+<p>Prueba esta: http://localhost:8090/api/v1/getChisteTematico?tema=programadores</p>
+<p><img alt="GroqAIService_brak_point_result_2" src="../img/GroqAIService_brak_point_result_2.png" /></p>
+<h3 id="7-frontend-con-thymeleaf">7. Frontend con Thymeleaf</h3>
+<h4 id="71-frontendcontroller">7.1. FrontendController</h4>
+<p>Ahora vamos a sacar provecho de la dependencia Thymeleaf para poder crear un chatbot con interface gráfica. Empezamos creando el controlador que renderizará la página principal del chatbot:</p>
+<h4 id="frontendcontrollerjava"><code>FrontendController.java</code></h4>
+<p><div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">com.cipfpcheste.dam2.chatbot.service.controller</span><span class="p">;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.stereotype.Controller</span><span class="p">;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.ui.Model</span><span class="p">;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="p">;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nd">@Controller</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FrontendController</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">    </span><span class="c1">// Este controlador maneja la ruta raíz y devuelve la vista index.html</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="nd">@GetMapping</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">)</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">index</span><span class="p">(</span><span class="n">Model</span><span class="w"> </span><span class="n">model</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">        </span><span class="c1">// Aquí puedes agregar datos al modelo si fuera necesario</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">&quot;index&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Renderiza index.html</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="p">}</span>
+</span></code></pre></div>
+<img alt="FrontendController" src="../img/FrontendController.png" /></p>
+<h4 id="archivos-estaticos">Archivos estáticos</h4>
+<p>Coloca en <code>src/main/resources/</code>:</p>
+<ul>
+<li><code>static/css/styles.css</code> <a href="../recursos/springIA/styles.css">styles.css</a></li>
+<li><code>static/images/logo_simarro.jpg</code> <a href="../recursos/springIA/logo_simarro.jpg">logo_simarro.jpg</a></li>
+<li><code>static/images/simarret.jpg</code> <a href="../recursos/springIA/simarret.jpg">simarret.jpg</a></li>
+<li><code>static/js/script.js</code> <a href="../recursos/springIA/script.js">script.js</a></li>
+<li><code>templates/index.html</code> <a href="../recursos/springIA/">index.html</a></li>
+</ul>
+<h3 id="8-ejecucion-y-prueba">8. Ejecución y prueba</h3>
+<ol>
+<li>Ejecuta la aplicación</li>
+<li>Accede a:</li>
+<li><code>http://localhost:8090/api/v1/getPresentacionAlUsuario</code></li>
+<li><code>http://localhost:8090/api/v1/getChisteTematico?tema=programadores</code></li>
+<li><code>http://localhost:8090/</code> (interfaz web)</li>
+</ol>
+<h2 id="_1"><img alt="Chiste" src="../img/Chiste.png" /></h2>
+<h2 id="creatividad-del-llm">Creatividad del LLM</h2>
+<h3 id="parametros-de-control">Parámetros de control</h3>
+<h4 id="temperatura-temperature">Temperatura (<code>temperature</code>)</h4>
+<p>Controla el grado de aleatoriedad en las respuestas.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Valor</th>
+<th style="text-align: left;">Efecto</th>
+<th style="text-align: left;">Casos de Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0.0</td>
+<td style="text-align: left;">Determinista, repetitivo</td>
+<td style="text-align: left;">Hechos científicos, respuestas técnicas</td>
+</tr>
+<tr>
+<td style="text-align: left;">0.1–0.4</td>
+<td style="text-align: left;">Conservador, enfocado</td>
+<td style="text-align: left;">Asistentes profesionales, chatbots empresariales</td>
+</tr>
+<tr>
+<td style="text-align: left;">0.5–0.7</td>
+<td style="text-align: left;">Equilibrio creatividad/coherencia (recomendado)</td>
+<td style="text-align: left;">Redacción creativa, brainstorming</td>
+</tr>
+<tr>
+<td style="text-align: left;">0.8–1.0+</td>
+<td style="text-align: left;">Altamente creativo/impredecible</td>
+<td style="text-align: left;">Poesía, ideas disruptivas</td>
+</tr>
+</tbody>
+</table>
+<h4 id="top-p-nucleus-sampling">Top-P (Nucleus Sampling)</h4>
+<p>Controla la diversidad restringiendo la selección a un subconjunto de opciones probables.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Valor</th>
+<th style="text-align: left;">Comportamiento</th>
+<th style="text-align: left;">Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0.1</td>
+<td style="text-align: left;">Muy conservador</td>
+<td style="text-align: left;">Traducciones técnicas</td>
+</tr>
+<tr>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;">Equilibrio coherencia/variedad</td>
+<td style="text-align: left;">Respuestas creativas pero relevantes</td>
+</tr>
+<tr>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">Diverso y original</td>
+<td style="text-align: left;">Historias, diálogos</td>
+</tr>
+<tr>
+<td style="text-align: left;">1.0</td>
+<td style="text-align: left;">Máxima diversidad</td>
+<td style="text-align: left;">Experimentación artística</td>
+</tr>
+</tbody>
+</table>
+<h3 id="combinaciones-recomendadas">Combinaciones recomendadas</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">OpenAiChatOptions</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="p">.</span><span class="na">model</span><span class="p">(</span><span class="s">&quot;llama-3.3-70b-versatile&quot;</span><span class="p">)</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="p">.</span><span class="na">temperature</span><span class="p">(</span><span class="mf">0.7</span><span class="p">)</span><span class="w">    </span><span class="c1">// Creatividad media</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="p">.</span><span class="na">topP</span><span class="p">(</span><span class="mf">0.9</span><span class="p">)</span><span class="w">           </span><span class="c1">// Diversidad controlada</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="p">.</span><span class="na">maxTokens</span><span class="p">(</span><span class="mi">32768</span><span class="p">)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+</span></code></pre></div>
+<h4 id="guia-rapida">Guía rápida</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Objetivo</th>
+<th style="text-align: left;">Temperature</th>
+<th style="text-align: left;">Top-P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Respuestas técnicas</td>
+<td style="text-align: left;">0.1–0.3</td>
+<td style="text-align: left;">0.1–0.3</td>
+</tr>
+<tr>
+<td style="text-align: left;">Chat creativo</td>
+<td style="text-align: left;">0.6–0.8</td>
+<td style="text-align: left;">0.7–0.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">Generación de ideas</td>
+<td style="text-align: left;">0.9–1.2</td>
+<td style="text-align: left;">0.9–1.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Poesía/Arte</td>
+<td style="text-align: left;">1.0–1.5</td>
+<td style="text-align: left;">1.0</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="entrega-chatbot">Entrega: Chatbot</h2>
+<p>Crea un nuevo proyecto Spring Boot (o Flask en Python) que utilice los modelos de Groq.</p>
+<p><strong>Se valorará:</strong></p>
+<ul>
+<li>Funcionalidad interesante (texto, audio, moderación, etc.).</li>
+<li>Experimentación con <code>temperature</code> y <code>top_p</code>.</li>
+<li>Informe con conclusiones sobre el comportamiento del modelo.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../NLP%20Transformers%20y%20LLMs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: NLP: Transformers y LLMs">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                NLP: Transformers y LLMs
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../ChefAI/" class="md-footer__link md-footer__link--next" aria-label="Next: ChefAI - Documentacion didactica">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                ChefAI - Documentacion didactica
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manu Romero
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://youtube.com/@ciclosformativosinfo" target="_blank" rel="noopener" title="youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/malsonvalencia.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.footer", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

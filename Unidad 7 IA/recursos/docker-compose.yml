@@ -1,0 +1,26 @@
+# Versión de Docker Compose utilizada en este archivo
+version: "3.11.2"
+
+# Definición de servicios
+services:
+  # Servicio llamado "web"
+  web:
+    # Nombre del contenedor para el servicio
+    container_name: chef_mistral
+    # Imagen del contenedor, se obtiene de un repositorio de Docker Hub o de una imagen local
+    image: joserraprofesor/chef_mistral
+    # Mapeo de puertos, permitiendo acceder al servicio desde el puerto 5000 del host
+    ports:
+      - "5000:5000"
+    # Variables de entorno (importante para la API key de Mistral)
+    environment:
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
+    # Fichero de entorno para cargar variables automáticamente
+    env_file:
+      - .env
+    # Configuración de la construcción del contenedor
+    build:
+      # Contexto del build, indica el directorio donde se encuentra el Dockerfile y el resto de archivos necesarios
+      context: .
+      # Ruta al Dockerfile, que se encuentra en el mismo directorio que este archivo docker-compose.yml
+      dockerfile: Dockerfile

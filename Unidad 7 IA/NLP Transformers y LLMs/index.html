@@ -1,0 +1,3796 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://sitename.example.com/Unidad%207%20IA/NLP%20Transformers%20y%20LLMs/">
+      
+      
+        <link rel="prev" href="../Configuraci%C3%B3n%20del%20entorno%20de%20trabajo/">
+      
+      
+        <link rel="next" href="../NLP%20con%20Spring%20AI%20Desarrollo%20de%20Chatbots%20en%20Java/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/Cheste.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>NLP: Transformers y LLMs - Acceso a Datos</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CRed+Hat+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Red Hat Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="deep-purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nlp-transformers-y-llms" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Acceso a Datos" class="md-header__button md-logo" aria-label="Acceso a Datos" data-md-component="logo">
+      
+  <img src="../../assets/Cheste.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Acceso a Datos
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NLP: Transformers y LLMs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="deep-purple"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="deep-orange"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Acceso a Datos" class="md-nav__button md-logo" aria-label="Acceso a Datos" data-md-component="logo">
+      
+  <img src="../../assets/Cheste.png" alt="logo">
+
+    </a>
+    Acceso a Datos
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Simulacro examen 1ª Evaluación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Simulacro examen 1ª Evaluación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Simulacro%20examen%201%C2%AA%20Evaluaci%C3%B3n/Simulacro%20examen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    📚 Simulacro de examen: Acceso a Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 1 Ficheros
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 1 Ficheros
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/1_File_System.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Sistema de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/2_Reading_and_writing_files.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Lectura y escritura de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/3_XML_Files.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Archivos XML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/4_JSON_Files.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Archivos JSON
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/5_Extra_Formats.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Formatos extra
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%201%20Ficheros/6_Ejercicios.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ejercicios sistema de archivos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 2 Conectores de BBDD
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 2 Conectores de BBDD
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/1_Object_relational_impedance_mismatch.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Desfase objeto-relacional
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/2_Connectors.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Conectores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/3_Connecting.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Conectando a bases de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/4_Resultset.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Clase ResultSet.
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/5_Metadata.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Metadata de la base de datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/6_CRUD.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Statements and CRUD operations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/7_Row_to_Object.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    7. De filas a Objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%202%20Conectores%20de%20BBDD/clienteSQL/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actividad Cliente MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 3 Hibernate
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 3 Hibernate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/1_Mapping.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/2_Hibernate.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Hibernate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/3_Entities_Beans.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Mapeo de Entidades con JPA y Hibernate
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/4_Relationships.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Mapeando Relaciones
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/5_HQL.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Hibernate Query Language (HQL) / JPQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%203%20Hibernate/6_Ejercicio/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6 Ejercicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 4 BBDDOO
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 4 BBDDOO
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%204%20BBDDOO/1_Introducci%C3%B3n/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Introducción
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%204%20BBDDOO/2_ORDB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 ORDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%204%20BBDDOO/3_OODB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 OODB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 5 Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 5 Spring Boot
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/1_Servicios%20de%20Acceso%20a%20Datos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1 Servicios de Acceso a Datos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/2_Spring_Spring%20Boot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2 Spring Spring Boot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/3_API_Rest/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3 API Rest
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/4_Spring_Security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4 Spring Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%205%20Spring%20Boot/5_Spring_Hateoas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5 Spring Hateoas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 6 MongoDB
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 6 MongoDB
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/1_NoSQL.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Bases de datos NoSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/2_MongoDB.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. MongoDB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/3_ShellOperations.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Trabajando con MongoDB: Operaciones básicas de shell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/4_Queries.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Consultas en Mongo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/5_Mongo_Java.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. MongoDB y Java
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Unidad%206%20MongoDB/6_Spring_MongoDB.es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6. Spring Data MongoDB y API REST
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unidad 7 IA
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Unidad 7 IA
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Configuraci%C3%B3n%20del%20entorno%20de%20trabajo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del entorno de trabajo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP: Transformers y LLMs
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP: Transformers y LLMs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#evolucion-del-nlp-la-era-de-los-transformers-y-llms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evolución del NLP: La Era de los Transformers y LLMs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evolución del NLP: La Era de los Transformers y LLMs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#futuro-del-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Futuro del NLP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-4-transformers-y-llms-2017-actualidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Etapa 4 – Transformers y LLMs (2017-Actualidad)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Etapa 4 – Transformers y LLMs (2017-Actualidad)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquitectura-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitectura Transformer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entendiendo-como-funciona-la-atencion-en-los-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entendiendo cómo funciona la atención en los Transformers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcionamiento-de-la-autoatencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funcionamiento de la Autoatención
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionamiento de la Autoatención">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-proyeccion-a-vectores-query-key-y-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Proyección a vectores ‘Query’, ‘Key’ y ‘Value’
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simil-de-biblioteca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Símil de biblioteca
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-logra-la-atencion-sus-objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cómo logra la Atención sus objetivos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos-de-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos prácticos de atención
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumen-del-mecanismo-de-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen del mecanismo de atención
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Transformers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de Transformers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelos-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelos Encoder
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelos Encoder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-modelos-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de modelos Encoder:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tareas-tipicas-de-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tareas típicas de Encoder:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos-con-encoders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos prácticos con Encoders
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos prácticos con Encoders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-binaria-con-distilbert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación binaria con DistilBERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-ternaria-en-espanol-con-roberta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación ternaria en español con RoBERTa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analisis-de-sentimiento-con-bert-multilingue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis de sentimiento con BERT multilingüe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ner-con-bert-en-espanol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NER con BERT en español
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recuperacion-de-informacion-ir-con-distilbert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recuperación de información (IR) con DistilBERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-multi-etiqueta-con-roberta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación multi-etiqueta con RoBERTa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-zero-shot-con-deberta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación Zero-Shot con DeBERTa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelos-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelos Decoder
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelos Decoder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-modelos-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de modelos Decoder:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-practico-generacion-de-texto-con-gpt-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo práctico: Generación de texto con GPT-2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelos-encoder-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelos Encoder-Decoder
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelos Encoder-Decoder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicaciones-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicaciones principales:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos prácticos:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos prácticos:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traduccion-de-texto-con-seq2seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traducción de texto con seq2seq
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumen-de-texto-con-bart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen de texto con BART
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-few-shot-con-bart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación Few-shot con BART
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-generativa-a-pregunta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuesta generativa a pregunta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recapitulacion-de-arquitecturas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recapitulación de arquitecturas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grandes-modelos-del-lenguaje-llms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grandes Modelos del Lenguaje (LLMs)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Grandes Modelos del Lenguaje (LLMs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usos principales:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-practico-mistral-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo práctico: Mistral AI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplo práctico: Mistral AI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#codigo-de-ejemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código de ejemplo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-guiado-crear-una-webapp-con-flask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio guiado: Crear una webapp con Flask
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejercicio guiado: Crear una webapp con Flask">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pasos:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-crear-entorno-virtual-con-conda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Crear entorno virtual con Conda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-instalar-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Instalar dependencias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estructura del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-archivo-utilities_chefpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Archivo utilities_chef.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-archivo-apppy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Archivo app.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-ejecutar-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Ejecutar la aplicación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega-mini-webapp-con-flask-y-mistral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrega: Mini-WebApp con Flask y Mistral
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entrega: Mini-WebApp con Flask y Mistral">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ideas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos de entrega:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NLP%20con%20Spring%20AI%20Desarrollo%20de%20Chatbots%20en%20Java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NLP: SpringAI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChefAI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ChefAI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ChefAI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ChefAI - Documentacion didactica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ChefAI/clases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clases del backend
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ChefAI/configuracion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuracion (application.properties)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ChefAI/frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Frontend (HTML, CSS y JavaScript)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#evolucion-del-nlp-la-era-de-los-transformers-y-llms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evolución del NLP: La Era de los Transformers y LLMs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evolución del NLP: La Era de los Transformers y LLMs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#futuro-del-nlp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Futuro del NLP
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etapa-4-transformers-y-llms-2017-actualidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Etapa 4 – Transformers y LLMs (2017-Actualidad)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Etapa 4 – Transformers y LLMs (2017-Actualidad)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquitectura-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arquitectura Transformer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entendiendo-como-funciona-la-atencion-en-los-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entendiendo cómo funciona la atención en los Transformers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcionamiento-de-la-autoatencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Funcionamiento de la Autoatención
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionamiento de la Autoatención">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-proyeccion-a-vectores-query-key-y-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Proyección a vectores ‘Query’, ‘Key’ y ‘Value’
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simil-de-biblioteca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Símil de biblioteca
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#como-logra-la-atencion-sus-objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ¿Cómo logra la Atención sus objetivos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos-de-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos prácticos de atención
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumen-del-mecanismo-de-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen del mecanismo de atención
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipos-de-transformers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de Transformers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de Transformers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modelos-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelos Encoder
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelos Encoder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-modelos-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de modelos Encoder:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tareas-tipicas-de-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tareas típicas de Encoder:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos-con-encoders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos prácticos con Encoders
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos prácticos con Encoders">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-binaria-con-distilbert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación binaria con DistilBERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-ternaria-en-espanol-con-roberta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación ternaria en español con RoBERTa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analisis-de-sentimiento-con-bert-multilingue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis de sentimiento con BERT multilingüe
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ner-con-bert-en-espanol" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NER con BERT en español
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recuperacion-de-informacion-ir-con-distilbert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recuperación de información (IR) con DistilBERT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-multi-etiqueta-con-roberta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación multi-etiqueta con RoBERTa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-zero-shot-con-deberta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación Zero-Shot con DeBERTa
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelos-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelos Decoder
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelos Decoder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-modelos-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos de modelos Decoder:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-practico-generacion-de-texto-con-gpt-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo práctico: Generación de texto con GPT-2
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modelos-encoder-decoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Modelos Encoder-Decoder
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modelos Encoder-Decoder">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aplicaciones-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicaciones principales:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-practicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplos prácticos:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplos prácticos:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#traduccion-de-texto-con-seq2seq" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Traducción de texto con seq2seq
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resumen-de-texto-con-bart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen de texto con BART
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clasificacion-few-shot-con-bart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Clasificación Few-shot con BART
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respuesta-generativa-a-pregunta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Respuesta generativa a pregunta
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recapitulacion-de-arquitecturas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recapitulación de arquitecturas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grandes-modelos-del-lenguaje-llms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Grandes Modelos del Lenguaje (LLMs)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Grandes Modelos del Lenguaje (LLMs)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usos principales:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ejemplo-practico-mistral-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo práctico: Mistral AI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejemplo práctico: Mistral AI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#codigo-de-ejemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Código de ejemplo:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ejercicio-guiado-crear-una-webapp-con-flask" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejercicio guiado: Crear una webapp con Flask
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ejercicio guiado: Crear una webapp con Flask">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivos:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pasos:
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pasos:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-crear-entorno-virtual-con-conda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Crear entorno virtual con Conda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-instalar-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Instalar dependencias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-estructura-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Estructura del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-archivo-utilities_chefpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Archivo utilities_chef.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-archivo-apppy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Archivo app.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-ejecutar-la-aplicacion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Ejecutar la aplicación
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entrega-mini-webapp-con-flask-y-mistral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entrega: Mini-WebApp con Flask y Mistral
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Entrega: Mini-WebApp con Flask y Mistral">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ideas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ideas:
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos de entrega:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="nlp-transformers-y-llms">NLP: Transformers y LLMs</h1>
+<p><strong>Ponente:</strong> Jose Ramón Cebolla Cebolla  </p>
+<p><strong>Objetivos de la sesión:</strong>  </p>
+<p>En esta sesión aprenderemos a:  </p>
+<ul>
+<li>Comprender cómo la arquitectura <strong>Transformer</strong> y los <strong>Grandes Modelos de Lenguaje (LLMs)</strong> han revolucionado por completo el Procesamiento del Lenguaje Natural.  </li>
+<li>Entender el mecanismo de <strong>atención</strong>, la idea clave que permite a los Transformers capturar el significado y el contexto profundo de un texto.  </li>
+<li>Implementar <strong>ejemplos prácticos en Python</strong> para dominar las distintas variantes de <strong>Transformers (Encoders, Decoders y Encoder-Decoders)</strong> y resolver una gran variedad de tareas, desde clasificación avanzada hasta generación o traducción de texto.  </li>
+<li>Aprender a <strong>interactuar directamente con LLMs de última generación</strong>, como <strong>Mistral</strong>, a través de sus APIs, para poder utilizar todo su potencial en nuestras propias aplicaciones creando una <strong>webapp con Flask</strong> y opcionalmente dockerizándola.  </li>
+</ul>
+<hr />
+<h2 id="evolucion-del-nlp-la-era-de-los-transformers-y-llms">Evolución del NLP: La Era de los Transformers y LLMs</h2>
+<p>El procesamiento del lenguaje natural (NLP) ha evolucionado desde enfoques manuales hasta métodos basados en datos y aprendizaje profundo. Esta sesión explora su última etapa para entender en qué situación nos encontramos:</p>
+<ul>
+<li><strong>Etapa 1:</strong> Sistemas basados en reglas (1950s-1980s)</li>
+<li><strong>Etapa 2:</strong> Métodos estadísticos y ML clásico (1990s-2010)</li>
+<li><strong>Etapa 3:</strong> Word embeddings y redes neuronales (2010s)</li>
+<li><strong>Etapa 4:</strong> Transformers y LLMs (2017-Actualidad)</li>
+</ul>
+<p>La IA es capaz de comprender la entrada y responder adecuadamente. En los últimos años la IA está en boca de todos y se ha normalizado el uso de chatbots conversacionales como ChatGPT.</p>
+<h3 id="futuro-del-nlp">Futuro del NLP</h3>
+<p>A nivel laboral está comenzando una era disruptiva con la utilización de la IA generativa para ser más productivo en un sinfín de tareas.</p>
+<hr />
+<h2 id="etapa-4-transformers-y-llms-2017-actualidad">Etapa 4 – Transformers y LLMs (2017-Actualidad)</h2>
+<h3 id="arquitectura-transformer">Arquitectura Transformer</h3>
+<p><strong>¡¡El paper “Attention is all you need” lo cambió todo!!</strong></p>
+<p><strong>¿Por qué los Transformers son tan buenos?</strong></p>
+<p>Imagina que lees un libro y recuerdas solo las partes importantes sin repetir todo. ¡Eso hace un transformer!</p>
+<p>Antes los modelos, como RNN, eran lentos y olvidaban el contexto lejano.</p>
+<p>A lo largo de esta práctica intentaremos explicar el motivo, pero por ejemplo, en “Pensaba que sería el mejor día de mi vida, pero cuando vi a Jose me di cuenta que no lo sería”, un transformer llega a entender que la frase es negativa a pesar de que hasta el final de la frase no se dan pistas...</p>
+<p>Usan “atención” en lugar de procesar palabras una por una.</p>
+<hr />
+<h3 id="entendiendo-como-funciona-la-atencion-en-los-transformers">Entendiendo cómo funciona la atención en los Transformers</h3>
+<p>La atención en los modelos Transformer es el mecanismo clave que les permite procesar el lenguaje de manera efectiva, logrando <strong>crear relaciones entre palabras, capturar el contexto dinámico y recordar la información lejana</strong>.</p>
+<p>Si nos paramos a pensar, <em>tener una representación estática de una palabra no refleja toda la riqueza del lenguaje</em>. Incorporar el resto del contexto en la representación semántica de las palabras nos permite profundizar en el significado real que toma esa palabra en ese contexto concreto.</p>
+<p>Técnicamente, funciona a través del mecanismo de <strong>autoatención (Self-Attention)</strong>, que nos permitirá, si nos quedamos con la esencia de las palabras, hacer cosas como traducir textos de entrada de un lenguaje a otro.</p>
+<p><img alt="Transformers" src="../img/Transformers.png" /></p>
+<hr />
+<p><strong>Para las explicaciones utilizaré los gráficos de Jay Alammar:</strong><br />
+<a href="https://jalammar.github.io/illustrated-transformer/">https://jalammar.github.io/illustrated-transformer/</a></p>
+<hr />
+<h3 id="funcionamiento-de-la-autoatencion">Funcionamiento de la Autoatención</h3>
+<h4 id="1-proyeccion-a-vectores-query-key-y-value">1. Proyección a vectores ‘Query’, ‘Key’ y ‘Value’</h4>
+<p>Para cada token (palabra o subpalabra) en la secuencia de entrada, se proyecta su embedding inicial en tres vectores diferentes mediante tres matrices de pesos aprendibles: Query (WQ), Key (WK) y Value (WV).</p>
+<p><img alt="Transformers_2" src="../img/Transformers_2.png" /></p>
+<p>Veamoslo con la representación de la frase “Thinking Machines”:</p>
+<hr />
+<h4 id="simil-de-biblioteca">Símil de biblioteca</h4>
+<ul>
+<li>
+<p><strong>Query (Consulta):</strong> Representa lo que cada palabra está buscando en las demás palabras de la oración. Son como las preguntas que haces en la biblioteca para encontrar información específica. Por ejemplo, podrías preguntar: “¿Dónde puedo encontrar información sobre la Segunda Guerra Mundial?”</p>
+</li>
+<li>
+<p><strong>Key (Clave):</strong> Representa lo que cada palabra ofrece a las demás en términos de información relevante. Son como etiquetas que describen el contenido de cada libro en la biblioteca. Cada libro tiene una serie de etiquetas que indican sobre qué temas trata. Por ejemplo, un libro podría tener las claves “Historia”, “Segunda Guerra Mundial”, “Europa”.</p>
+</li>
+<li>
+<p><strong>Value (Valor):</strong> Contiene la información real que se agregará a la representación de la palabra actual basándose en la atención. <em>Son el contenido real de los libros, es decir, la información que contienen. Siguiendo con el ejemplo, el valor sería el texto completo de un libro sobre la Segunda Guerra Mundial.</em></p>
+</li>
+</ul>
+<hr />
+<h4 id="como-logra-la-atencion-sus-objetivos">¿Cómo logra la Atención sus objetivos?</h4>
+<ol>
+<li><strong>Crear y dar fuerza a las relaciones entre palabras en una oración:</strong></li>
+<li>El mecanismo de autoatención permite que cada palabra interactúe directamente con todas las demás a través del cálculo de las puntuaciones de relevancia entre sus vectores ‘Query’ y ‘Key’.</li>
+<li>Cuanto más semánticamente relacionadas sean dos palabras en un contexto dado, mayor será la puntuación de relevancia entre su ‘Query’ y su ‘Key’, lo que resultará en un mayor peso de atención.</li>
+<li>
+<p>Al combinar los vectores ‘Value’ ponderados por estos pesos de atención, la representación de cada palabra se enriquece con la información de las palabras con las que tiene relaciones más fuertes.</p>
+</li>
+<li>
+<p><strong>Capturar el contexto dinámico de las palabras:</strong></p>
+</li>
+<li>A diferencia de los embeddings de palabras estáticos (como Word2Vec) que tienen una representación fija para cada palabra, la autoatención genera embeddings contextualizados. Por eso también se les llama <em>modelos de embeddings contextualizados</em>.</li>
+<li>
+<p>La representación de cada token se vuelve dependiente del contexto de toda la secuencia porque se calcula considerando su relación con todos los demás tokens.</p>
+</li>
+<li>
+<p><strong>No olvidar el contexto lejano:</strong></p>
+</li>
+<li>Las capas recurrentes (como LSTMs y GRUs) tienen dificultades para mantener la información de partes lejanas de la secuencia debido al problema de la "memoria a corto plazo".</li>
+<li>El mecanismo de autoatención, en cambio, permite que cada palabra atienda directamente a cualquier otra palabra en la secuencia, independientemente de su distancia lineal. No hay una dependencia secuencial estricta; la información puede fluir directamente entre palabras lejanas a través de las conexiones de atención.</li>
+<li>Esto es crucial para entender oraciones largas donde las dependencias semánticas pueden existir entre palabras que están muy separadas.</li>
+</ol>
+<hr />
+<h4 id="ejemplos-practicos-de-atencion">Ejemplos prácticos de atención</h4>
+<ol>
+<li>
+<p><strong>"Juan esta durmiendo en su habitación tranquilo":</strong><br />
+   Los transformers entienden que "tranquilo" se refiere a "Juan" aunque esté muy lejos y esté junto a la palabra "habitación".</p>
+</li>
+<li>
+<p><strong>Diferencias entre "Juan esta sentado en el banco" (mueble) y "Depositó dinero en el banco" (edificio):</strong><br />
+   Los embeddings contextualizados resultantes para "banco" en ambas frases serán diferentes, reflejando sus distintos significados contextuales. Esto permite al <em>Transformer diferenciar la polisemia de las palabras</em>.</p>
+</li>
+<li>
+<p><strong>"Pensaba que sería el mejor día de mi vida, pero cuando vi a Jose me di cuenta que no lo sería":</strong><br />
+   Permite al modelo mantener la coherencia semántica y "recordar" el contexto lejano para entender la contradicción implícita.</p>
+</li>
+</ol>
+<hr />
+<h3 id="resumen-del-mecanismo-de-atencion">Resumen del mecanismo de atención</h3>
+<p>En resumen, el mecanismo de atención del Transformer, a través del cálculo dinámico de la relevancia entre palabras y la creación de embeddings contextualizados, permite capturar complejas relaciones semánticas, adaptarse al contexto cambiante de las palabras y mantener la información relevante incluso a largas distancias dentro de una secuencia.</p>
+<hr />
+<h2 id="tipos-de-transformers">Tipos de Transformers</h2>
+<p>Profundicemos a continuación los distintos tipos de Transformers que existen:</p>
+<ul>
+<li><strong>Encoders</strong></li>
+<li><strong>Decoders</strong></li>
+<li><strong>Encoders-Decoders</strong></li>
+</ul>
+<p>Muchos de estos transformers pueden funcionar con GPU o con CPU a una velocidad más lenta, lo que les da un valor añadido.</p>
+<hr />
+<h3 id="modelos-encoder">Modelos Encoder</h3>
+<p>Los modelos Encoder son Transformers que están diseñados para <strong>comprender el texto de entrada codificándolo de forma informativa</strong>, creando una representación enriquecida de la entrada.</p>
+<p><img alt="Encoder" src="../img/Encoder.png" /></p>
+<h4 id="ejemplos-de-modelos-encoder">Ejemplos de modelos Encoder:</h4>
+<ul>
+<li><strong>BERT (Bidirectional Encoder Representations from Transformers)</strong>, lanzado en octubre de 2018.</li>
+<li><strong>DistilBERT</strong>, una versión destilada de BERT (60% más rápida, 40% más ligera).</li>
+<li><strong>RoBERTa</strong>, <strong>SpanBERT</strong>, <strong>ALBERT</strong>, <strong>DeBERTa</strong>, <strong>DeBERTa-v2</strong>, <strong>DeBERTa-v3</strong>.</li>
+</ul>
+<p>Los modelos Encoder son más aptos para tareas de comprensión de texto (<strong>NLU = Natural Language Understanding</strong>).</p>
+<h4 id="tareas-tipicas-de-encoder">Tareas típicas de Encoder:</h4>
+<ul>
+<li><strong>Clasificación de texto</strong></li>
+<li><strong>Reconocimiento de Entidades Nombradas (NER)</strong></li>
+<li><strong>Recuperación de información (IR)</strong></li>
+<li>Análisis de sentimientos, detección de spam, clasificación de pares de texto.</li>
+</ul>
+<hr />
+<h4 id="ejemplos-practicos-con-encoders">Ejemplos prácticos con Encoders</h4>
+<p>En los siguientes apartados se explicaran los ejemplos de código del <a href="../recursos/03_NLP_Transformers_LLMs.ipynb">fichero</a> Puedes abrirlo en Google Colab e ir probandolo.</p>
+<h5 id="clasificacion-binaria-con-distilbert">Clasificación binaria con DistilBERT</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">clasificador</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s1">&#39;sentiment-analysis&#39;</span><span class="p">)</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">clasificador</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">name_or_path</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">clasificador</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">name_or_path</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">mensajeEN</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Love this product!&#39;</span><span class="p">,</span> <span class="s2">&quot;Terrible service, horrible day&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">results</span> <span class="o">=</span> <span class="n">clasificador</span><span class="p">(</span><span class="n">mensajeEN</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">for</span> <span class="n">mensaje</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mensajeEN</span><span class="p">,</span> <span class="n">results</span><span class="p">):</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mensaje: </span><span class="si">{</span><span class="n">mensaje</span><span class="si">}</span><span class="s2"> -&gt; Sentimiento: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (Score: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h5 id="clasificacion-ternaria-en-espanol-con-roberta">Clasificación ternaria en español con RoBERTa</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">clasificador</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s1">&#39;text-classification&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;pysentimiento/robertuito-sentiment-analysis&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h5 id="analisis-de-sentimiento-con-bert-multilingue">Análisis de sentimiento con BERT multilingüe</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">classifier</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;sentiment-analysis&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;nlptown/bert-base-multilingual-uncased-sentiment&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h5 id="ner-con-bert-en-espanol">NER con BERT en español</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">ner_pipeline</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;ner&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;nrm8488/bert-spanish-cased-finetuned-ner&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h5 id="recuperacion-de-informacion-ir-con-distilbert">Recuperación de información (IR) con DistilBERT</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">qa</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s1">&#39;question-answering&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<h5 id="clasificacion-multi-etiqueta-con-roberta">Clasificación multi-etiqueta con RoBERTa</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">classifier</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="n">task</span><span class="o">=</span><span class="s2">&quot;text-classification&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;Sambove/roberta-base-go_emotions&quot;</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</span></code></pre></div>
+<h5 id="clasificacion-zero-shot-con-deberta">Clasificación Zero-Shot con DeBERTa</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">zero_shot_classifier</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;zero-shot-classification&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;MoritzLaurer/mDeBERTa-v3-base-mnli-xnli&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<hr />
+<h3 id="modelos-decoder">Modelos Decoder</h3>
+<p>Los modelos decoder son Transformers que se centran en <em>generar texto de forma autoregresiva</em>, lo que significa que retroceden o predicen el siguiente valor de una secuencia en función de todos los valores anteriores.</p>
+<h4 id="ejemplos-de-modelos-decoder">Ejemplos de modelos Decoder:</h4>
+<ul>
+<li><strong>GPT</strong> (Improving Language Understanding by Generative Pre-Training), junio 2018.</li>
+<li><strong>GPT-2</strong>, <strong>GPT-3</strong>, <strong>GPT-4</strong>.</li>
+<li>Modelos opensource: <em>Mistral</em>, <em>Phi-2</em>, <em>Qwen-1.5</em>, <em>Gemma</em>.</li>
+</ul>
+<h4 id="ejemplo-practico-generacion-de-texto-con-gpt-2">Ejemplo práctico: Generación de texto con GPT-2</h4>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">set_seed</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">generador</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;text-generation&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt2&quot;</span><span class="p">)</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">set_seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">texto</span> <span class="o">=</span> <span class="n">generador</span><span class="p">(</span><span class="s2">&quot;Hello, I&#39;m a language model.&quot;</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</span></code></pre></div>
+<hr />
+<h3 id="modelos-encoder-decoder">Modelos Encoder-Decoder</h3>
+<p>Los modelos encoder-decoder son Transformers que actúan como un <em>puente entre la comprensión y la generación de texto</em>. Toman una secuencia de entrada, la codifican en una representación, y luego utilizan un decoder para generar una secuencia de salida. Por ello hay quien los llama también modelos secuencia a secuencia.</p>
+<h4 id="ejemplos">Ejemplos:</h4>
+<ul>
+<li><strong>BART</strong> (octubre 2019)</li>
+<li><strong>T5</strong> (Text-to-Text Transformer, octubre 2019)</li>
+<li><strong>Pegasus</strong> (diciembre 2019)</li>
+</ul>
+<h4 id="aplicaciones-principales">Aplicaciones principales:</h4>
+<ul>
+<li><strong>Traducción automática</strong></li>
+<li><strong>Resumen automático</strong></li>
+<li><strong>Respuesta generativa a preguntas</strong></li>
+</ul>
+<h4 id="ejemplos-practicos">Ejemplos prácticos:</h4>
+<h5 id="traduccion-de-texto-con-seq2seq">Traducción de texto con seq2seq</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">traductor</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;translation_en_to_es&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;Helsinki-NLP/opus-mt-en-es&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h5 id="resumen-de-texto-con-bart">Resumen de texto con BART</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">resumen</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;summarization&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;facebook/bart-large-cnn&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h5 id="clasificacion-few-shot-con-bart">Clasificación Few-shot con BART</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">classifier</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;zero-shot-classification&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;facebook/bart-large-mnli&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<h5 id="respuesta-generativa-a-pregunta">Respuesta generativa a pregunta</h5>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">qa_pipeline</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s2">&quot;text2text-generation&quot;</span><span class="p">,</span> <span class="n">tokenizer</span><span class="o">=</span><span class="s2">&quot;vgaraujov/t5-base-spanish&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="s2">&quot;benjleite/t5s-spanish-qa&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<hr />
+<h3 id="recapitulacion-de-arquitecturas">Recapitulación de arquitecturas</h3>
+<ul>
+<li><strong>Modelos encoder:</strong> Especializados en tareas que requieren comprender la entrada (clasificación, NER). También conocidos como modelos bidireccionales.</li>
+<li><strong>Modelos decoder:</strong> Especializados en tareas generativas. También conocidos como modelos generativos.</li>
+<li><strong>Modelos encoder-decoder:</strong> Buenas para tareas generativas que requieren comprender una entrada para generar una salida (traducción, resumen). También conocidos como modelos seq2seq.</li>
+</ul>
+<hr />
+<h2 id="grandes-modelos-del-lenguaje-llms">Grandes Modelos del Lenguaje (LLMs)</h2>
+<p>Los LLMs (Large Language Models) son modelos con <em>millones de parámetros</em>. Permiten diálogos naturales y respuestas útiles capaces de traducir y entender lo que se le pide con precisión.</p>
+<h3 id="usos-principales">Usos principales:</h3>
+<ul>
+<li><em>Generación de texto</em> (contenido, chatbots, código)</li>
+<li><em>Modelos de chat generativos</em>: ChatGPT, Claude, Gemini, Deepseek, Llama, Mixtral, Grok, etc.</li>
+</ul>
+<hr />
+<h3 id="ejemplo-practico-mistral-ai">Ejemplo práctico: Mistral AI</h3>
+<p>Pasos para utilizar la API de Mistral:</p>
+<ol>
+<li>Crear espacio en https://console.mistral.ai/</li>
+<li>Configurar plan (gratuito o de pago)
+<img alt="Mistral" src="../img/Mistral.png" /></li>
+<li>Indica que quieres experimentar con un plan gratuito:
+<img alt="Mistral2" src="../img/Mistral_2.png" /></li>
+<li>Suscríbete y verifica tu número de teléfono:
+<img alt="Mistral3" src="../img/Mistral_3.png" /></li>
+<li>Crear una API Key
+<img alt="Mistral4" src="../img/Mistral_4.png" /></li>
+<li>Consultar documentación en https://docs.mistral.ai/getting-started/quickstart/
+<img alt="Mistral5" src="../img/Mistral_5.png" /></li>
+</ol>
+<h4 id="codigo-de-ejemplo">Código de ejemplo:</h4>
+<ol>
+<li>Podemos crear una variable de entorno en nuestro sistema operativo que lea el valor de esa api_key o podemos poner directamente la clave en el valor de la api_key si tenemos un fichero “.py” con el código en local. Si ponemos la clave en Google Colab para probar, acordaros después de borrarla de Mistral por seguridad..</li>
+</ol>
+<p><img alt="Mistral6" src="../img/Mistral_6.png" /></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mistralai</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mistral</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">api_key</span> <span class="o">=</span> <span class="s2">&quot;TU_API_KEY&quot;</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">model</span> <span class="o">=</span> <span class="s2">&quot;mistral-large-latest&quot;</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">client</span> <span class="o">=</span> <span class="n">Mistral</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="n">chat_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">complete</span><span class="p">(</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;What is the best French cheese?&quot;</span><span class="p">}]</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="p">)</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">chat_response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span></code></pre></div>
+<hr />
+<h2 id="ejercicio-guiado-crear-una-webapp-con-flask">Ejercicio guiado: Crear una webapp con Flask</h2>
+<h3 id="objetivos">Objetivos:</h3>
+<ul>
+<li>Crear entornos virtuales con conda.</li>
+<li>Desarrollar APIs (Backend) que accedan a la API de Mistral.</li>
+<li>Desarrollar FrontEnd en HTML con Flask.</li>
+</ul>
+<h3 id="pasos">Pasos:</h3>
+<h4 id="1-crear-entorno-virtual-con-conda">1. Crear entorno virtual con Conda</h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>proyectoFlask<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11.2
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>conda<span class="w"> </span>activate<span class="w"> </span>proyectoFlask
+</span></code></pre></div>
+<h4 id="2-instalar-dependencias">2. Instalar dependencias</h4>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>pip<span class="w"> </span>install<span class="w"> </span>flask<span class="w"> </span>mistralai<span class="w"> </span>python-dotenv<span class="w"> </span>markdown
+</span></code></pre></div>
+<p>Si quisieramos desactivar el entorno:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>conda<span class="w"> </span>deactivate
+</span></code></pre></div>
+<h4 id="3-estructura-del-proyecto">3. Estructura del proyecto</h4>
+<p>Vamos a crear una carpeta ‘chef_mistral_flask’, dentro creamos un fichero “.env” con la clave de mistral :</p>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;MISTRAL_API_KEY=tu_clave_aki&quot;</span>&gt;.env
+</span></code></pre></div>
+El fichero .env nos servirá para leer la clave de mistral sin tener que ponerla directamente en el fichero de Python. Es una muy buena práctica si después queremos subir nuestra webapp a Github o similar, porque en ese caso subiremos todos los ficheros menos el fichero “.env” para evitar estar dando nuestro código a cualquiera que pueda leer nuestros ficheros Python.
+Ya podemos abrir la carpeta ‘chef_mistral_flask’ desde VSCode.</p>
+<ul>
+<li><code>chef_mistral_flask/</code></li>
+<li><code>templates/</code> (contiene <code>home.html</code>)</li>
+<li><code>.env</code> (clave de Mistral)</li>
+<li><code>utilities_chef.py</code> (funciones de llamada a Mistral)</li>
+<li><code>app.py</code> (aplicación Flask principal)</li>
+</ul>
+<h4 id="4-archivo-utilities_chefpy">4. Archivo <code>utilities_chef.py</code></h4>
+<p>Configurar mistral en la webapp: utilities_chef.py:
+Copiamos el fichero <a href="../recursos/utilities_chef.py">utilities_chef.py</a> en la raiz del proyecto. De momento no reconoce la librería mistralai, pero lo solucionamos enseguida:</p>
+<p><img alt="Mistral_7" src="../img/Mistral_7.png" /></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mistralai</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mistral</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="n">load_dotenv</span><span class="p">()</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="n">api_key</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;MISTRAL_API_KEY&quot;</span><span class="p">)</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="n">client</span> <span class="o">=</span> <span class="n">Mistral</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">LLM_response</span><span class="p">(</span><span class="n">ingredientes</span><span class="p">):</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    <span class="n">prompt</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Genera una receta con estos ingredientes: </span><span class="si">{</span><span class="n">ingredientes</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">complete</span><span class="p">(</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;mistral-large-latest&quot;</span><span class="p">,</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>        <span class="n">messages</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">prompt</span><span class="p">}]</span>
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>    <span class="p">)</span>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>    <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+</span></code></pre></div>
+<p>Pulsamos en la versión del interprete de Python (cuadro rojo inferior) y en el desplegable seleccionamos “proyectoFlask” (cuadro rojo superior) para que las librerías se importen:</p>
+<p><img alt="Mistral_8" src="../img/Mistral_8.png" /></p>
+<p>Descomentamos la parte final del fichero para probar a llamar a Mistral y ya podemos ejecutar el fichero y comprobar si responde bien. Una vez probado volver a comentar.</p>
+<p><img alt="Mistral_9" src="../img/Mistral_9.png" /></p>
+<p>Creamos la carpeta “templates” en nuestro proyecto y copiamos el fichero “home.html” de la carpeta de Recursos. Si lo abrimos podemos comprobar que al introducir los ingredientes llamará a “generar_receta”:</p>
+<p><img alt="Mistral_10" src="../img/Mistral_10.png" /></p>
+<h4 id="5-archivo-apppy">5. Archivo <code>app.py</code></h4>
+<p>Copiamos <a href="../recursos/app.py">app.py</a>, que será quien atienda el servicio web utilizando Flask y mostrando la página principal (<strong>home.html</strong>) a través del decorador <strong>app.route</strong> cuando se acceda a la raíz de nuestra web:</p>
+<p><img alt="Mistral_11" src="../img/Mistral_11.png" /></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">utilities_chef</span><span class="w"> </span><span class="kn">import</span> <span class="n">LLM_response</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">markdown</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">home</span><span class="p">():</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;home.html&#39;</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/generar_receta&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">generate_recipe</span><span class="p">():</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>        <span class="n">ingredients</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;INGREDIENTS&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">ingredients</span><span class="p">:</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;home.html&#39;</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="s1">&#39;Introduce ingredientes.&#39;</span><span class="p">)</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>        <span class="k">try</span><span class="p">:</span>
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>            <span class="n">receta</span> <span class="o">=</span> <span class="n">LLM_response</span><span class="p">(</span><span class="n">ingredients</span><span class="p">)</span>
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>            <span class="n">receta_html</span> <span class="o">=</span> <span class="n">markdown</span><span class="o">.</span><span class="n">markdown</span><span class="p">(</span><span class="n">receta</span><span class="p">)</span>
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;home.html&#39;</span><span class="p">,</span> <span class="n">ingredients_input</span><span class="o">=</span><span class="n">ingredients</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="n">receta_html</span><span class="p">)</span>
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="__span-18-23"><a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;home.html&#39;</span><span class="p">,</span> <span class="n">val</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Error: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Si solicitamos “<strong>generar_receta</strong>” en modo POST desde el formulario donde le indicamos los ingredientes invocaremos a <strong>Mistral</strong> utilizando el método <strong>LLM_response</strong> que hemos creado en el fichero de utilidades:</p>
+<p><img alt="Mistral_12" src="../img/Mistral_12.png" /></p>
+<h4 id="6-ejecutar-la-aplicacion">6. Ejecutar la aplicación</h4>
+<p>Lancemos la aplicación, comprobemos que esta corriendo y ya podemos probarla.</p>
+<p>Ten en cuenta que tarda en responder. La webapp es mejorable, pero como prueba de concepto es suficiente.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>python<span class="w"> </span>app.py
+</span></code></pre></div>
+<p><img alt="Mistral_13" src="../img/Mistral_13.png" /></p>
+<p>Acceder a <code>http://127.0.0.1:5000</code></p>
+<hr />
+<p><img alt="Mistral_14" src="../img/Mistral_14.png" />
+<img alt="Mistral_15" src="../img/Mistral_15.png" /></p>
+<hr />
+<h2 id="entrega-mini-webapp-con-flask-y-mistral">Entrega: Mini-WebApp con Flask y Mistral</h2>
+<p>Crea un nuevo proyecto Flask que interactúe con la API de Mistral para resolver un problema interesante.</p>
+<h3 id="ideas">Ideas:</h3>
+<ul>
+<li>Generador de ideas para posts o tuits</li>
+<li>Asistente de programación (explica código)</li>
+<li>Ayudante de escritura (corrección gramatical, resumen)</li>
+<li>Traductor simple</li>
+</ul>
+<h3 id="requisitos-de-entrega">Requisitos de entrega:</h3>
+<ul>
+<li>Ficheros Python (<code>app.py</code>, <code>utilities.py</code>, etc.)</li>
+<li>Plantillas HTML</li>
+<li><code>requirements.txt</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Configuraci%C3%B3n%20del%20entorno%20de%20trabajo/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configuración del entorno de trabajo">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Configuración del entorno de trabajo
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../NLP%20con%20Spring%20AI%20Desarrollo%20de%20Chatbots%20en%20Java/" class="md-footer__link md-footer__link--next" aria-label="Next: NLP: SpringAI">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                NLP: SpringAI
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Manu Romero
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://youtube.com/@ciclosformativosinfo" target="_blank" rel="noopener" title="youtube.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.545 15.568V8.432L15.818 12z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://bsky.app/profile/malsonvalencia.bsky.social" target="_blank" rel="noopener" title="bsky.app" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037-.856 3.061-3.978 3.842-6.755 3.37 4.854.826 6.089 3.562 3.422 6.299-5.065 5.196-7.28-1.304-7.847-2.97-.104-.305-.152-.448-.153-.327 0-.121-.05.022-.153.327-.568 1.666-2.782 8.166-7.847 2.97-2.667-2.737-1.432-5.473 3.422-6.3-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.footer", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
