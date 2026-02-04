@@ -1216,3 +1216,5 @@ Por defecto podemos acceder a la aplicación desde esta url: http://localhost:80
 
 ![SpringIA_conf_proyect](./img/OpenAPI.png)
 
+El proyecto final lo podemos encontrar [aqui](SpringMongoDB.zip)
+
