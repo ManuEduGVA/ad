@@ -10,7 +10,7 @@ Una base de datos MongoDB está compuesta por colecciones de `Document`. Aunque 
 
 En este contexto, existen dos anotaciones principales que utilizaremos:
 
-- `@Document` → para indicar que una clase corresponde a un objeto de dominio (domain object) que se puede mapear en la base de datos para ofrecer persistencia. Esta anotación para MongoDB sería la equivalente a `@Entity` en JPA. Si no se indica nada, el nombre de la colección que se va a utilizar se interpretará como correspondiente al nombre de la clase en **minúsculas**. Así, si tenemos la clase `com.jaume.ad.Person`, se utilizará la colección `person`. Sin embargo, podemos indicar la colección con la que estamos trabajando, ya sea a través de los atributos value o collection, con la siguiente sintaxis: 
+- `@Document` → para indicar que una clase corresponde a un objeto de dominio (domain object) que se puede mapear en la base de datos para ofrecer persistencia. Esta anotación para MongoDB sería la equivalente a `@Entity` en JPA. Si no se indica nada, el nombre de la colección que se va a utilizar se interpretará como correspondiente al nombre de la clase en **minúsculas**. Así, si tenemos la clase `org.cipfpcheste.dam2.springmongodb.model.Pelicula`, se utilizará la colección `pelicula`. Sin embargo,gitt podemos indicar la colección con la que estamos trabajando, ya sea a través de los atributos value o collection, con la siguiente sintaxis: 
 - `@Document(value="collection")` 
 - `@Document("collection")` 
 - `@Document(collection="collection")`
